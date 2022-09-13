@@ -1,0 +1,123 @@
+<main class="container flex-row package-full">
+    <div class="side-bar col-4 flex-col">
+         <div class="drop-down-menu box-shadow btn" id="drop-down-menu">
+             <h1 class="text-shadow"><i class="fa-solid fa-bars" id="ddmi"></i>Menu</h1>
+         </div>
+         <nav class="navigation box-shadow" id="navigation">
+                 <ul class="flex-col">
+                     <a href="/" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-house"></i> Home</li></a>
+                     <a href="/category/ranks" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-crown"></i> Ranks</li></a>
+                     <a href="/category/subscriptions" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-newspaper"></i> Ranks Subscription</li></a>
+                     <a href="/category/cosmetics" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-masks-theater"></i> Cosmetics</li></a>
+                     <a href="/category/keys" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-key"></i> Keys</li></a>
+                     <a href="/category/coins" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-coins"></i> Coins</li></a>
+                 </ul>
+             </nav>
+         <script>
+             let dropDownMenu = document.getElementById("drop-down-menu");
+             let ddmi = document.getElementById("ddmi");
+             let navi = document.getElementById("navigation");
+             dropDownMenu.addEventListener("click", function() {
+                 if(ddmi.classList.contains("fa-bars")) {
+                     ddmi.classList.remove("fa-bars");
+                     ddmi.classList.add("fa-square-xmark");
+                     navi.style.visibility = "visible";
+                     navi.style.opacity = "1";
+                     dropDownMenu.classList.toggle("drop-down-menu-active");
+                 }else {
+                     ddmi.classList.add("fa-bars");
+                     ddmi.classList.remove("fa-square-xmark");
+                     navi.style.visibility = "hidden";
+                     navi.style.opacity = "0";
+                     dropDownMenu.classList.toggle("drop-down-menu-active");
+                 }
+             });
+         </script>
+             {{ modules|raw }}
+     </div>
+    <div class="main-bar col-8 flex-col">
+        <div class="card-heading btn">
+        <div class="heading flex-row">
+            <h1 class="text-shadow">{{ package.name[:20] }}
+                 {% if package.countdownEnds %}<br /><span class="text-white small">
+                         <span class="countdown-to" data-countdown="{{ package.countdownEnds }}">{{
+                             __("Ending Soon!") }}</span></span>{% endif %}</h1>
+        </div>
+            <div class="flex-row image-container">
+                <img src="{{ package.image.url }}" class="toggle-tooltip drop-shadow {% if package.image.borderless %}img-rounded{% else %}img-thumbnail{% endif %}" />
+            </div>
+            </div>
+            <div class="container-fluid flex-col p-4 p-md-0">
+                                 <div class="row">
+                                     <div class="col-12 price">
+                                         <strong class="h2 mb-0">
+                                             {% if package.customPrice %}
+                                             <b>{{ __("You decide how much to pay.") }}</b>
+                                             {% elseif package.price == 0.00 %}
+                                             <b>{{ __("This item is free.") }}</b>
+                                             {% else %}
+                                             {% if package.discount.applied %}
+                                             <del class="text-danger small font-weight-bold">{{ package.discount.original|money }}</del>
+                                             {% endif %}
+                                             <b>{{ package.price|money }} <small>{{ basket.currency }}</small></b>
+                                             {% endif %}
+                                         </strong>
+                                     </div>
+                                 </div>
+                                 <div class="row mt-3 buy">
+                                     <div class="col-12">
+                                         <div {% if package.purchasable==false %}data-toggle="tooltip" title="{{ package.reason }}" {% endif %}>
+                                             {% if package.basket %}
+                                                 <a href="/checkout/packages/remove/{{ package.id }}" class="btn btn-primary btn-lg gift-weight mb-2 btn-rm">{{
+                                                     __("Remove") }}</a>
+ 
+                                             {% else %}
+ 
+                                                 {% if package.type != "single" %}
+                                                 <a href="/checkout/packages/add/{{ package.id }}/subscribe" class="btn btn-success btn-lg gift-weight mb-2 btn-buy"
+                                                    {% if package.purchasable==false %}disabled{% endif %}>{{ __("Subscribe") }}</a>
+                                                 {% endif %}
+ 
+                                                 {% if package.type != "subscription" %}
+                                                 <a href="/checkout/packages/add/{{ package.id }}/single" class="btn btn-primary btn-lg gift-weight mb-2 btn-buy" {% if
+                                                    package.purchasable==false %}disabled{% endif %}>{{ __("Add to basket") }} <i class="fas fa-plus ml-2"></i> </a>
+                                                 {% endif %}
+ 
+                                             {% endif %}
+                                         </div>
+ 
+                                         {% if package.disable_gifting == false and package.storeGiftingEnabled %}
+                                         <a href="#" data-toggle="collapse" data-target="#giftFields"
+                                                 aria-expanded="false" aria-controls="giftFields" class="btn btn-secondary btn-lg gift-weight btn-gift btn-buy">{{ __("Gift this package") }} <i class="fas fa-chevron-down ml-2"></i>
+                                         </a>
+                                         {% endif %}
+ 
+                                         {% if package.disable_gifting == false and package.storeGiftingEnabled %}
+                                         <div class="collapse gift-fields" id="giftFields">
+                                             <div class="row">
+                                                 <div class="col-12">
+                                                     <form name="gift-form" method="get" action="/checkout/packages/add/{{ package.id }}/single/gift">
+                                                         <div class="input-group mt-3">
+                                                             <div class="input-group-prepend">
+                                                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                             </div>
+                                                             <input type="text" name="username" placeholder="{{ __("Enter a username to gift this package to") }}"
+                                                             class="form-control" />
+                                                             <div class="input-group-append">
+                                                                 <button class="btn btn-primary btn-sm" type="submit">Gift <i class="fas fa-chevron-right ml-1"></i></button>
+                                                             </div>
+ 
+                                                         </div>
+                                                     </form>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                         {% endif %}
+                                     </div>
+                                 </div>
+            <div class="desc btn text-shadow box-shadow">
+            {{ package.description|raw }}
+            </div>
+        </div>
+    </div>
+ </main>

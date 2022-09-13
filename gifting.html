@@ -1,0 +1,14 @@
+{% if checkout.enableGifting %}
+    {% if package.ign == "" %}
+    <div class="row gifting">
+        <div class="col-12">
+            <div>
+                <input type="checkbox" id="gifting_{{ package.id }}" name="gifting[{{ package.id }}]" value="1" />&nbsp; <label for="gifting_{{ package.id }}" style="display:inline-block"><i class="fa fa-gift"></i> This is a gift</label>
+            </div>
+            <div class="hide hidden" id="ign_gifting_{{ package.id }}">
+                <input type="text" style="width:100%" class="form-control" name="gift_user[{{ package.id }}]" placeholder="{{ __("Username to gift this package to") }}" />
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endif %}

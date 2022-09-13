@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+{% block content %}
+<main class="container flex-row category">
+   <div class="side-bar col-4 flex-col">
+        <div class="drop-down-menu box-shadow btn" id="drop-down-menu">
+            <h1 class="text-shadow"><i class="fa-solid fa-bars" id="ddmi"></i>Menu</h1>
+        </div>
+        <nav class="navigation box-shadow" id="navigation">
+                <ul class="flex-col">
+                    <a href="/" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-house"></i> Home</li></a>
+                    <a href="/category/ranks" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-crown"></i> Ranks</li></a>
+                    <a href="/category/subscriptions" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-newspaper"></i> Ranks Subscription</li></a>
+                    <a href="/category/cosmetics" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-masks-theater"></i> Cosmetics</li></a>
+                    <a href="/category/keys" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-key"></i> Keys</li></a>
+                    <a href="/category/coins" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-coins"></i> Coins</li></a>
+                </ul>
+            </nav>
+        <script>
+            let dropDownMenu = document.getElementById("drop-down-menu");
+            let ddmi = document.getElementById("ddmi");
+            let navi = document.getElementById("navigation");
+            dropDownMenu.addEventListener("click", function() {
+                if(ddmi.classList.contains("fa-bars")) {
+                    ddmi.classList.remove("fa-bars");
+                    ddmi.classList.add("fa-square-xmark");
+                    navi.style.visibility = "visible";
+                    navi.style.opacity = "1";
+                    dropDownMenu.classList.toggle("drop-down-menu-active");
+                }else {
+                    ddmi.classList.add("fa-bars");
+                    ddmi.classList.remove("fa-square-xmark");
+                    navi.style.visibility = "hidden";
+                    navi.style.opacity = "0";
+                    dropDownMenu.classList.toggle("drop-down-menu-active");
+                }
+            });
+        </script>
+            {{ modules|raw }}
+    </div>
+   <div class="main-bar col-8 flex-col">
+      <div class="category-wc">
+         <h1 class="name">{{ category.name }}</h1>
+         <h3 class="desc">{{ category.description|raw }}</h3>
+      </div>
+      {% if category.packages|length > 0 %}
+      {% if category.displayType == "list" %}
+      
+      
+      <div class="flex-col package-container-list btn box-shadow">
+                                {% for package in category.packages %}
+                                
+                                <div class="package flex-row box-shadow btn">
+                                    <div class="text flex-col text-shadow">
+                                        <h4 class="name"><strong class="h4">{{ package.name }} {% if package.countdownEnds %}<span class="text-danger">&nbsp;&nbsp;<i
+                                            class="fa fa-clock-o"></i> <br /><span class="countdown-to badge px-0" data-countdown="{{ package.countdownEnds }}">{{
+                                                            __("Ending Soon!") }}</span></span>{% endif %}</strong></h4>
+                                        {% if package.customPrice == false and package.price > 0 %}
+                                        <strong class="h4">
+                                            <span>{{ package.price|money }} <small>{{ basket.currency }}</small></span>
+                                            {% if package.discount.applied %}
+                                            <del class="text-danger small font-weight-bold">{{ package.discount.original|money }}</del>
+                                            {% endif %}
+                                        </strong>
+                                        {% endif %}
+                                    </div>
+                                    {% if package.basket %}
+                                            <a href="/checkout/packages/remove/{{ package.id }}" class="btn btn-rm flex-row text-shadow"><i class="fa-solid fa-square-xmark"></i>{{__("Remove") }}</a>
+                                        {% else %}
+                                            <a href="/package/{{ package.id }}" class="btn btn-buy ml-auto box-shadow flex-row text-shadow"><i class="fa-solid fa-square-plus"></i>{{__("Buy") }}</a>
+                                        {% endif %}
+                                </div>
+                                {% endfor %}
+                        </div>
+      
+      
+      {% else %}
+      <div class="package-container btn box-shadow">
+         {% for package in category.packages %}
+         <div class="package flex-col btn box-shadow">
+            <div class="card-header flex-col">
+               <a href="/package/{{ package.id }}" class="img-container">
+               <img src="{{ package.image.url }}" class="card-img-top toggle-tooltip drop-shadow {% if package.image.borderless %}img-rounded{% else %}img-thumbnail{% endif %}"
+               title="{{ __("Click for more details") }}" />
+               </a>
+               <h4 class="card-header flex-col text-shadow"><strong class="h4 mb-0">{{ package.name[:20] }}
+                  {% if package.countdownEnds %}<br /><span class="text-danger"><i class="fa fa-clock-o"></i>
+                  <span class="countdown-to badge px-0" data-countdown="{{ package.countdownEnds }}">{{
+                  __("Ending Soon!") }}</span></span>{% endif %}
+                  </strong>
+               </h4>
+            </div>
+            <div class="card-body flex-col">
+                {% if package.basket %}
+               <a href="/checkout/packages/remove/{{ package.id }}" class="btn btn-rm ml-auto flex-row box-shadow text-shadow"><i class="fa-solid fa-square-xmark"></i>{{
+               __("Remove") }}</a>
+               {% else %}
+               <a href="/package/{{ package.id }}" class="btn btn-primary ml-auto flex-row box-shadow text-shadow"><i class="fa-solid fa-square-plus"></i>{{__("Buy") }}</a>
+               {% endif %}
+               {% if package.customPrice == false and package.price > 0.00 %}
+               <strong class="h4">
+               {% if package.discount.applied %}
+               <del class="text-danger small font-weight-bold" style="margin-right: 12px; color: var(--red);">
+               {{ package.discount.original|money }}
+               </del>
+               {% endif %}
+               {{ package.price|money }} <small style="font-size: 14px">{{ basket.currency }}</small>
+               </strong>
+               {% endif %}
+            </div>
+         </div>
+         {% endfor %}
+      </div>
+      {% endif %}
+      {% else %}
+      {{ __("No packages to display in this category.") }}
+      {% endif %}
+   </div>
+</main>
+{% include "content_footer.html" %}
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="jumbotron bg-primary inner-page-title">
+    <div class="container">
+        <header class="page-title">
+            <h1 class="text-center text-white text-shadow">{{ options.package.name }}</h1>
+        </header>
+    </div>
+</div>
+
+<div id="content-outer" class="container px-0 px-lg-3">
+     <section class="bg-white p-0 row no-gutters border-left border-right">
+        <div class="col-12">
+            <div class="p-xl-5 p-4">
+                <h4 class="mb-3">Enter package options: </h4>
+                <div class="variables">
+                    <form method="post">
+                        {% if options.package.chooseServer %}
+                        <div class="form-group">
+                            <label>{{ __("Please choose which server to receive this package upon") }}</label>
+                            <select class="form-control input-lg" name="server">
+                                <option value="">{{ __("Please choose which server to receive this package upon") }}</option>
+                                {% for server in options.servers %}
+                                <option value="{{ server.id }}">{{ server.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        {% endif %}
+
+                        {% if options.package.customPrice %}
+                        <div class="form-group">
+                            <label>{{ __("Please enter an amount greater than " ~ options.package.price ~ " " ~ store.currency ~ " that you'd like to pay.") }}</label>
+                            <div class="input-group">
+                                <input type="text" name="price" class="form-control input-lg" placeholder="{{ __("Please enter the amount you'd like to pay.") }}">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">{{ store.currency }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% for variable in options.variables %}
+                        {% if variable.type == "dropdown" %}
+                        <div class="form-group mb-4">
+                            <label>{{ variable.description }}</label>
+                            <select name="variables[{{ variable.id }}]" class="form-control input-lg">
+                                <option value="">{{ variable.description }}</option>
+                                {% for option in variable.options %}
+                                <option value="{{ option.id }}">
+                                    {{ option.name }}
+                                    {% if option.price > 0 %}
+                                    (+{{ option.price|money }} {{ basket.currency }})
+                                    {% endif %}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        {% elseif variable.id == "discord_id" %}
+                            <p>{{ variable.description }}</p>
+                            
+                            <div class="input-group">
+                              <input type="text" class="form-control input-lg" readonly value="{{ variable.value ? "Logged in as " ~ variable.discord_tag : "Not logged in" }}">
+                              <span class="input-group-append">
+                                  <a href="https://ident.tebex.io/discord/?return={{ url(['fivem_id']) }}" id="login-with-discord" class="btn btn-info">Login with Discord</a>
+                              </span>
+                            </div>
+                            
+                            <input type="hidden" name="variables[{{ variable.id }}]" value="{{ variable.value }}" />
+                            <br />
+                        {% else %}
+                        <div class="form-group mb-4">
+                            <label>{{ variable.description }}</label>
+                            <input type="text" name="variables[{{ variable.id }}]" class="form-control input-lg"
+                                   placeholder="{{ variable.description }}" />
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+
+                        <div class="row align-items-center">
+                            <div class="col-6">
+                                <a href="/category/{{ options.package.category }}" class="btn btn-link btn-sm text-dark font-weight-bold px-0">{{
+                                    __("Back") }}</a>
+                            </div>
+                            <div class="col-6 text-right">
+                                <input type="submit" value="{{ __("Continue") }}" name="submit" class="btn btn-primary btn-lg" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% include "content_footer.html" %}
+
+{% endblock %}

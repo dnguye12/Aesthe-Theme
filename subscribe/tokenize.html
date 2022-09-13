@@ -1,0 +1,5 @@
+{% if checkout.paypalv2.token %}
+    <div class="hidden" id="paypal-token">
+        <label><input type="checkbox" name="paypalv2-billing-token-id" value="{{ checkout.paypalv2.token.id }}" checked /> Use {{ checkout.paypalv2.token.name }} ({{ checkout.paypalv2.token.description }}).</label>
+    </div>
+{% endif %}

@@ -1,0 +1,68 @@
+<div class="modal-footer bg-light">
+    <div class="container-fluid px-0">
+        <div class="row align-items-center">
+            <div class="col-12 col-lg-4 text-center text-lg-left mb-3 mb-lg-0">
+                <strong class="h4 mb-0">
+                    {% if package.customPrice %}
+                        <span class="h5">{{ __("You decide how much to pay.") }}</span>
+                    {% elseif package.price == 0.00 %}
+                        <span class="h5">{{ __("This item is free.") }}</span>
+                    {% else %}
+                        {% if package.discount.applied %}
+                            <del class="text-danger small font-weight-bold">{{ package.discount.original|money }}</del>
+                        {% endif %}
+                        <b>{{ package.price|money }} <small>{{ basket.currency }}</small></b>
+                    {% endif %}
+                    </strong>
+            </div>
+
+            <div class="col-12 col-lg-8 text-center text-lg-right">
+
+                {% if package.purchasable==false %}data-toggle="tooltip" title="{{ package.reason }}" {% endif %}
+                    {% if package.basket %}
+                        <a href="/checkout/packages/remove/{{ package.id }}" class="btn btn-primary d-block d-md-inline-block gift-weight mb-2 mb-md-0">{{
+                        __("Remove") }}</a>
+                    {% else %}
+                        {% if package.type != "single" %}
+                            <a href="/checkout/packages/add/{{ package.id }}/subscribe" class="btn btn-success d-block d-md-inline-block gift-weight mb-2 mb-md-0" {%
+                            if package.purchasable==false %}disabled{% endif %}>{{ __("Subscribe") }}</a>
+                        {% endif %}
+
+                        {% if package.type != "subscription" %}
+                            <a href="/checkout/packages/add/{{ package.id }}/single" class="btn btn-primary d-block d-md-inline-block gift-weight mb-2 mb-md-0" {% if
+                            package.purchasable==false %}disabled{% endif %}>{{ __("Add to basket") }} <i class="fas fa-plus mr-1"></i> </a>
+                        {% endif %}
+                    {% endif %}
+                
+
+                {% if package.disable_gifting == false and package.storeGiftingEnabled %}
+                    <a href="#" type="button" data-toggle="collapse" data-target="#giftFields"
+                        aria-expanded="false" aria-controls="giftFields" class="btn btn-secondary d-block d-md-inline-block gift-weight btn-gift">{{ __("Gift this package") }} <i class="fas fa-chevron-down ml-1"></i>
+                    </a>
+                {% endif %}
+
+            </div>
+        </div>
+        {% if package.disable_gifting == false and package.storeGiftingEnabled %}
+        <div class="collapse gift-fields" id="giftFields">
+            <div class="row">
+                <div class="col-12">
+                    <form name="gift-form" method="get" action="/checkout/packages/add/{{ package.id }}/single/gift">
+                        <div class="input-group mt-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" name="username" placeholder="{{ __("Enter a username to gift this package to") }}"
+                                class="form-control" />
+                            <div class="input-group-append">
+                                <button class="btn btn-primary btn-sm" type="submit">Gift <i class="fas fa-chevron-right ml-1"></i></button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>

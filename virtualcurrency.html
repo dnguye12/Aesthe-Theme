@@ -1,0 +1,29 @@
+{% if checkout.gameCurrency.verified is defined and checkout.gameCurrency.verified == false %}
+    <div class="page-header">
+        <h4>{{ __("Virtual Currency") }}</h4>
+    </div>
+    <p>You could use your virtual currency to make purchases on our webstore, but first you need to create a Tebex account and login using a verified profile.</p>
+{% elseif checkout.gameCurrency.verified == true and checkout.gameCurrency.basketValue %}
+    <div class="page-header">
+        <h4>{{ __("Virtual Currency") }}</h4>
+    </div>
+    <form method="post" action="/checkout/gamecurrency">
+        <div class="row">
+            <div class="col-sm-12 col-md-9" id="game-currency-text">
+                {% if basket.gameCurrency != null %}
+                    <p>You are using virtual currency for this purchase, we will remove {{ checkout.gameCurrency.symbol }}{{ checkout.gameCurrency.spentBalance }} from your virtual balance.</p>
+                {% else %}
+                    <p>Your virtual balance is {{ checkout.gameCurrency.symbol }}{{ checkout.gameCurrency.balance }}, this equates to {{ checkout.gameCurrency.basketValue }} {{ basket.currency }}.</p>
+                {% endif %}
+
+                {% if checkout.gameCurrency.minimumSpend.value > basket.gameCurrency %}
+                    <p>You are required to spend at least {{ checkout.gameCurrency.symbol }}{{ checkout.gameCurrency.minimumSpend.balance }} ({{ checkout.gameCurrency.minimumSpend.basketValue }} {{ basket.currency }}) in virtual currency to complete this purchase.</p>
+                {% endif %}
+            </div>
+            <div class="col-sm-12 col-md-3">
+                <button class="btn btn-primary pull-right">{{ basket.gameCurrency != null ? __("Remove virtual currency") : __("Use virtual currency") }} <i class="fa fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </form>
+{% endif %}
+

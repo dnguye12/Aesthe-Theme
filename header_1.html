@@ -1,0 +1,78 @@
+<!-- Header 1 -->
+<div class="header-container">
+    <header id="header" class="position-relative btn">
+        <div class="container flex-row line-1">
+            <button class="btn btn-ip flex-row box-shadow" type="button">
+                <img class="drop-shadow" src="{{store.favicon}}" alt="hivemc small logo">
+            <div class="text flex-col" id="btn-ip">
+            <h4 class="text-shadow">Click to copy IP</h4>
+            <h2 class="text-shadow">play.HiveMC.com</h2>
+            </div>
+            <script>
+                let btnIp = document.getElementById("btn-ip");
+                btnIp.addEventListener("click", function() {
+                   navigator.clipboard.writeText("{{ module.ip }}{% if module.port != 25565 %}:{{ module.port }}{% endif %}");
+                   console.log("{{ module.ip }}{% if module.port != 25565 %}:{{ module.port }}{% endif %}");
+                   alert("Server Ip copied to Clipboard!");
+                });
+            </script>
+            </button>
+            
+            {% if basket.username %}
+            <div class="flex-row line-11">
+            <a class="btn btn-logout box-shadow flex-row text-shadow" href="/checkout/logout">Logout <i class="fa-solid fa-right-from-bracket"></i></a>
+            <a class="btn btn-login flex-row box-shadow" href=""> 
+                
+                <div class="text flex-col">
+                <h2 class="text-shadow" style="margin-bottom: 0px; font-size: 16px;">Welcome</h2>
+                <h2 class="text-shadow" style="margin-top: 0px;">{{basket.ign}}</h2>
+                </div>
+                <img class="drop-shadow" src="https://mc-heads.net/body/{{basket.ign}}" alt="">
+                </a>
+                </div>
+                {% else %}
+                <a class="btn btn-login flex-row box-shadow" href="/login">
+                    <div class="text flex-col">
+                <h2 class="text-shadow">Login <i class="fa-solid fa-right-to-bracket" style="height: 16px;"></i></h2>
+                </div>
+                <img class="drop-shadow" src="https://mc-heads.net/body/notch" alt="">
+                
+            </a>
+            
+            {% endif %}
+        </div>
+        
+        <div class="container container-logo flex-row">
+            <img class="drop-shadow" src="{{store.logo}}" alt="logo" id="logo">
+        </div>
+        
+        <div class="container flex-row line-2">
+            <div class="select">
+        <select class="btn box-shadow">
+            <option value="" disabled selected hidden class="text-shadow">{{ basket.currency }} </option>
+            {% for currency in store.currencies %}
+                                    {% if currency.code in [store.currency, "AUD", "BRL", "CAD", "DKK", "EUR", "NOK", "NZD", "GBP", "SEK", "USD", "PLN"] %}
+                                        <option class="text-shadow"><a href="?currency={{ currency.code }}">{{ currency.code }}</a></option>
+                                    {% endif %}
+                                {% endfor %}
+        </select>
+    </div>
+                        
+                        
+                        
+                        
+                        
+                        
+            <a href="https://the-golden-egg.tebex.io/checkout/basket" class="btn btn-basket flex-row box-shadow">
+                {% if basket.packages|length > 0 %}
+    <h4 class="text-shadow"><i class="fa-solid fa-basket-shopping"></i> {{ _p(":count item for :amount :currency", basket.packages|length, {'count' :
+    basket.packages|length, 'amount' : basket.price|money, 'currency' : basket.currency})
+    }}</h4>
+    {% else %}
+    <h4 class="text-shadow"><i class="fa-solid fa-basket-shopping"></i> Empty</h4>
+    {% endif %}
+            </a>
+        </div>   
+        
+    </header>   
+    </div>

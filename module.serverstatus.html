@@ -1,0 +1,32 @@
+{% if module.display %}
+<div class="module-server-status btn box-shadow">
+    <h4 class="flex-row"><span><i class="fa-solid fa-server"></i>{{ module.header }}</span>
+
+        {% if module.online %}
+        <span class="badge badge-success">{{ __("Online") }}</span>
+        {% else %}
+        <span class="badge badge-danger">{{ __("Offline") }}</span>
+        {% endif %}
+
+    </h4>
+    <div class="text">
+
+        <h4 class="ip btn flex-col text-shadow box-shadow" id="server-ip">{{ module.ip }}{% if module.port != 25565 %}:{{ module.port }}{% endif %}</h4>
+        <p class="">
+            {% if module.online %}
+            <span style="font-weight: bold; color: var(--orange);">{{ module.players.online }}</span> / {{ module.players.max }}
+            {% else %}
+            <span style="font-weight: bold;">0</span>/0
+            {% endif %}
+            {{ __("players online.") }}
+        </p>
+    </div>
+    <script>
+        let serverIp = document.getElementById("server-ip");
+            serverIp.addEventListener("click", function() {
+               navigator.clipboard.writeText("{{ module.ip }}{% if module.port != 25565 %}:{{ module.port }}{% endif %}");
+               alert("Server Ip copied to Clipboard!");
+            });
+    </script>
+</div>
+{% endif %}

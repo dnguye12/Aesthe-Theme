@@ -1,0 +1,114 @@
+{% if checkout.paypalv2 %}
+    <div id="paypal-button" class="hidden text-center text-lg-right">
+    </div>
+                                                        
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    
+    <input type="hidden" name="paypalv2-order-id"/>
+    <input type="hidden" name="paypalv2-payer-id"/>
+    <input type="hidden" name="paypalv2-agreement-token"/>
+    <input type="hidden" name="paypalv2-personal-account" value="{{ checkout.paypalv2.personal_account }}"/>
+    
+    <script>
+        var tokenized = false;
+        var agreementToken = "";
+
+        paypal.Button.render({
+            env: 'production',
+            commit: true,
+             style: {
+                layout: 'vertical',
+                size: '{{ checkout.paypalv2.size }}',
+                shape: 'rect',
+                color: '{{ checkout.paypalv2.colour }}'
+            },
+            
+            buttonStyle: {
+                label: 'buynow'
+            },
+            funding: {
+            {% if checkout.paypalv2.disabledApms|length > 0 %}
+                disallowed: [
+                    {% for apm in checkout.paypalv2.disabledApms %}
+                        {{ apm.funding_option }},
+                    {% endfor %}
+                ],
+            {% endif %}
+            {% if checkout.paypalv2.apms|length > 0 %}
+                allowed: [
+                    {% for apm in checkout.paypalv2.apms %}
+                        {{ apm.funding_option }},
+                    {% endfor %}
+                ]
+            {% endif %}
+            },
+            payment: function(data, actions) {
+                
+                postObject = {};
+                var form = jQuery("[name=agreement]").parents("form").eq(0);
+                
+                formValues = form.find("input, select").serializeArray();
+                
+                for (i = 0; i < formValues.length; i++) {
+                    postObject[formValues[i].name] = formValues[i].value;
+                }
+                
+                console.log(postObject);
+                
+                postObject.gateway_id = 24;
+                postObject.tokenized = tokenized;
+                if (!postObject.address_state) {
+                    postObject.address_state = '';
+                }
+                
+                if (!postObject.address_country) {
+                    postObject.address_country = '';
+                }
+                
+                {% if basket.type == "single" %}
+                    tokenized = $("input[name='save-token']").is(":checked");
+                    
+                    return actions.request.post("/checkout/initPayment", postObject).then(function (res) {
+                        if (res.type && res.type == 'error') {
+                            notification.show(res.type, res.message);
+                            return false;
+                        }                        
+                        if(tokenized) {
+                            agreementToken = res.value;
+                        }
+                        
+                        return res.value;
+                    });
+                {% else %}
+                    postObject.tokenized = true;
+                    return actions.request.post("/checkout/initPayment", postObject).then(function (res) {
+                        if (res.type && res.type == 'error') {
+                            notification.show(res.type, res.message);
+                            return false;
+                        }
+                        agreementToken = res.value;
+                        return res.value;
+                    });
+                {% endif %}
+            },
+            onAuthorize: function(data, actions) {
+                
+                
+                {% if basket.type == "single" %}
+                    if(!tokenized) {
+                        $("input[name='paypalv2-order-id']").val(data.orderID);
+                        $("input[name='paypalv2-payer-id']").val(data.payerID);
+                    } else {
+                        $("input[name='paypalv2-agreement-token']").val(data.billingToken);
+                    }
+                {% else %}
+                    $("input[name='paypalv2-agreement-token']").val(data.billingToken);
+                {% endif %}
+                
+                $("div#waiting-overlay").fadeIn();
+                $("button#purchase-button").click();
+                
+            }
+        }, '#paypal-button');
+    </script>
+{% endif %}

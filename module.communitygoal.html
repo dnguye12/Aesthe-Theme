@@ -1,0 +1,27 @@
+<div class="widget p-4 p-md-5 border-top module">
+    <h4>{{ module.header }}</h4>
+    {% if module.communitygoal.image %}
+        <div class="text-center">
+            <img src="{{ module.communitygoal.image }}" style="width:190px; height:165px;" class="img-fluid mx-auto" />
+        </div>
+    {% endif %}
+    <p>{{ module.communitygoal.description|raw }}</p>
+    <div class="progress">
+        <div class='progress-bar
+            {% if module.bar.style == "striped" %} progress-bar-striped {% endif %}
+            {% if module.bar.animated %}progress-bar-striped progress-bar-animated{% endif %}' role="progressbar" style='width:{{ module.percentage }}%;' aria-valuenow='{{ module.percentage }}' aria-valuemax='100'>
+        </div>
+    </div>
+    {% if module.communitygoal.repeatable == 1 %}
+        <hr />
+        <p>{{ __("Times Achieved:") }} {{ module.communitygoal.times_achieved }}</p>
+    {% endif %}
+    <p class="mt-2 text-center">
+        {% if module.displayAmount %}
+        <strong>{{ module.total }} / {{ module.target }} {{ store.currency }}</strong> ({{ module.percentage }}%)
+        {% endif %}
+        {% if module.displayAmount == false %}
+        {{ module.percentage }}% {{ __("completed") }}
+        {% endif %}
+    </p>
+</div>

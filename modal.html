@@ -1,0 +1,11 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header bg-primary">
+            <h4 class="modal-title text-white">{{ page.title }}</h4>
+            <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</div>

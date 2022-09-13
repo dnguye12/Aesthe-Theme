@@ -1,0 +1,13 @@
+{% if config("show-promo") == "Show" %}
+    <div class="bg-cta w-100 d-block">
+        <div class="text-center">
+            <div class="p-3 p-lg-5">
+                <h4 class="text-white font-weight-light h2 mb-0">
+                    {{ config("promo-text") }}
+                    <a href="{{ config("promo-button-url") }}" class="font-weight-bold d-block d-sm-inline-block bg-black30 px-3 py-2 rounded ml-2 mt-2 mt-sm-0 text-white">
+                        {{ config("promo-button-text") }}</a>
+                </h4>
+            </div>
+        </div>
+    </div>
+{% endif %}

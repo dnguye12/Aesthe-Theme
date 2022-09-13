@@ -1,0 +1,27 @@
+{% if module.display %}
+<div class="module-feature flex-row btn box-shadow">
+    <a href="/package/{{ module.package.id }}" class="img-container flex-col">
+            <img src="{{ module.package.image.url }}" width="60" class="card-img-top toggle-tooltip drop-shadow {% if module.package.image.borderless %}img-rounded{% else %}img-thumbnail{% endif %}"  title="{{ __("Click for more details") }}" />
+        </a>
+    <div class="text flex-col ">
+        <h4><i class="fa-solid fa-star"></i>{{ module.package.name }}</h4>
+        <div class="price-container flex-row">
+            <div class="price flex-row">
+            {% if module.package.customPrice == false and module.package.price > 0 %}
+                <strong class="h4 mb-0">
+                    {% if module.package.discount.applied %}
+                    <del class="text-danger small font-weight-bold">{{ module.package.discount.original|money }}</del>
+                    {% endif %}
+                    <span>{{ module.package.price|money }} <small>{{ module.package.currency }}</small></span>
+                </strong>
+            {% endif %}
+            </div>
+            {% if module.package.basket %}
+                <a href="/checkout/packages/remove/{{ module.package.id }}" class="btn btn-primary float-right">{{ __("Remove") }}</a>
+            {% else %}
+                <a href="/package/{{ module.package.id }}" class="btn btn-primary btn-view box-shadow text-shadow">{{ __("View") }} </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endif %}

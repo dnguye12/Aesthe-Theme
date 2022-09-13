@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <div class="jumbotron inner-page-title">
+        <div class="container">
+            <header class="page-title">
+                <h1 class="text-center text-white text-shadow">{{ __("Cancel billing agreement") }}</h1>
+            </header>
+        </div>
+    </div>
+
+    <div id="content-outer" class="container px-0 px-lg-3">
+         <section class="bg-white p-0 row no-gutters border-left border-right">
+            <div class="col-12 col-lg-8">
+                <div class="p-xl-5 p-4">
+                    <p>Are you sure wish to cancel this subscription?</p>
+                    <strong>Next Billing Date:</strong> {{ agreement.next_billing_date|date("M d, Y H:i") }} UTC<br />
+                    <strong>Next Billing Amount:</strong> {{ agreement.next_billing_amount|number_format(2, ".", ",") }} {{ agreement.currency }}
+                    <div class="row align-items-center">
+                        <div class="col-6">
+                            <a href="/" class="btn btn-link btn-sm text-dark font-weight-bold px-0">Cancel</a>
+                        </div>
+                        <div class="col-6 text-right">
+
+                            <a href="{{ agreement.cancel_url }}" class="btn btn-primary btn-lg">I want to cancel the subscription</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 sidebar">
+                {{ modules|raw }}
+            </div>
+        </section>
+    </div>
+
+    {% include "content_footer.html" %}
+
+{% endblock %}

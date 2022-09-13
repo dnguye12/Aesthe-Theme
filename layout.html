@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>{{ store.name }} | {{ __(page.title) }}</title>
+
+    <link rel="shortcut icon" href="{{ store.favicon }}">
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+
+        _gaq.push(['_setAccount', 'UA-36735942-3']);
+        _gaq.push(['_trackPageview']);
+
+        {% if store.googleAnalytics %}
+        _gaq.push(['b._setAccount', '{{ store.googleAnalytics }}']);
+        _gaq.push(['b._trackPageview']);
+        {% endif %}
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') +
+                '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+    <!-- Generated via SASS -->
+    <link href="{{ asset('store.css') }}" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/b73f8cb73d.js" crossorigin="anonymous"></script>
+
+    <!-- Custom Theme CSS Output -->
+    <style>{{ store.css|raw }}</style>
+
+</head>
+<body>
+
+{% include "header_1.html" %}
+
+<div class="notification">
+    {% if page.message.display %}
+        <div class="alert alert-{{ page.message.type}} mb-0 mb-4 container" role="alert">
+            {{ page.message.text }}
+        </div>
+    {% endif %}
+</div>
+
+{% block content %}{% endblock %}
+
+<footer class="container flex-row">
+    <div class="flex-col text">
+        <h2>Copyright © tjktak1002</h2>
+        <h4>Powered by <a href="https://www.tebex.io/" target="_blank">Tebex.io</a>. We are not affiliated with Mojang AB.</h4>
+    </div>
+    <div class="flex-row">
+        <a class="btn btn-di flex-col drop-shadow" href=""><i class="fa-brands fa-discord"></i></a>
+        <a class="btn btn-yt flex-col drop-shadow" href=""><i class="fa-brands fa-youtube"></i></a>
+        <a class="btn btn-tw flex-col drop-shadow" href=""><i class="fa-brands fa-twitter"></i></a>
+        <a class="btn btn-fb flex-col drop-shadow" href=""><i class="fa-brands fa-square-facebook"></i></a>
+    </div>
+</footer>
+
+
+<div class="modal fade remote-modal" tabindex="-1" role="dialog" aria-labelledby="popup-modal" aria-hidden="true"  id="popup-modal">
+</div>
+
+
+{% if page.category == "checkout" %}
+<script src="https://js.stripe.com/v2/"></script>
+{% endif %}
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+
+<script src="/templates/209/js/skin.min.js"></script>
+<script src="/templates/209/js/site.js"></script>
+<script>
+    jQuery(function () {
+        var countdowns = $(".countdown-to");
+        countdowns.each(function () {
+            setInterval(function (ele) {
+                timeLeft = parseInt(ele.attr("data-countdown"));
+                if (timeLeft == 0) {
+                    ele.html("Time Expired!");
+                } else {
+                    timeLeft--;
+                    ele.attr("data-countdown", timeLeft);
+                    var days = Math.floor(timeLeft / (60 * 60 * 24));
+                    var hours = Math.floor((timeLeft % (60 * 60 * 24)) / (60 * 60));
+                    var minutes = Math.floor((timeLeft % (60 * 60)) / (60));
+                    var seconds = Math.floor((timeLeft % 60));
+                    ele.html(days + "d " + hours + "h " + minutes + "m " + seconds + "s");
+                }
+            }, 1000, jQuery(this));
+        });
+    });
+
+</script>
+</body>
+
+</html>

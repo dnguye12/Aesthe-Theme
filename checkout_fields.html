@@ -1,0 +1,81 @@
+{% if checkout.requiredFields|length > 0 %}
+
+<div class="row mt-5">
+
+    <div class="col-12">
+
+        <h4 class="mb-3">Billing details</h4>
+
+        <div class="details">
+
+            {% if "req_full_name" in checkout.requiredFields %}
+            <div class="row">
+                <div class="name form-group col-12">
+                    <label>{{ __("Full name:") }}</label>
+                    <input type="input" class="form-control" name="address_name" />
+                </div>
+            </div>
+            {% endif %}
+
+            {% if "req_email" in checkout.requiredFields %}
+            <div class="row">
+                <div class="email form-group col-12">
+                    <label>{{ __("Email address:") }}</label>
+                    <input type="input" class="form-control" name="email" />
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+
+        {% if "req_address" in checkout.requiredFields or "req_country_and_state" in checkout.requiredFields %}
+
+        {% if "req_address" in checkout.requiredFields %}
+        <div class="row">
+            <div class="address1 form-group col-12 col-md-6">
+                <label>{{ __("Address Line 1:") }}</label>
+                <input type="input" class="form-control" name="address_line_1" />
+            </div>
+            <div class="address2 form-group col-12 col-md-6">
+                <label>{{ __("Address Line 2:") }}</label>
+                <input type="input" class="form-control" name="address_line_2" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="city form-group col-12 col-md-6">
+                <label>{{ __("City:") }}</label>
+                <input type="input" class="form-control" name="address_city" />
+            </div>
+            <div class="zip form-group col-12 col-md-6">
+                <label>{{ __("Zip Code:") }}</label>
+                <input type="input" class="form-control" name="address_zip" />
+            </div>
+        </div>
+        {% endif %}
+
+
+        {% if "req_address" in checkout.requiredFields or "req_country_and_state" in checkout.requiredFields %}
+        <div class="row">
+            <div class="country form-group col-12 col-md-6">
+                <label>{{ __("Country:") }}</label>
+                <select class="form-control" name="address_country">
+                    <option value="">{{ __("Select a country") }}</option>
+                    {% for country in checkout.countries %}
+                    <option value="{{ country.id }}">{{ country.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="state form-group col-12 col-md-6">
+                <label>{{ __("State/Region:") }}</label>
+                <input type="input" class="form-control" name="address_state" />
+            </div>
+        </div>
+        {% endif %}
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endif %}

@@ -1,0 +1,8 @@
+{% include "checkout/paypal.html" %}
+<div class="form-group text-left mt-4 mb-0">
+    {% if basket.price > 0 %}
+        <button type="submit" class="btn btn-success btn-lg px-5 purchase-button" id="purchase-button" data-loading-text="{{ __("Loading, please wait...") }}">{{ __("Purchase") }}</button>
+    {% else %}
+         <button type="submit" class="btn btn-success btn-block btn-lg px-5 " data-loading-text="{{ __("Loading, please wait...") }}">{{ __("Claim for free") }}</button>
+    {% endif %}
+</div>

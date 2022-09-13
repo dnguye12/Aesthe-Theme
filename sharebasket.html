@@ -1,0 +1,18 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Share this basket</h4></h4>
+        </div>
+        <div class="modal-body">
+            You can send this link to your friend or family member and all they have to do is check out for you.
+            <br><br>
+            <div class="input-group">
+                <input type="text" name="copy-hash" value="{{ basket.copy_link }}" class="form-control" readonly="readonly">
+                <div class="input-group-btn">
+                    <button class="btn btn-primary btn-copy">{{ __("Copy") }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+
+
+{% block content %}
+<main class="container flex-row">
+    <div class="side-bar col-4 flex-col">
+        <div class="drop-down-menu box-shadow btn" id="drop-down-menu">
+            <h1 class="text-shadow"><i class="fa-solid fa-bars" id="ddmi"></i>Menu</h1>
+        </div>
+        <nav class="navigation box-shadow" id="navigation">
+                <ul class="flex-col">
+                    <a href="/" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-house"></i> Home</li></a>
+                    <a href="/category/ranks" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-crown"></i> Ranks</li></a>
+                    <a href="/category/subscriptions" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-newspaper"></i> Ranks Subscription</li></a>
+                    <a href="/category/cosmetics" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-masks-theater"></i> Cosmetics</li></a>
+                    <a href="/category/keys" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-key"></i> Keys</li></a>
+                    <a href="/category/coins" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-coins"></i> Coins</li></a>
+                </ul>
+            </nav>
+        <script>
+            let dropDownMenu = document.getElementById("drop-down-menu");
+            let ddmi = document.getElementById("ddmi");
+            let navi = document.getElementById("navigation");
+            dropDownMenu.addEventListener("click", function() {
+                if(ddmi.classList.contains("fa-bars")) {
+                    ddmi.classList.remove("fa-bars");
+                    ddmi.classList.add("fa-square-xmark");
+                    navi.style.visibility = "visible";
+                    navi.style.opacity = "1";
+                    dropDownMenu.classList.toggle("drop-down-menu-active");
+                }else {
+                    ddmi.classList.add("fa-bars");
+                    ddmi.classList.remove("fa-square-xmark");
+                    navi.style.visibility = "hidden";
+                    navi.style.opacity = "0";
+                    dropDownMenu.classList.toggle("drop-down-menu-active");
+                }
+            });
+        </script>
+            {{ modules|raw }}
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="main-bar col-8 flex-col">
+        <div class="main-wc">
+            <h1>Welcome</h1>
+            
+        </div>
+        <div class="main-container">
+            <h3>Your generous contributions enable us to keep creating and maintaining unique Minecraft experiences for all our beloved players! We are dedicated to keeping purchase costs low and staff presence high.</h3>
+            
+            
+            
+            
+            
+            <div class="container" id="card-container">
+            <div class="card box-shadow">
+                <h2><i class="fa-solid fa-circle-exclamation"></i> Caution</h2>
+                <ul>
+                    <li>When entering your username please make sure it is case sensitive.</li>
+                    <li>Please make sure you have enough inventory space for your needed items as items are non-refundable.</li>
+                    <li>Purchases can take up to 30 minutes to process.</li>
+                </ul>
+            </div>
+            <div class="card box-shadow">
+                <h2><i class="fa-solid fa-credit-card"></i> Payment</h2>
+                <ul>
+                    <li>Our store accepts payments through Tebex Checkout.</li>
+                    <li>You can choose from hundreds of payment methods, including PayPal and credit/debit cards.</li>
+                    <li>Your payment information is encrypted and protected.</li>
+                </ul>
+            </div>
+            </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <div class="flex-col qes box-shadow">
+                <h2><i class="fa-solid fa-message"></i> I did not receive my purchase!</h2>
+                <p>Our store should credit purchases to your in-game account within 30 minutes. You must be ONLINE to receive your purchase. Please stay in-game when waiting for a purchase. If not credited within 2 hours, use the button below to seek assistance from the staff team.</p>
+                <div class="flex-row qes-btns">
+                    <a class="btn btn-help flex-row text-shadow box-shadow"><i class="fa-solid fa-circle-question"></i>Get Help</a>
+                    <a class="btn btn-refund flex-row text-shadow box-shadow"><i class="fa-solid fa-triangle-exclamation"></i>Refund Policy</a>
+                </div>
+            </div>
+            
+            
+            <div class="flex-col qes box-shadow">
+                <h2><i class="fa-solid fa-message"></i> I have a question about the Store.</h2>
+                <p>Our staff team or knowledgeable players are most likely to address your questions on our Official Discord Server. Click the button below to start interacting with our community immediately!</p>
+                <div class="flex-row qes-btns">
+                    <a class="btn btn-discord flex-row text-shadow box-shadow"><i class="fa-brands fa-discord"></i>Join Discord</a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</main>
+
+
+
+
+
+
+
+{% include "content_footer.html" %}
+{% endblock %}

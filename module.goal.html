@@ -1,0 +1,18 @@
+<div class="module-goal btn box-shadow">
+    <h4><i class="fa-solid fa-circle-dollar-to-slot"></i>{{ module.header }}</h4>
+
+    <div class="progress">
+        <div class="progress-bar {% if module.bar.style == "striped" %} progress-bar-striped {% endif %} {% if module.bar.animated %} progress-bar-striped progrss-bar-animated {% endif %}" role="progressbar" style="width:{{ module.percentage }}%;"></div>
+    </div>
+
+    <p class="text">
+        {% if module.displayAmount %}
+        <strong>{{ module.total }} / {{ module.target }} {{ store.currency }}</strong> ({{ module.percentage }}%)
+        {% endif %}
+
+        {% if module.displayAmount == false %}
+        {{ module.percentage }}% {{ __("completed") }}
+        {% endif %}
+    </p>
+
+</div>

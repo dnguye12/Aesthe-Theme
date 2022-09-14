@@ -1,0 +1,134 @@
+{
+	"author": "tjktak1002",
+	"support_email": "tjktakbuonngu@gmail.com",
+	"config": [{
+			"header": "General Settings",
+			"options": [{
+					"id": "main-color",
+					"name": "Main Color (Default Orange)",
+					"default": "#ffa31a",
+					"description": "Change the main color of the website. Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				},
+				{
+					"id": "bg-color",
+					"name": "Background Color (Default Grey)",
+					"default": "#292929",
+					"description": "Change the background color of the website. Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				},
+				{
+					"id": "warning-color",
+					"name": "Warning Color (Default Red)",
+					"default": "#d63f3f",
+					"description": "Change the color of all warning elements on the website. Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				},
+				{
+					"id": "warning-color-hover",
+					"name": "Warning Color while hovering(Default Red)",
+					"default": "#e04848",
+					"description": "Change the color of all warning elements while mouse hover on the website. Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				},
+				{
+					"id": "green-color",
+					"name": "Green Color (Default Green)",
+					"default": "#33bd38",
+					"description": "Change the color of all green elements on the website. Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				},
+				{
+					"id": "discord-color",
+					"name": "Discord Color (Default Blue)",
+					"default": "#1145ca",
+					"description": "Change the color of all discord elements on the website. Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				},
+				{
+					"id": "discord-color-hover",
+					"name": "Discord Color while hovering(Default Red)",
+					"default": "#224ECA",
+					"description": "Change the color of all discord elements while mouse hover on the website. Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				},
+				{
+					"id": "help-color",
+					"name": "Help Color (Default Lighter Gray)",
+					"default": "#808080",
+					"description": "Change the color of all help elements on the website. Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				},
+				{
+					"id": "help-color-hover",
+					"name": "Help Color While Hovering(Default Lighter Gray)",
+					"default": "#9E9E9E",
+					"description": "Change the color of all help elements while hovering on the website. Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				}
+			]
+		},
+		{
+			"header": "Font Settings",
+			"options": [{
+					"id": "text-color",
+					"name": "Text Color (Default White)",
+					"default": "white",
+					"description": "Change the text color of the website. Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				}
+			]
+		},
+		{
+			"header": "Background Layers Settings",
+			"options": [{
+					"id": "layer1",
+					"name": "Layer 1 Color (Default Dark Gray)",
+					"default": "rgba(27, 27, 27, 0.86)",
+					"description": "Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				},
+				{
+					"id": "layer2",
+					"name": "Layer 2 Color (Default Gray)",
+					"default": "#292929",
+					"description": "Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				},
+				{
+					"id": "layer3",
+					"name": "Layer 3 Color (Default Light Gray)",
+					"default": "#363636",
+					"description": "Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				}
+			]
+		},
+		{
+		    "header": "links",
+		    "options": [
+		        {
+		          "id":"discord-url",
+		          "name":"Your Discord Server Address",
+		          "default":"https://discord.gg",
+		          "description": "The address of your Discord server",
+				  "type": "textarea"
+		        },
+		        {
+		          "id":"refund-url",
+		          "name":"Your Refund Policy address",
+		          "default":"https://discord.gg",
+		          "description": "The address for your refund policy",
+				  "type": "textarea"
+		        },
+		        {
+		          "id":"help-url",
+		          "name":"Your Help address",
+		          "default":"https://discord.gg",
+		          "description": "The address for your help section",
+				  "type": "textarea"
+		        }
+		        ]
+		}
+	]
+}

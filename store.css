@@ -1,17 +1,17 @@
 :root{
-    --orange: #ffa31a;
-    --gray: #292929;
-    --white: white;
-	--gray-light: #363636;
-	--gray-lighter: #808080;
-	--gray-lighter-hover: #9E9E9E;
+    --orange: {{config("main-color")}};
+    --gray: {{config("layer2")}};
+    --white: {{config("text-color")}};
+	--gray-light: {{config("layer3")}};
+	--gray-lighter: {{config("help-color")}};
+	--gray-lighter-hover: {{config("help-color-hover")}};
 	--brown: #99610f;
-	--red: #d63f3f;
-	--red-hover: #e04848; 
-	--discord: #1145ca;
-	--discord-hover: #224ECA;
-	--green: #33bd38;
-	--gray-dark: rgba(27, 27, 27, 0.86);
+	--red: {{config("warning-color")}};
+	--red-hover: {{config("warning-color-hover")}}; 
+	--discord: {{config("discord-color")}};
+	--discord-hover: {{config("discord-color-hover")}};
+	--green: {{config("green-color")}};
+	--gray-dark: {{config("layer1")}};
 }
 
 html {
@@ -1738,7 +1738,7 @@ body {
     line-height: 1.5;
     color: var(--white);
     text-align: left;
-    background-color: var(--gray);
+    background-color: {{config("bg-color")}};
 }
 
 [tabindex="-1"]:focus {

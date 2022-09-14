@@ -478,6 +478,7 @@ main .side-bar .navigation ul li:hover i {
     padding: 0px 22px;
     height: 44px;
     transition: background-color 350ms;
+    color: var(--white);
 }
 .main-bar .main-container .qes a i {
     margin-right: 12px;
@@ -760,7 +761,7 @@ main .side-bar .navigation ul li:hover i {
     background-color: var(--orange);
     color: var(--white);
     font-size: 20px;
-    font-weight: 600;
+    font-weight: bold !important;
     padding: 12px;
     
 }

@@ -105,7 +105,7 @@
 			]
 		},
 		{
-		    "header": "links",
+		    "header": "Links",
 		    "options": [
 		        {
 		          "id":"discord-url",
@@ -129,6 +129,72 @@
 				  "type": "textarea"
 		        }
 		        ]
+		},
+		{
+		    "header": "Footer Options",
+		    "options": [
+		        {
+		            "id":"discord-btn",
+		            "name":"Discord Button",
+		            "description": "Enable/Disable the discord button in Footer",
+		            "type":"select",
+		            "default":"initial",
+		            "values": [
+		                "initial",
+		                "none"]
+		        },
+		        {
+		            "id":"yt-btn",
+		            "name":"Youtube Button",
+		            "description": "Enable/Disable the youtube button in Footer",
+		            "type":"select",
+		            "default":"initial",
+		            "values": [
+		                "initial",
+		                "none"]
+		        },
+		        {
+		          "id":"yt-url",
+		          "name":"Your Youtube address",
+		          "default":"https://www.youtube.com/",
+		          "description": "The address for your Youtube channel",
+				  "type": "textarea"
+		        },
+		        {
+		            "id":"twt-btn",
+		            "name":"Twitter Button",
+		            "description": "Enable/Disable the twitter button in Footer",
+		            "type":"select",
+		            "default":"initial",
+		            "values": [
+		                "initial",
+		                "none"]
+		        },  
+		        {
+		          "id":"twt-url",
+		          "name":"Your Twitter address",
+		          "default":"https://twitter.com/",
+		          "description": "The address for your Twitter",
+				  "type": "textarea"
+		        },
+		        {
+		            "id":"fb-btn",
+		            "name":"Facebook Button",
+		            "description": "Enable/Disable the facebook button in Footer",
+		            "type":"select",
+		            "default":"initial",
+		            "values": [
+		                "initial",
+		                "none"]
+		        },
+		        {
+		          "id":"fb-url",
+		          "name":"Your Facebook address",
+		          "default":"https://www.facebook.com/",
+		          "description": "The address for your Facebook",
+				  "type": "textarea"
+		        }
+		    ]
 		}
 	]
 }

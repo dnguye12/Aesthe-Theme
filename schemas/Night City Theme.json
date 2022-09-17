@@ -1,0 +1,214 @@
+{
+	"author": "tjktak1002",
+	"support_email": "tjktakbuonngu@gmail.com",
+	"config": [{
+			"header": "General Settings",
+			"options": [{
+					"id": "main-color",
+					"name": "Main Color (Default Orange)",
+					"default": "#00B7FF",
+					"description": "Change the main color of the website. Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				},
+				{
+					"id": "bg-color",
+					"name": "Background Color (Default Grey)",
+					"default": "#20202A",
+					"description": "Change the background color of the website. Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				},
+				{
+					"id": "warning-color",
+					"name": "Warning Color (Default Red)",
+					"default": "#FF3434;",
+					"description": "Change the color of all warning elements on the website. Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				},
+				{
+					"id": "warning-color-hover",
+					"name": "Warning Color while hovering(Default Red)",
+					"default": "#FF0000",
+					"description": "Change the color of all warning elements while mouse hover on the website. Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				},
+				{
+					"id": "green-color",
+					"name": "Green Color (Default Green)",
+					"default": "#40E253",
+					"description": "Change the color of all green elements on the website. Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				},
+				{
+					"id": "discord-color",
+					"name": "Discord Color (Default Blue)",
+					"default": "#00B7FF",
+					"description": "Change the color of all discord elements on the website. Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				},
+				{
+					"id": "discord-color-hover",
+					"name": "Discord Color while hovering(Default Blue)",
+					"default": "#00D9FF",
+					"description": "Change the color of all discord elements while mouse hover on the website. Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				},
+				{
+					"id": "help-color",
+					"name": "Help Color (Default Lighter Gray)",
+					"default": "#FF9119",
+					"description": "Change the color of all help elements on the website. Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				},
+				{
+					"id": "help-color-hover",
+					"name": "Help Color While Hovering(Default Lighter Gray)",
+					"default": "#FFBE00",
+					"description": "Change the color of all help elements while hovering on the website. Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				},
+				{
+					"id": "top",
+					"name": "Special for other theme, not important if you use Golden theme",
+					"default": "#a100f2",
+					"description": "",
+					"type": "textarea"
+				},
+				{
+					"id": "gift",
+					"name": "Special for other theme, not important if you use Golden theme",
+					"default": "#262634",
+					"description": "",
+					"type": "textarea"
+				}
+			]
+		},
+		{
+			"header": "Font Settings",
+			"options": [{
+					"id": "text-color",
+					"name": "Text Color (Default White)",
+					"default": "white",
+					"description": "Change the text color of the website. Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				}
+			]
+		},
+		{
+			"header": "Background Layers Settings",
+			"options": [{
+					"id": "layer1",
+					"name": "Layer 1 Color (Default Dark Gray)",
+					"default": "#262634",
+					"description": "Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				},
+				{
+					"id": "layer2",
+					"name": "Layer 2 Color (Default Gray)",
+					"default": "#20202A",
+					"description": "Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				},
+				{
+					"id": "layer3",
+					"name": "Layer 3 Color (Default Light Gray)",
+					"default": "#242431",
+					"description": "Check README for better understanding or contact me by disocrd or email.",
+					"type": "textarea"
+				}
+			]
+		},
+		{
+		    "header": "Links",
+		    "options": [
+		        {
+		          "id":"discord-url",
+		          "name":"Your Discord Server Address",
+		          "default":"https://discord.gg",
+		          "description": "The address of your Discord server",
+				  "type": "textarea"
+		        },
+		        {
+		          "id":"refund-url",
+		          "name":"Your Refund Policy address",
+		          "default":"https://discord.gg",
+		          "description": "The address for your refund policy",
+				  "type": "textarea"
+		        },
+		        {
+		          "id":"help-url",
+		          "name":"Your Help address",
+		          "default":"https://discord.gg",
+		          "description": "The address for your help section",
+				  "type": "textarea"
+		        }
+		        ]
+		},
+		{
+		    "header": "Footer Options",
+		    "options": [
+		        {
+		            "id":"discord-btn",
+		            "name":"Discord Button",
+		            "description": "Enable/Disable the discord button in Footer",
+		            "type":"select",
+		            "default":"initial",
+		            "values": [
+		                "initial",
+		                "none"]
+		        },
+		        {
+		            "id":"yt-btn",
+		            "name":"Youtube Button",
+		            "description": "Enable/Disable the youtube button in Footer",
+		            "type":"select",
+		            "default":"initial",
+		            "values": [
+		                "initial",
+		                "none"]
+		        },
+		        {
+		          "id":"yt-url",
+		          "name":"Your Youtube address",
+		          "default":"https://www.youtube.com/",
+		          "description": "The address for your Youtube channel",
+				  "type": "textarea"
+		        },
+		        {
+		            "id":"twt-btn",
+		            "name":"Twitter Button",
+		            "description": "Enable/Disable the twitter button in Footer",
+		            "type":"select",
+		            "default":"initial",
+		            "values": [
+		                "initial",
+		                "none"]
+		        },  
+		        {
+		          "id":"twt-url",
+		          "name":"Your Twitter address",
+		          "default":"https://twitter.com/",
+		          "description": "The address for your Twitter",
+				  "type": "textarea"
+		        },
+		        {
+		            "id":"fb-btn",
+		            "name":"Facebook Button",
+		            "description": "Enable/Disable the facebook button in Footer",
+		            "type":"select",
+		            "default":"initial",
+		            "values": [
+		                "initial",
+		                "none"]
+		        },
+		        {
+		          "id":"fb-url",
+		          "name":"Your Facebook address",
+		          "default":"https://www.facebook.com/",
+		          "description": "The address for your Facebook",
+				  "type": "textarea"
+		        }
+		    ]
+		}
+	]
+}

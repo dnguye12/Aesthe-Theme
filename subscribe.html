@@ -3,42 +3,7 @@
 {% block content %}
 
 <main  class="container flex-row checkout">
-    <div class="side-bar col-4 flex-col">
-        <div class="drop-down-menu box-shadow btn" id="drop-down-menu">
-            <h1 class="text-shadow"><i class="fa-solid fa-bars" id="ddmi"></i>Menu</h1>
-        </div>
-        <nav class="navigation box-shadow" id="navigation">
-                <ul class="flex-col">
-                    <a href="/" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-house"></i> Home</li></a>
-                    <a href="/category/ranks" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-crown"></i> Ranks</li></a>
-                    <a href="/category/subscriptions" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-newspaper"></i> Ranks Subscription</li></a>
-                    <a href="/category/cosmetics" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-masks-theater"></i> Cosmetics</li></a>
-                    <a href="/category/keys" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-key"></i> Keys</li></a>
-                    <a href="/category/coins" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-coins"></i> Coins</li></a>
-                </ul>
-            </nav>
-        <script>
-            let dropDownMenu = document.getElementById("drop-down-menu");
-            let ddmi = document.getElementById("ddmi");
-            let navi = document.getElementById("navigation");
-            dropDownMenu.addEventListener("click", function() {
-                if(ddmi.classList.contains("fa-bars")) {
-                    ddmi.classList.remove("fa-bars");
-                    ddmi.classList.add("fa-square-xmark");
-                    navi.style.visibility = "visible";
-                    navi.style.opacity = "1";
-                    dropDownMenu.classList.toggle("drop-down-menu-active");
-                }else {
-                    ddmi.classList.add("fa-bars");
-                    ddmi.classList.remove("fa-square-xmark");
-                    navi.style.visibility = "hidden";
-                    navi.style.opacity = "0";
-                    dropDownMenu.classList.toggle("drop-down-menu-active");
-                }
-            });
-        </script>
-            {{ modules|raw }}
-    </div>
+    {% include "header_2.html" %}
     <div class="main-bar col-8 checkout-bar flex-col">
    <div class="basket box-shadow btn flex-col">
       <h1><i class="fa-solid fa-basket-shopping"></i>Review Basket</h1>

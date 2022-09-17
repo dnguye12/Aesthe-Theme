@@ -34,6 +34,7 @@ body {
 
 header {
     padding: 24px;
+    padding-bottom: 0px !important;
     margin-bottom: -110px;
     /*
     background: rgb(102,45,145);
@@ -82,7 +83,7 @@ header .btn-ip h2 {
 header .btn-ip img {
     height: 45px;
     width: auto;
-    margin-right: 0px;
+    margin-right: 12px;
     
 }
 
@@ -260,8 +261,16 @@ header .line-2 select:hover {
         width: 100%;
     }
     
+    header .line-2 select {
+        font-size: 21px;
+        margin-bottom: 16px;
+        margin-top: 16px;
+    }
+    
     header .btn-basket {
         width: 100%;
+        font-size: 21px;
+        height: 63.5px;
     }
 }
 
@@ -272,12 +281,6 @@ header .line-2 select:hover {
     
     header .btn-login {
     padding-left: 24px;
-    }
-}
-
-@media only screen and (max-width: 411px) {
-    header .line-2 select {
-        height: 90.53px;
     }
 }
 
@@ -833,6 +836,29 @@ main .side-bar .navigation ul li:hover i {
     margin-bottom: 0px;
 }
 
+.module-text {
+    background-color: var(--gray);
+    padding: 16px;
+    width: 100%;
+    color: var(--white);
+    margin-bottom: 24px;
+}
+
+.module-text h4 {
+    font-size: 20px;
+    margin-top: 0px;
+    margin-bottom: 16px;
+}
+
+.module-text h4 i {
+    margin-right: 12px;
+}
+
+.module-text p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
 @media only screen and (max-width: 992px) {
     main {
         flex-direction: column;
@@ -890,7 +916,7 @@ main .side-bar .navigation ul li:hover i {
         max-width: 100% !important;
     }
     
-    .module-payments, .module-goal, .module-top, .module-feature {
+    .module-payments, .module-goal, .module-top, .module-feature, .module-text {
         display: none !important;
     }
 }
@@ -1619,6 +1645,7 @@ footer .btn {
     color: var(--white);
     font-size: 19px;
     margin-left: 12px;
+    display: flex !important;
 }
 
 footer .btn:nth-child(1) {

@@ -20,7 +20,7 @@
 				{
 					"id": "warning-color",
 					"name": "Warning Color (Default Red)",
-					"default": "#FF3434;",
+					"default": "#FF3434",
 					"description": "Change the color of all warning elements on the website. Check README for better understanding or contact me by disocrd or email.",
 					"type": "textarea"
 				},

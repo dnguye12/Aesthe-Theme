@@ -17,7 +17,7 @@
                {% else %}
                <h2>{{ package.name }}</h2>
                {%endif %}
-               <h4>{{ basket.price|money }} <small>{{ basket.currency }}</small></h4>
+               <h4>{{ package.price|money }} <small>{{ basket.currency }}</small></h4>
             </div>
             
             {% include "package_options.html" %}

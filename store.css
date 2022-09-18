@@ -1,6 +1,7 @@
 :root{
     --orange: {{config("main-color")}};
     --gray: {{config("layer2")}};
+    --bg: {{config("bg-color")}};
     --white: {{config("text-color")}};
 	--gray-light: {{config("layer3")}};
 	--gray-lighter: {{config("help-color")}};
@@ -12,6 +13,8 @@
 	--discord-hover: {{config("discord-color-hover")}};
 	--green: {{config("green-color")}};
 	--gray-dark: {{config("layer1")}};
+	--top: {{config("top")}};
+	--gift: {{config("gift")}};
 }
 
 html {
@@ -27,7 +30,7 @@ body {
 
 .header-container {
     padding: 24px;
-    background-color: var(--gray);
+    background-color: var(--bg);
     overflow: hidden;
     margin-bottom: 24px;
 }
@@ -43,6 +46,11 @@ background: -webkit-linear-gradient(180deg, rgba(102,45,145,1) 0%, rgba(69,44,99
 background: linear-gradient(180deg, rgba(102,45,145,1) 0%, rgba(69,44,99,1) 20%, rgba(69,44,99,1) 55%, rgba(41,41,41,1) 75%);
 filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#662d91",endColorstr="#292929",GradientType=1);*/
     background-color: var(--gray-dark);
+}
+
+header .header-btm {
+    width: 100%;
+    height: 24px;
 }
 
 header .line-1 {
@@ -272,6 +280,10 @@ header .line-2 select:hover {
         font-size: 21px;
         height: 63.5px;
     }
+    
+    header .header-btm {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 450px) {
@@ -302,6 +314,7 @@ main .side-bar {
     border-radius: 10px;
     padding: 24px !important;
     padding-bottom: 0px !important;
+    z-index: 99;
 }
 
 main .side-bar .navigation {
@@ -382,6 +395,10 @@ main .side-bar .navigation ul li:hover i {
     border-radius: 10px;
     margin-bottom: 16px;
     
+}
+
+.main-bar .category-wc {
+    width: 100%;
 }
 
 .main-bar .main-wc h1 {
@@ -602,7 +619,7 @@ main .side-bar .navigation ul li:hover i {
     width: 100%;
     padding: 24px;
     height: 160px;
-    cursor: default;
+    cursor: default !important;
     margin-bottom: 24px;
 }
 
@@ -766,7 +783,11 @@ main .side-bar .navigation ul li:hover i {
     font-size: 20px;
     font-weight: bold !important;
     padding: 12px;
-    
+    transition: filter 350ms;
+}
+
+.module-feature .btn-view:hover {
+    filter: brightness(1.15);
 }
 
 
@@ -791,8 +812,8 @@ main .side-bar .navigation ul li:hover i {
     width: 100%;
     height: 40px;
     font-size: 18px;
-    font-weight: 600;
-    color: var(--gray-lighter);
+    font-weight: 500;
+    color: var(--gift);
     padding-left: 18px;
     padding-right: 18px;
     border-radius: 5px !important;
@@ -1020,8 +1041,27 @@ main .side-bar .navigation ul li:hover i {
     grid-template-columns: repeat(3, auto);
     grid-auto-rows: auto;
     column-gap: 16px;
+    row-gap:16px;
     width: 100%;
     padding: 24px;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1220px) {
+    .category .package-container {
+    grid-template-columns: repeat(2, auto);
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .category .package-container {
+    grid-template-columns: repeat(2, auto);
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .category .package-container {
+    grid-template-columns: auto;
+    }
 }
 
 .category .package-container .package {
@@ -1051,6 +1091,12 @@ main .side-bar .navigation ul li:hover i {
 .category .package-container .package .card-body {
     width: 100%;
     padding-top: 16px;
+}
+
+.category .package-container .package .card-body strong {
+    font-size: 22px;
+    margin-top: -8px;
+    margin-bottom: -8px;
 }
 
 .category .package-container .package .btn-primary {
@@ -1766,7 +1812,7 @@ body {
     line-height: 1.5;
     color: var(--white);
     text-align: left;
-    background-color: {{config("bg-color")}};
+    background-color: var(--bg);
 }
 
 [tabindex="-1"]:focus {

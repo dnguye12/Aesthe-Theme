@@ -36,12 +36,6 @@ header {
     padding: 24px;
     padding-bottom: 0px !important;
     margin-bottom: -110px;
-    /*
-    background: rgb(102,45,145);
-background: -moz-linear-gradient(180deg, rgba(102,45,145,1) 0%, rgba(69,44,99,1) 20%, rgba(69,44,99,1) 55%, rgba(41,41,41,1) 75%);
-background: -webkit-linear-gradient(180deg, rgba(102,45,145,1) 0%, rgba(69,44,99,1) 20%, rgba(69,44,99,1) 55%, rgba(41,41,41,1) 75%);
-background: linear-gradient(180deg, rgba(102,45,145,1) 0%, rgba(69,44,99,1) 20%, rgba(69,44,99,1) 55%, rgba(41,41,41,1) 75%);
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#662d91",endColorstr="#292929",GradientType=1);*/
     background-color: var(--gray-dark);
 }
 
@@ -66,7 +60,7 @@ header .btn-ip {
 }
 
 header .btn-ip:hover {
-    filter: brightness(1.15);
+    filter: brightness(1.2);
 }
 
 header .btn-ip .text {
@@ -108,7 +102,7 @@ header .btn-logout i {
 }
 
 header .btn-logout:hover {
-    filter: brightness(1.15);
+    filter: brightness(1.2);
 }
 
 header .btn-login {
@@ -123,7 +117,7 @@ header .btn-login {
 }
 
 header .btn-login:hover {
-filter: brightness(1.15);
+filter: brightness(1.2);
 }
 
 header .btn-login img {
@@ -180,7 +174,7 @@ header .btn-basket {
 }
 
 header .btn-basket:hover {
-    filter: brightness(1.15);
+    filter: brightness(1.2);
 }
 
 header .btn-basket h4 {
@@ -208,7 +202,7 @@ header .line-2 select {
 }
 
 header .line-2 select:hover {
-    filter: brightness(1.15);
+    filter: brightness(1.2);
 }
 
 @media only screen and (max-width: 1200px) and (min-width: 992px) {
@@ -520,7 +514,7 @@ main .side-bar .navigation ul li:hover i {
 }
 
 .main-bar .main-container .qes .btn-refund:hover {
-    filter: brightness(1.15);
+    filter: brightness(1.2);
 }
 
 .main-bar .main-container .qes .btn-discord {
@@ -528,7 +522,7 @@ main .side-bar .navigation ul li:hover i {
 }
 
 .main-bar .main-container .qes .btn-discord:hover {
-    filter: brightness(1.15);
+    filter: brightness(1.2);
 }
 
 
@@ -585,7 +579,7 @@ main .side-bar .navigation ul li:hover i {
 }
 
 .module-server-status h4:nth-child(1):hover {
-    filter: brightness(1.15);
+    filter: brightness(1.2);
 }
 
 .module-server-status .ip {
@@ -784,7 +778,7 @@ main .side-bar .navigation ul li:hover i {
 }
 
 .module-feature .btn-view:hover {
-    filter: brightness(1.15);
+    filter: brightness(1.2);
 }
 
 
@@ -829,7 +823,7 @@ main .side-bar .navigation ul li:hover i {
 }
 
 .module-gift .btn-check:hover {
-    filter: brightness(1.15);
+    filter: brightness(1.2);
 }
 
 .module-gift .alert-danger {
@@ -1012,7 +1006,7 @@ main .side-bar .navigation ul li:hover i {
 }
 
 .login-form button:hover {
-    filter: brightness(1.15);
+    filter: brightness(1.2);
 }
 
 
@@ -1109,7 +1103,7 @@ main .side-bar .navigation ul li:hover i {
 }
 
 .category .package-container .package .btn-primary:hover {
-    filter: brightness(1.15);
+    filter: brightness(1.2);
 }
 
 .category .package-container .package .btn-primary i {
@@ -1134,7 +1128,7 @@ main .side-bar .navigation ul li:hover i {
 }
 
 .category .package-container .package .btn-rm:hover {
-    filter: brightness(1.15);
+    filter: brightness(1.2);
 }
 
 .category .package-container .package .btn-rm i {
@@ -1220,7 +1214,7 @@ main .side-bar .navigation ul li:hover i {
 }
 
 .category .package-container-list .package .btn-buy:hover {
-    filter: brightness(1.15);
+    filter: brightness(1.2);
 }
 
 .category .package-container-list .package .btn-rm {
@@ -1242,7 +1236,7 @@ main .side-bar .navigation ul li:hover i {
 }
 
 .category .package-container-list .package .btn-rm:hover {
-    filter: brightness(1.15);
+    filter: brightness(1.2);
 }
 
 .package-full .main-bar {
@@ -1314,7 +1308,7 @@ main .side-bar .navigation ul li:hover i {
 }
 
 .package-full .container-fluid .btn-buy:hover {
-    filter: brightness(1.15);
+    filter: brightness(1.2);
 }
 
 .package-full .container-fluid .btn-rm {
@@ -1323,7 +1317,7 @@ main .side-bar .navigation ul li:hover i {
 }
 
 .package-full .container-fluid .btn-rm:hover {
-    filter: brightness(1.15);
+    filter: brightness(1.2);
 }
 
 .package-full .container-fluid .price {
@@ -1443,7 +1437,7 @@ main .side-bar .navigation ul li:hover i {
 }
 
 .checkout-bar .basket .checkout-item .btn-update:hover {
-    filter: brightness(1.15);
+    filter: brightness(1.2);
 }
 
 .checkout-bar .basket .checkout-item .btn-update i {
@@ -1466,7 +1460,7 @@ main .side-bar .navigation ul li:hover i {
 }
 
 .checkout-bar .basket .checkout-item .btn-rm:hover {
-    filter: brightness(1.15);
+    filter: brightness(1.2);
 }
 
 .checkout-bar .basket .checkout-item .btn-rm i {
@@ -1566,7 +1560,7 @@ main .side-bar .navigation ul li:hover i {
 }
 
 .checkout-bar .checkout .card-footer .btn-redeem:hover {
-    filter: brightness(1.15);
+    filter: brightness(1.2);
 }
 
 .checkout-bar .checkout .card-footer .btn-redeem i {
@@ -1594,7 +1588,7 @@ main .side-bar .navigation ul li:hover i {
 }
 
 .checkout-bar .checkout .card-footer .btn-purchase:hover {
-    filter: brightness(1.15);
+    filter: brightness(1.2);
 }
 
 .checkout-bar .checkout .card-footer .btn-purchase i {

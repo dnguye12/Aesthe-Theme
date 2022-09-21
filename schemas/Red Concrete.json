@@ -6,28 +6,28 @@
 			"options": [{
 					"id": "main-color",
 					"name": "Main Color (Default Orange)",
-					"default": "#2dc653",
+					"default": "#ff3838",
 					"description": "Change the main color of the website. Check README for better understanding or contact me by disocrd or email.",
 					"type": "textarea"
 				},
 				{
 					"id": "bg-color",
 					"name": "Background Color (Default Grey)",
-					"default": "#191919",
+					"default": "#414141",
 					"description": "Change the background color of the website. Check README for better understanding or contact me by disocrd or email.",
 					"type": "textarea"
 				},
 				{
 					"id": "warning-color",
 					"name": "Warning Color (Default Red)",
-					"default": "#FF3434",
+					"default": "#ff3838",
 					"description": "Change the color of all warning elements on the website. Check README for better understanding or contact me by disocrd or email.",
 					"type": "textarea"
 				},
 				{
 					"id": "green-color",
 					"name": "Green Color (Default Green)",
-					"default": "#2dc653",
+					"default": "#40E253",
 					"description": "Change the color of all green elements on the website. Check README for better understanding or contact me by disocrd or email.",
 					"type": "textarea"
 				},
@@ -55,14 +55,14 @@
 				{
 					"id": "top",
 					"name": "Special for other theme, not important if you use Golden theme",
-					"default": "#2dc653",
+					"default": "#ff3838",
 					"description": "",
 					"type": "textarea"
 				},
 				{
 					"id": "gift",
 					"name": "Special for other theme, not important if you use Golden theme",
-					"default": "#1F1F1F",
+					"default": "#252525",
 					"description": "",
 					"type": "textarea"
 				}
@@ -84,21 +84,21 @@
 			"options": [{
 					"id": "layer1",
 					"name": "Layer 1 Color (Default Dark Gray)",
-					"default": "#1F1F1F",
+					"default": "#252525",
 					"description": "Check README for better understanding or contact me by disocrd or email.",
 					"type": "textarea"
 				},
 				{
 					"id": "layer2",
 					"name": "Layer 2 Color (Default Gray)",
-					"default": "#191919",
+					"default": "#414141",
 					"description": "Check README for better understanding or contact me by disocrd or email.",
 					"type": "textarea"
 				},
 				{
 					"id": "layer3",
 					"name": "Layer 3 Color (Default Light Gray)",
-					"default": "#252525",
+					"default": "#646666",
 					"description": "Check README for better understanding or contact me by disocrd or email.",
 					"type": "textarea"
 				}

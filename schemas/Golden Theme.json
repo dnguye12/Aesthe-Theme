@@ -25,13 +25,6 @@
 					"type": "textarea"
 				},
 				{
-					"id": "warning-color-hover",
-					"name": "Warning Color while hovering(Default Red)",
-					"default": "#e04848",
-					"description": "Change the color of all warning elements while mouse hover on the website. Check README for better understanding or contact me by disocrd or email.",
-					"type": "textarea"
-				},
-				{
 					"id": "green-color",
 					"name": "Green Color (Default Green)",
 					"default": "#33bd38",
@@ -43,13 +36,6 @@
 					"name": "Discord Color (Default Blue)",
 					"default": "#1145ca",
 					"description": "Change the color of all discord elements on the website. Check README for better understanding or contact me by disocrd or email.",
-					"type": "textarea"
-				},
-				{
-					"id": "discord-color-hover",
-					"name": "Discord Color while hovering(Default Blue)",
-					"default": "#224ECA",
-					"description": "Change the color of all discord elements while mouse hover on the website. Check README for better understanding or contact me by disocrd or email.",
 					"type": "textarea"
 				},
 				{

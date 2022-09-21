@@ -6,11 +6,8 @@
 	--gray-light: {{config("layer3")}};
 	--gray-lighter: {{config("help-color")}};
 	--gray-lighter-hover: {{config("help-color-hover")}};
-	--brown: #99610f;
 	--red: {{config("warning-color")}};
-	--red-hover: {{config("warning-color-hover")}}; 
 	--discord: {{config("discord-color")}};
-	--discord-hover: {{config("discord-color-hover")}};
 	--green: {{config("green-color")}};
 	--gray-dark: {{config("layer1")}};
 	--top: {{config("top")}};
@@ -103,7 +100,7 @@ header .btn-logout {
     color: white;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 350ms;
+    transition: background-color 350ms, filter 350ms;
 }
 
 header .btn-logout i {
@@ -111,7 +108,7 @@ header .btn-logout i {
 }
 
 header .btn-logout:hover {
-    background-color: var(--red-hover);
+    filter: brightness(1.15);
 }
 
 header .btn-login {
@@ -349,7 +346,7 @@ main .side-bar .navigation ul li {
     cursor: pointer;
     padding-left: 24px;
     padding-right: 24px;
-    transition: background-color 350ms;
+    transition: background-color 350ms, filter 350ms;
 }
 
 main .side-bar .navigation ul li:hover {
@@ -497,7 +494,7 @@ main .side-bar .navigation ul li:hover i {
     font-weight: bold;
     padding: 0px 22px;
     height: 44px;
-    transition: background-color 350ms;
+    transition: background-color 350ms, filter 350ms;
     color: var(--white);
 }
 .main-bar .main-container .qes a i {
@@ -523,7 +520,7 @@ main .side-bar .navigation ul li:hover i {
 }
 
 .main-bar .main-container .qes .btn-refund:hover {
-    background-color: var(--red-hover);
+    filter: brightness(1.15);
 }
 
 .main-bar .main-container .qes .btn-discord {
@@ -531,7 +528,7 @@ main .side-bar .navigation ul li:hover i {
 }
 
 .main-bar .main-container .qes .btn-discord:hover {
-    background-color: var(--discord-hover);
+    filter: brightness(1.15);
 }
 
 
@@ -893,7 +890,7 @@ main .side-bar .navigation ul li:hover i {
         width: 100%;
         margin-bottom: -336px;
         text-align: center;
-        transition: background-color 350ms;
+        transition: background-color 350ms, filter 350ms;
         padding: 16px;
     }
     
@@ -911,7 +908,7 @@ main .side-bar .navigation ul li:hover i {
     }
     
     main .drop-down-menu-active:hover {
-        background-color: var(--red-hover) !important;
+        filter: brightness(1.15) !important;
     }
     
     main .drop-down-menu:hover {
@@ -1133,11 +1130,11 @@ main .side-bar .navigation ul li:hover i {
     font-size: 20px;
     font-weight: 500;
     margin-bottom: 16px;
-    transition: background-color 350ms;
+    transition: background-color 350ms, filter 350ms;
 }
 
 .category .package-container .package .btn-rm:hover {
-    background-color: var(--red-hover);
+    filter: brightness(1.15);
 }
 
 .category .package-container .package .btn-rm i {
@@ -1232,7 +1229,7 @@ main .side-bar .navigation ul li:hover i {
     text-decoration: none;
     font-size: 20px;
     font-weight: 500;
-    transition: background-color 350ms;
+    transition: background-color 350ms, filter 350ms;
 }
 
 .category .package-container-list .package .btn-rm i {
@@ -1245,7 +1242,7 @@ main .side-bar .navigation ul li:hover i {
 }
 
 .category .package-container-list .package .btn-rm:hover {
-    background-color: var(--red-hover);
+    filter: brightness(1.15);
 }
 
 .package-full .main-bar {
@@ -1322,11 +1319,11 @@ main .side-bar .navigation ul li:hover i {
 
 .package-full .container-fluid .btn-rm {
     background-color: var(--red);
-    transition: background-color 350ms;
+    transition: background-color 350ms, filter 350ms;
 }
 
 .package-full .container-fluid .btn-rm:hover {
-    background-color: var(--red-hover);
+    filter: brightness(1.15);
 }
 
 .package-full .container-fluid .price {
@@ -1464,12 +1461,12 @@ main .side-bar .navigation ul li:hover i {
     font-weight: bold;
     background-color: var(--red);
     color: var(--white);
-    transition: background-color 350ms;
+    transition: background-color 350ms, filter 350ms;
     margin-left: 12px;
 }
 
 .checkout-bar .basket .checkout-item .btn-rm:hover {
-    background-color: var(--red-hover);
+    filter: brightness(1.15);
 }
 
 .checkout-bar .basket .checkout-item .btn-rm i {
@@ -1593,11 +1590,11 @@ main .side-bar .navigation ul li:hover i {
     height: 40px;
     font-size: 16px;
     font-weight: 600;
-    transition: background-color 350ms;
+    transition: background-color 350ms, filter 350ms;
 }
 
 .checkout-bar .checkout .card-footer .btn-purchase:hover {
-    background-color: var(--discord-hover);
+    filter: brightness(1.15);
 }
 
 .checkout-bar .checkout .card-footer .btn-purchase i {
@@ -1813,6 +1810,7 @@ body {
     color: var(--white);
     text-align: left;
     background-color: var(--bg);
+text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
 }
 
 [tabindex="-1"]:focus {
@@ -1939,15 +1937,15 @@ body {
 }
 
 .text-shadow {
-    text-shadow: 1px 2px 2px rgba(0,0,0,0.2);
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
 }
 
 .box-shadow {
-    box-shadow: 2px 2px 3px rgba(0,0,0,0.2);
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.3);
 }
 
 .drop-shadow {
-    filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.2));
+    filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.3));
 }
 
 a{

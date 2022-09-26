@@ -12,6 +12,7 @@
 	--gray-dark: {{config("layer1")}};
 	--top: {{config("top")}};
 	--gift: {{config("gift")}};
+	--logo-height: {{config("logo-height")}};
 }
 
 html {
@@ -145,7 +146,7 @@ header .container-logo {
 }
 
 header .container-logo #logo {
-    height: 240px;
+    height: var(--logo-height);
     width: auto;
     position: relative;
     top: -25px;
@@ -189,7 +190,7 @@ header .btn-basket .basket{
 
 header .line-2 select {
     background-color: var(--orange);
-    color: white;
+    color: var(--white);
     padding-right: 12px;
     padding-left: 12px;
     font-size: 16px;
@@ -559,7 +560,20 @@ main .side-bar .navigation ul li:hover i {
     font-size: 18px;
 }
 
+.module-com img {
+    height: auto !important;
+    width: 100% !important;
+    object-fit: contain;
+}
 
+.module-com p {
+    font-size: 18px;
+}
+
+.module-com .text p {
+    margin-bottom: 8px !important;
+    margin-top: 0xp !important;
+}
 
 
 .module-server-status {
@@ -606,7 +620,7 @@ main .side-bar .navigation ul li:hover i {
 
 .module-top {
     overflow: hidden;
-    background-color: var(--orange);
+    background-color: var(--top);
     width: 100%;
     padding: 24px;
     height: 160px;

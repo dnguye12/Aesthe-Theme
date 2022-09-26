@@ -3,7 +3,15 @@
 	"support_email": "tjktakbuonngu@gmail.com",
 	"config": [{
 			"header": "General Settings",
-			"options": [{
+			"options": [
+				{
+					"id": "logo-height",
+					"name": "Heading logo height",
+					"default": "240px",
+					"description": "Change the height of the main logo, which also change its size.",
+					"type": "textarea"
+				},
+				{
 					"id": "main-color",
 					"name": "Main Color (Default Orange)",
 					"default": "#ffa31a",

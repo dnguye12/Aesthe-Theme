@@ -6,7 +6,7 @@
                 <img class="drop-shadow" src="{{store.favicon}}" alt="hivemc small logo">
             <div class="text flex-col" id="btn-ip">
             <h4 class="text-shadow">Click to copy IP</h4>
-            <h2 class="text-shadow">play.HiveMC.com</h2>
+            <h2 class="text-shadow">{{ module.ip }}</h2>
             </div>
             <script>
                 let btnIp = document.getElementById("btn-ip");
@@ -63,7 +63,7 @@
                         
                         
                         
-            <a href="https://the-golden-egg.tebex.io/checkout/basket" class="btn btn-basket flex-row box-shadow">
+            <a href="/checkout/basket" class="btn btn-basket flex-row box-shadow">
                 {% if basket.packages|length > 0 %}
     <h4 class="text-shadow"><i class="fa-solid fa-basket-shopping"></i> {{ _p(":count item for :amount :currency", basket.packages|length, {'count' :
     basket.packages|length, 'amount' : basket.price|money, 'currency' : basket.currency})

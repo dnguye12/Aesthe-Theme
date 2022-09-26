@@ -942,7 +942,7 @@ main .side-bar .navigation ul li:hover i {
         max-width: 100% !important;
     }
     
-    .module-payments, .module-goal, .module-top, .module-feature, .module-text {
+    .module-payments, .module-goal, .module-top, .module-feature, .module-text, .module-com {
         display: none !important;
     }
 }

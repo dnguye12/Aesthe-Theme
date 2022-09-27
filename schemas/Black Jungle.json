@@ -5,6 +5,20 @@
 			"header": "General Settings",
 			"options": [
 				{
+			        "id": "server-ip",
+					"name": "You server ip address",
+					"default": "mc.hypixel.net",
+					"description": "Change the server address",
+					"type": "textarea"
+			    },
+			    {
+			        "id": "server-port",
+					"name": "You server port",
+					"default": "25565",
+					"description": "Change the server port if you have one",
+					"type": "textarea"
+			    },
+				{
 					"id": "logo-height",
 					"name": "Heading logo height",
 					"default": "240px",

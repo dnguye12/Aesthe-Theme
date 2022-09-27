@@ -6,13 +6,14 @@
                 <img class="drop-shadow" src="{{store.favicon}}" alt="hivemc small logo">
             <div class="text flex-col" id="btn-ip">
             <h4 class="text-shadow">Click to copy IP</h4>
-            <h2 class="text-shadow">{{ module.ip }}</h2>
+            <h2 class="text-shadow" id="storeIp">{{ config("server-ip") }}</h2>
             </div>
             <script>
                 let btnIp = document.getElementById("btn-ip");
+                let storeIp = "{{ config("server-ip") }}";
+                let storePort = "{{ config("server-port") }}";
                 btnIp.addEventListener("click", function() {
-                   navigator.clipboard.writeText("{{ module.ip }}{% if module.port != 25565 %}:{{ module.port }}{% endif %}");
-                   console.log("{{ module.ip }}{% if module.port != 25565 %}:{{ module.port }}{% endif %}");
+                    navigator.clipboard.writeText(storeIp.concat(":", storePort));
                    alert("Server Ip copied to Clipboard!");
                 });
             </script>

@@ -1,19 +1,13 @@
 {% extends "layout.html" %}
 
 {% block content %}
-
-<div class="jumbotron bg-primary inner-page-title">
-    <div class="container">
-        <header class="page-title">
-            <h1 class="text-center text-white text-shadow">{{ options.package.name }}</h1>
-        </header>
-    </div>
-</div>
-
-<div id="content-outer" class="container px-0 px-lg-3">
-     <section class="bg-white p-0 row no-gutters border-left border-right">
-        <div class="col-12">
-            <div class="p-xl-5 p-4">
+<main class="container options flex-row">
+    {% include "header_2.html" %}
+    <div class="main-bar col-8 flex-col">
+        <div class="main-wc">
+            <h1>{{ options.package.name }}</h1>
+        </div>
+    <div id="content-outer" class="container px-0 px-lg-3">
                 <h4 class="mb-3">Enter package options: </h4>
                 <div class="variables">
                     <form method="post">
@@ -62,9 +56,7 @@
                             
                             <div class="input-group">
                               <input type="text" class="form-control input-lg" readonly value="{{ variable.value ? "Logged in as " ~ variable.discord_tag : "Not logged in" }}">
-                              <span class="input-group-append">
-                                  <a href="https://ident.tebex.io/discord/?return={{ url(['fivem_id']) }}" id="login-with-discord" class="btn btn-info">Login with Discord</a>
-                              </span>
+                                  <a href="https://ident.tebex.io/discord/?return={{ url(['fivem_id']) }}" id="login-with-discord" class="btn btn-info option-btn-discord flex-row">Login with Discord</a>
                             </div>
                             
                             <input type="hidden" name="variables[{{ variable.id }}]" value="{{ variable.value }}" />
@@ -78,21 +70,20 @@
                         {% endif %}
                         {% endfor %}
 
-                        <div class="row align-items-center">
-                            <div class="col-6">
-                                <a href="/category/{{ options.package.category }}" class="btn btn-link btn-sm text-dark font-weight-bold px-0">{{
+                        <div class="align-items-center option-footer flex-row">
+                            <div style="width: 49%;">
+                                <a href="/category/{{ options.package.category }}" class="btn btn-back flex-row">{{
                                     __("Back") }}</a>
                             </div>
-                            <div class="col-6 text-right">
-                                <input type="submit" value="{{ __("Continue") }}" name="submit" class="btn btn-primary btn-lg" />
+                            <div style="width: 49%;">
+                                <input type="submit" value="{{ __("Continue") }}" name="submit" class="btn btn-con flex-row" />
                             </div>
                         </div>
                     </form>
                 </div>
-            </div>
-        </div>
-    </section>
 </div>
+    </div>
+</main>
 
 {% include "content_footer.html" %}
 

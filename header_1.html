@@ -13,7 +13,12 @@
                 let storeIp = "{{ config("server-ip") }}";
                 let storePort = "{{ config("server-port") }}";
                 btnIp.addEventListener("click", function() {
-                    navigator.clipboard.writeText(storeIp.concat(":", storePort));
+                    
+                    if(storePort != "25565" ) {
+                        navigator.clipboard.writeText(storeIp.concat(":", storePort));
+                    }else {
+                        navigator.clipboard.writeText(storeIp):
+                    }
                    alert("Server Ip copied to Clipboard!");
                 });
             </script>

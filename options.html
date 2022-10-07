@@ -1,14 +1,23 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<main class="container options flex-row">
-    {% include "header_2.html" %}
-    <div class="main-bar col-8 flex-col">
-        <div class="main-wc">
-            <h1>{{ options.package.name }}</h1>
-        </div>
-    <div id="content-outer" class="container px-0 px-lg-3">
-                <h4 class="mb-3">Enter package options: </h4>
+
+<main class="container options flex-row category">
+  {% include "header_2.html" %}
+   <div class="main-bar col-8 flex-col">
+      <div class="main-wc box-shadow">
+         <h1 class="name">{{ options.package.name }}</h1>
+      </div>
+      
+      
+      
+      
+      
+      <div id="content-outer " class="login-form btn box-shadow">
+     <section class="bg-white p-0 row no-gutters border-left border-right">
+        <div class="col-12">
+            <div class="p-xl-5 p-4">
+                <h4 class="option-name">Enter package options: </h4>
                 <div class="variables">
                     <form method="post">
                         {% if options.package.chooseServer %}
@@ -54,9 +63,9 @@
                         {% elseif variable.id == "discord_id" %}
                             <p>{{ variable.description }}</p>
                             
-                            <div class="input-group">
+                            <div class="input-group flex-col">
                               <input type="text" class="form-control input-lg" readonly value="{{ variable.value ? "Logged in as " ~ variable.discord_tag : "Not logged in" }}">
-                                  <a href="https://ident.tebex.io/discord/?return={{ url(['fivem_id']) }}" id="login-with-discord" class="btn btn-info option-btn-discord flex-row">Login with Discord</a>
+                            <a href="https://ident.tebex.io/discord/?return={{ url(['fivem_id']) }}" id="login-with-discord" class="btn btn-info login-discord flex-row box-shadow">Login with Discord</a>
                             </div>
                             
                             <input type="hidden" name="variables[{{ variable.id }}]" value="{{ variable.value }}" />
@@ -70,19 +79,28 @@
                         {% endif %}
                         {% endfor %}
 
-                        <div class="align-items-center option-footer flex-row">
-                            <div style="width: 49%;">
-                                <a href="/category/{{ options.package.category }}" class="btn btn-back flex-row">{{
+                        <div class="align-items-center flex-row btn-end">
+                                <a href="/category/{{ options.package.category }}" class="btn btn-back box-shadow flex-row">{{
                                     __("Back") }}</a>
-                            </div>
-                            <div style="width: 49%;">
-                                <input type="submit" value="{{ __("Continue") }}" name="submit" class="btn btn-con flex-row" />
-                            </div>
+                                <input type="submit" value="{{ __("Continue") }}" name="submit" class="btn btn-con box-shadow flex-row" />
                         </div>
                     </form>
                 </div>
+            </div>
+        </div>
+    </section>
 </div>
-    </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+   </div>
 </main>
 
 {% include "content_footer.html" %}

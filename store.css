@@ -1835,7 +1835,49 @@ footer .btn:nth-child(1) {
 }
 
 
+.options .option-name {
+    font-size: 20px;
+    margin-top: 0px;
+}
 
+.options .login-discord {
+    width: 100%;
+    background-color: var(--discord);
+    transition: filter 350ms;
+    height: 40px;
+    color: var(--white);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.options .login-discord:hover {
+    filter: brightness(1.2);
+}
+
+.options .btn-back {
+    width: 50%;
+    background-color: var(--red);
+    transition: filter 350ms;
+    height: 40px;
+    color: var(--white);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.options .btn-con {
+    width: 50%;
+    background-color: var(--orange);
+    transition: filter 350ms;
+    height: 40px;
+    color: var(--white);
+    font-size: 20px;
+    font-weight: 600;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-bottom: 0px!important;
+    border-radius: 10px !important;
+    margin-left: 12px;
+}
 
 
 

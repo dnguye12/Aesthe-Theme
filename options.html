@@ -23,7 +23,7 @@
                         {% if options.package.chooseServer %}
                         <div class="form-group">
                             <label>{{ __("Please choose which server to receive this package upon") }}</label>
-                            <select class="form-control input-lg" name="server">
+                            <select class="form-control input-lg options-dd flex-col btn box-shadow" name="server">
                                 <option value="">{{ __("Please choose which server to receive this package upon") }}</option>
                                 {% for server in options.servers %}
                                 <option value="{{ server.id }}">{{ server.name }}</option>
@@ -48,7 +48,7 @@
                         {% if variable.type == "dropdown" %}
                         <div class="form-group mb-4">
                             <label>{{ variable.description }}</label>
-                            <select name="variables[{{ variable.id }}]" class="form-control input-lg">
+                            <select name="variables[{{ variable.id }}]" class="form-control input-lg options-dd flex-col btn box-shadow">
                                 <option value="">{{ variable.description }}</option>
                                 {% for option in variable.options %}
                                 <option value="{{ option.id }}">

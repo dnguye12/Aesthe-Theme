@@ -90,6 +90,21 @@
 <script src="https://js.stripe.com/v2/"></script>
 {% endif %}
 
+<script>
+let btnIp = document.getElementById("btn-ip");
+                let storeIp = "{{ config("server-ip") }}";
+                let storePort = "{{ config("server-port") }}";
+                btnIp.addEventListener("click", function() {
+                    
+                    if(storePort != "25565" ) {
+                        navigator.clipboard.writeText(storeIp.concat(":", storePort));
+                    }else {
+                        navigator.clipboard.writeText(storeIp);
+                    }
+                   alert("Server Ip copied to Clipboard!");
+                });
+</script>
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"

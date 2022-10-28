@@ -16,13 +16,13 @@
 				<label for="touch"><span class="dropdown-title text-shadow">Drop down test</span></label>               
             <input type="checkbox" id="touch"> 
 
-            <ul class="slide">
+            <ul id="slide">
             <li><a href="#">Lorem Ipsum</a></li> 
             <li><a href="#">Lorem Ipsum</a></li>
             <li><a href="#">Lorem Ipsum</a></li>
             <li><a href="#">Lorem Ipsum</a></li>
             </ul>
-			
+			-->
 			
             </nav>
 		<style>
@@ -50,27 +50,51 @@
   font-size: 24px;
   font-weight: 600;
 }
-    .slide {
+.dropdown-title i {
+    margin-right: 12px;
+    transition: transform 350ms;
+}
+
+.dropdown-title:hover i {
+    transform: rotate(-30deg);
+}
+    #slide {
     clear:both;
     width:100%;
     height:0px;
     overflow: hidden;
-    text-align: center;
     transition: height .4s ease;
 }
-    .slide li {}
+    #slide a {
+        padding: 0px;
+        height: 56px;
+    }
+    #slide li {
+        height: unset;
+    }
+    #slide li i {
+        margin-left: 8px;
+    }
 
     #touch {position: absolute; opacity: 0; height: 0px;}    
 
-    #touch:checked + .slide {
-        height: 224px;
+    #touch:checked + #slide {
         background-color: var(--gray-light);
     } 
-    </style>-->
+            
+        </style>
+        
         <script>
             let dropDownMenu = document.getElementById("drop-down-menu");
             let ddmi = document.getElementById("ddmi");
             let navi = document.getElementById("navigation");
+            let helper = false;
+            
+            let touch = document.getElementById("touch");
+            let slide = document.getElementById("slide");
+            let slideItems = document.querySelectorAll('#slide li');
+            let widthScreen = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+            
             dropDownMenu.addEventListener("click", function() {
                 if(ddmi.classList.contains("fa-bars")) {
                     ddmi.classList.remove("fa-bars");
@@ -78,13 +102,40 @@
                     navi.style.visibility = "visible";
                     navi.style.opacity = "1";
                     dropDownMenu.classList.toggle("drop-down-menu-active");
+                    helper = true;
                 }else {
                     ddmi.classList.add("fa-bars");
                     ddmi.classList.remove("fa-square-xmark");
                     navi.style.visibility = "hidden";
                     navi.style.opacity = "0";
                     dropDownMenu.classList.toggle("drop-down-menu-active");
+                    helper = false;
+                    if(touch.checked && widthScreen <= 992) {
+                        dropDownMenu.style.marginBottom = (slideItems.length * -56 - 112).toString() + "px";
+                        slide.style.height = (slideItems.length * 56 ).toString() + "px";
+                        navi.style.top = (slideItems.length * 56 + 112).toString() + "px";
+                    } 
                 }
+                console.log(helper);
+            });
+            
+            navi.addEventListener("click", function() {
+             if(touch.checked) {
+                 if(widthScreen <= 992) {
+                     dropDownMenu.style.marginBottom = (slideItems.length * -56 - 112).toString() + "px";
+                 slide.style.height = (slideItems.length * 56 ).toString() + "px";
+                 navi.style.top = (slideItems.length * 56 + 112).toString() + "px";
+                 }else {
+                     dropDownMenu.style.marginBottom = (slideItems.length * -56).toString() + "px";
+                 slide.style.height = (slideItems.length * 56).toString() + "px";
+                 navi.style.top = (slideItems.length * 56).toString() + "px";
+                 }
+                 
+             }   else {
+                 dropDownMenu.style.marginBottom = "-112px";
+                 slide.style.height = "0px";
+                 navi.style.top = "112px";
+             }
             });
         </script>
             {{ modules|raw }}

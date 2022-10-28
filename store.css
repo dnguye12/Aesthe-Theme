@@ -1064,6 +1064,7 @@ main .side-bar .navigation ul li:hover i {
     padding: 24px;
     font-size: 18px;
     font-weight: 600;
+	width: 100%;
 }
 
 .login-form p:nth-child(1) {

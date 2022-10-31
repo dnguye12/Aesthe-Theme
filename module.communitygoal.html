@@ -1,28 +1,23 @@
-<div class="module-com module-goal btn box-shadow">
-    <h4><i class="fa-solid fa-people-group"></i>{{ module.header }}</h4>
-    {% if module.communitygoal.image %}
-        <div class="text-center">
-            <img src="{{ module.communitygoal.image }}" style="width:190px; height:165px;" class="img-fluid mx-auto" />
-        </div>
-    {% endif %}
-    <p>{{ module.communitygoal.description|raw }}</p>
-
-    <div class="progress">
-        <div class="progress-bar {% if module.bar.style == "striped" %} progress-bar-striped {% endif %} {% if module.bar.animated %} progress-bar-striped progrss-bar-animated {% endif %}" role="progressbar" style="width:{{ module.percentage }}%;"></div>
+<div class="module module--communitygoal">
+    <div class="module__heading">
+        
+        <h2><i class="fas fa-bullseye"></i>{{ module.header }}</h2>
     </div>
-
-    <p class="text">
+    <div class="module__body">
+        {{ module.communitygoal.description|raw }}
+        
+        <div class="progress">
+            <div class="progress__bar" style="width:{{ module.percentage }}%;"></div>
+            {% if module.displayAmount %}
+                <h3>{{ module.total }} / {{ module.target }} {{ store.currency }} ({{ module.percentage }}%)</h3>
+		    {% endif %}
+		    {% if module.displayAmount == false %}
+			    <h3>{{ module.percentage }}% Completed</h3>
+		    {% endif %}
+        </div>
+        
         {% if module.communitygoal.repeatable == 1 %}
-        <hr />
-        <p>{{ __("Times Achieved:") }} {{ module.communitygoal.times_achieved }}</p>
-    {% endif %}
-        {% if module.displayAmount %}
-        <strong>{{ module.total }} / {{ module.target }} {{ store.currency }}</strong> ({{ module.percentage }}%)
+            <h3>Times Achieved: {{ module.communitygoal.times_achieved }}</h3>
         {% endif %}
-
-        {% if module.displayAmount == false %}
-        {{ module.percentage }}% {{ __("completed") }}
-        {% endif %}
-    </p>
-
+    </div>
 </div>

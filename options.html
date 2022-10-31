@@ -1,105 +1,81 @@
 {% extends "layout.html" %}
 
 {% block content %}
-
-<main class="container options flex-row category">
-  {% include "header_2.html" %}
-   <div class="main-bar col-8 flex-col">
-      <div class="main-wc box-shadow">
-         <h1 class="name">{{ options.package.name }}</h1>
-      </div>
-      
-      
-      
-      
-      
-      <div id="content-outer " class="login-form btn box-shadow">
-     <section class="bg-white p-0 row no-gutters border-left border-right">
-        <div class="col-12">
-            <div class="p-xl-5 p-4">
-                <h4 class="option-name">Enter package options: </h4>
-                <div class="variables">
-                    <form method="post">
-                        {% if options.package.chooseServer %}
-                        <div class="form-group">
-                            <label>{{ __("Please choose which server to receive this package upon") }}</label>
-                            <select class="form-control input-lg options-dd flex-col btn box-shadow" name="server">
-                                <option value="">{{ __("Please choose which server to receive this package upon") }}</option>
-                                {% for server in options.servers %}
-                                <option value="{{ server.id }}">{{ server.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        {% endif %}
-
-                        {% if options.package.customPrice %}
-                        <div class="form-group">
-                            <label>{{ __("Please enter an amount greater than " ~ options.package.price ~ " " ~ store.currency ~ " that you'd like to pay.") }}</label>
-                            <div class="input-group">
-                                <input type="text" name="price" class="form-control input-lg" placeholder="{{ __("Please enter the amount you'd like to pay.") }}">
+	<div class="body">
+	    <div>
+    	    <div class="sidebar">
+    	        {% include "header_3.html" %}   
+    			{{ modules|raw }}
+    		</div>
+		</div>
+		
+		<div class="content">
+		    <div class="featured">{{ modules|raw }}</div>
+		    
+			<div class="panel panel--options">
+				<div class="panel__heading">
+				    <h1>{{ options.package.name }}</h1>
+			    </div>
+				<div class="panel__body">
+					<form method="post">
+                        
+						{% if options.package.chooseServer %}
+						    <!-- CHOOSE SERVER -->
+						    <div class="select">
+                                <select name="server">
+                                    <option value="">Please choose which server to receive this package upon</option>
+                                    {% for server in options.servers %}
+    									<option value="{{ server.id }}">{{ server.name }}</option>
+    								{% endfor %}
+                                </select>
                             </div>
-                        </div>
-                        {% endif %}
+						{% endif %}
 
-                        {% for variable in options.variables %}
-                        {% if variable.type == "dropdown" %}
-                        <div class="form-group mb-4">
-                            <label>{{ variable.description }}</label>
-                            <select name="variables[{{ variable.id }}]" class="form-control input-lg options-dd flex-col btn box-shadow">
-                                <option value="">{{ variable.description }}</option>
-                                {% for option in variable.options %}
-                                <option value="{{ option.id }}">
-                                    {{ option.name }}
-                                    {% if option.price > 0 %}
-                                    (+{{ option.price|money }} {{ basket.currency }})
-                                    {% endif %}
-                                </option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        {% elseif variable.id == "discord_id" %}
-                            <p>{{ variable.description }}</p>
-                            
-                            <div class="input-group flex-col">
-                              <input type="text" class="form-control input-lg" readonly value="{{ variable.value ? "Logged in as " ~ variable.discord_tag : "Not logged in" }}">
-                            <a href="https://ident.tebex.io/discord/?return={{ url(['fivem_id']) }}" id="login-with-discord" class="btn btn-info login-discord flex-row box-shadow">Login with Discord</a>
+						{% if options.package.customPrice %}
+						    <!-- SET CUSTOM PRICE -->
+    						<div id="customPrice">
+                                <input type="text" name="price" placeholder="Please enter an amount">
+                                <span class="text--title">{{ store.currency }}</span>
                             </div>
-                            
-                            <input type="hidden" name="variables[{{ variable.id }}]" value="{{ variable.value }}" />
-                            <br />
-                        {% else %}
-                        <div class="form-group mb-4">
-                            <label>{{ variable.description }}</label>
-                            <input type="text" name="variables[{{ variable.id }}]" class="form-control input-lg"
-                                   placeholder="{{ variable.description }}" />
+						{% endif %}
+
+						{% for variable in options.variables %}
+							{% if variable.type == "dropdown" %}
+							    <!-- DROPDOWN EXTRA OPTIONS -->
+							    <div class="select">
+                                    <select name="variables[{{ variable.id }}]">
+                                        <option value="">{{ variable.description }}</option>
+    									{% for option in variable.options %}
+    										<option value="{{ option.id }}">
+    											{{ option.name }}
+    											{% if option.price > 0 %}
+    												(+{{ option.price|money }} {{ basket.currency }})
+    											{% endif %}
+    										</option>
+    									{% endfor %}
+                                    </select>   
+                                </div>
+                            {% elseif variable.id == "discord_id" %}
+                                <!-- DISCORD ID -->
+                                <p>{{ variable.description }}</p>
+                                <input type="text" readonly value="{{ variable.value ? "Logged in as " ~ variable.discord_tag : __("Not logged in") }}">
+                                <span><a href="https://ident.tebex.io/discord/?return={{ url(['fivem_id']) }}" id="login-with-discord" class="btn cursorAura" style="background: #5865F2;">Login with Discord</a></span>
+                                <input type="hidden" name="variables[{{ variable.id }}]" value="{{ variable.value }}" />
+                            {% else %}
+							    <div>
+                                    <input type="text" name="variables[{{ variable.id }}]" placeholder="{{ variable.description }}" />
+                                </div>
+							{% endif %}
+						{% endfor %}
+						
+                        <!-- BUTTONS -->
+                        <div class="panel__buttons">
+                            <a href="/category/{{ options.package.category }}" class="btn btn--danger cursorAura">Back</a>
+                            <input type="submit" name="submit" value="Continue" class="btn btn--primary cursorAura"/>
                         </div>
-                        {% endif %}
-                        {% endfor %}
-
-                        <div class="align-items-center flex-row btn-end">
-                                <a href="/category/{{ options.package.category }}" class="btn btn-back box-shadow flex-row">{{
-                                    __("Back") }}</a>
-                                <input type="submit" value="{{ __("Continue") }}" name="submit" class="btn btn-con box-shadow flex-row" />
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-   </div>
-</main>
-
-{% include "content_footer.html" %}
-
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

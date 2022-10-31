@@ -1,88 +1,104 @@
-<main class="container flex-row package-full">
-    {% include "header_2.html" %}
-    <div class="main-bar col-8 flex-col">
-        <div class="card-heading btn">
-        <div class="heading flex-row">
-            <h1 class="text-shadow">{{ package.name[:20] }}
-                 {% if package.countdownEnds %}<br /><span class="text-white small">
-                         <span class="countdown-to" data-countdown="{{ package.countdownEnds }}">{{
-                             __("Ending Soon!") }}</span></span>{% endif %}</h1>
-        </div>
-            <div class="flex-row image-container">
-                <img src="{{ package.image.url }}" class="toggle-tooltip drop-shadow {% if package.image.borderless %}img-rounded{% else %}img-thumbnail{% endif %}" />
-            </div>
-            </div>
-            <div class="container-fluid flex-col p-4 p-md-0">
-                                 <div class="row">
-                                     <div class="col-12 price">
-                                         <strong class="h2 mb-0">
-                                             {% if package.customPrice %}
-                                             <b>{{ __("You decide how much to pay.") }}</b>
-                                             {% elseif package.price == 0.00 %}
-                                             <b>{{ __("This item is free.") }}</b>
-                                             {% else %}
-                                             {% if package.discount.applied %}
-                                             <del class="text-danger small font-weight-bold">{{ package.discount.original|money }}</del>
-                                             {% endif %}
-                                             <b>{{ package.price|money }} <small>{{ basket.currency }}</small></b>
-                                             {% endif %}
-                                         </strong>
-                                     </div>
-                                 </div>
-                                 <div class="row mt-3 buy">
-                                     <div class="col-12">
-                                         <div {% if package.purchasable==false %}data-toggle="tooltip" title="{{ package.reason }}" {% endif %}>
-                                             {% if package.basket %}
-                                                 <a href="/checkout/packages/remove/{{ package.id }}" class="btn btn-primary btn-lg gift-weight mb-2 btn-rm">{{
-                                                     __("Remove") }}</a>
- 
-                                             {% else %}
- 
-                                                 {% if package.type != "single" %}
-                                                 <a href="/checkout/packages/add/{{ package.id }}/subscribe" class="btn btn-success btn-lg gift-weight mb-2 btn-buy"
-                                                    {% if package.purchasable==false %}disabled{% endif %}>{{ __("Subscribe") }}</a>
-                                                 {% endif %}
- 
-                                                 {% if package.type != "subscription" %}
-                                                 <a href="/checkout/packages/add/{{ package.id }}/single" class="btn btn-primary btn-lg gift-weight mb-2 btn-buy" {% if
-                                                    package.purchasable==false %}disabled{% endif %}>{{ __("Add to basket") }} <i class="fas fa-plus ml-2"></i> </a>
-                                                 {% endif %}
- 
-                                             {% endif %}
-                                         </div>
- 
-                                         {% if package.disable_gifting == false and package.storeGiftingEnabled %}
-                                         <a href="#" data-toggle="collapse" data-target="#giftFields"
-                                                 aria-expanded="false" aria-controls="giftFields" class="btn btn-secondary btn-lg gift-weight btn-gift btn-buy">{{ __("Gift this package") }} <i class="fas fa-chevron-down ml-2"></i>
-                                         </a>
-                                         {% endif %}
- 
-                                         {% if package.disable_gifting == false and package.storeGiftingEnabled %}
-                                         <div class="collapse gift-fields" id="giftFields">
-                                             <div class="row">
-                                                 <div class="col-12">
-                                                     <form name="gift-form" method="get" action="/checkout/packages/add/{{ package.id }}/single/gift">
-                                                         <div class="input-group mt-3">
-                                                             <div class="input-group-prepend">
-                                                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                                             </div>
-                                                             <input type="text" name="username" placeholder="{{ __("Enter a username to gift this package to") }}"
-                                                             class="form-control" />
-                                                             <div class="input-group-append">
-                                                                 <button class="btn btn-primary btn-sm" type="submit">Gift <i class="fas fa-chevron-right ml-1"></i></button>
-                                                             </div>
- 
-                                                         </div>
-                                                     </form>
-                                                 </div>
-                                             </div>
-                                         </div>
-                                         {% endif %}
-                                     </div>
-                                 </div>
-            <div class="desc btn text-shadow box-shadow">
-            {{ package.description|raw }}
-            </div>
-        </div>
+<div class="jumbotron bg-primary inner-page-title">
+    <div class="container">
+        <header class="page-title">
+            <h1 class="text-center text-white text-shadow">{{ package.name[:20] }}
+                {% if package.countdownEnds %}<br /><span class="text-white small">
+                        <span class="countdown-to" data-countdown="{{ package.countdownEnds }}">{{
+                            __("Ending Soon!") }}</span></span>{% endif %}</h1>
+        </header>
     </div>
- </main>
+</div>
+
+<div id="content-outer" class="container px-0 px-lg-3">
+    <section class="bg-white p-0 row no-gutters border-left border-right">
+        <div class="col-12">
+            <div class="p-xl-5 p-4">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <img src="{{ package.image.url }}" class="img-fluid toggle-tooltip {% if package.image.borderless %}img-rounded{% else %}img-thumbnail{% endif %}" />
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="package_summary mt-3">
+                            <div class="container-fluid p-4 p-md-0">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <strong class="h2 mb-0">
+                                            {% if package.customPrice %}
+                                            <b>{{ __("You decide how much to pay.") }}</b>
+                                            {% elseif package.price == 0.00 %}
+                                            <b>{{ __("This item is free.") }}</b>
+                                            {% else %}
+                                            {% if package.discount.applied %}
+                                            <del class="text-danger small font-weight-bold">{{ package.discount.original|money }}</del>
+                                            {% endif %}
+                                            <b>{{ package.price|money }} <small>{{ basket.currency }}</small></b>
+                                            {% endif %}
+                                        </strong>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <div {% if package.purchasable==false %}data-toggle="tooltip" title="{{ package.reason }}" {% endif %}>
+                                            {% if package.basket %}
+                                                <a href="/checkout/packages/remove/{{ package.id }}" class="btn btn-primary btn-lg gift-weight mb-2">{{
+                                                    __("Remove") }}</a>
+
+                                            {% else %}
+
+                                                {% if package.type != "single" %}
+                                                <a href="/checkout/packages/add/{{ package.id }}/subscribe" class="btn btn-success btn-lg gift-weight mb-2"
+                                                   {% if package.purchasable==false %}disabled{% endif %}>{{ __("Subscribe") }}</a>
+                                                {% endif %}
+
+                                                {% if package.type != "subscription" %}
+                                                <a href="/checkout/packages/add/{{ package.id }}/single" class="btn btn-primary btn-lg gift-weight mb-2" {% if
+                                                   package.purchasable==false %}disabled{% endif %}>{{ __("Add to basket") }} <i class="fas fa-plus ml-2"></i> </a>
+                                                {% endif %}
+
+                                            {% endif %}
+                                        </div>
+
+                                        {% if package.disable_gifting == false and package.storeGiftingEnabled %}
+                                        <a href="#" data-toggle="collapse" data-target="#giftFields"
+                                                aria-expanded="false" aria-controls="giftFields" class="btn btn-secondary btn-lg gift-weight btn-gift">{{ __("Gift this package") }} <i class="fas fa-chevron-down ml-2"></i>
+                                        </a>
+                                        {% endif %}
+
+                                        {% if package.disable_gifting == false and package.storeGiftingEnabled %}
+                                        <div class="collapse gift-fields" id="giftFields">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <form name="gift-form" method="get" action="/checkout/packages/add/{{ package.id }}/single/gift">
+                                                        <div class="input-group mt-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                            </div>
+                                                            <input type="text" name="username" placeholder="{{ __("Enter a username to gift this package to") }}"
+                                                            class="form-control" />
+                                                            <div class="input-group-append">
+                                                                <button class="btn btn-primary btn-sm" type="submit">Gift <i class="fas fa-chevron-right ml-1"></i></button>
+                                                            </div>
+
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        {{ package.description|raw }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% include "content_footer.html" %}

@@ -1,71 +1,91 @@
-<!-- Header 1 -->
-<div class="header-container">
-    <header id="header" class="position-relative btn">
-        <div class="container flex-row line-1">
-            <button class="btn btn-ip flex-row box-shadow" type="button">
-                <img class="drop-shadow" src="{{store.favicon}}" alt="hivemc small logo">
-            <div class="text flex-col" id="btn-ip">
-            <h4 class="text-shadow">Click to copy IP</h4>
-            <h2 class="text-shadow" id="storeIp">{{ config("server-ip") }}</h2>
+<header>
+            <div class="header__socialWrapper">
+                <div class="container">
+                    <ul class="nav--secondary">
+                        {% if socials.facebook %}
+                            <li><a href="{{socials.facebook}}" class="iconBoxed"><svg role="img" aria-label="facebook icon"><use xlink:href="#facebook"></use></svg></a></li>
+                        {% endif %}
+                        {% if socials.github %}
+                            <li><a href="{{socials.github}}" class="iconBoxed"><svg role="img" aria-label="github icon"><use xlink:href="#github"></use></svg></a></li>
+                        {% endif %}
+                        {% if socials.linkedin %}
+                            <li><a href="{{socials.linkedin}}" class="iconBoxed"><svg role="img" aria-label="linkedin icon"><use xlink:href="#linkedin"></use></svg></a></li>
+                        {% endif %}
+                        {% if socials.instagram %}
+                            <li><a href="{{socials.instagram}}" class="iconBoxed"><svg role="img" aria-label="instagram icon"><use xlink:href="#instagram"></use></svg></a></li>
+                        {% endif %}
+                        {% if socials.youtube %}
+                            <li><a href="{{socials.youtube}}" class="iconBoxed"><svg role="img" aria-label="youtube icon"><use xlink:href="#youtube"></use></svg></a></li>
+                        {% endif %}
+                        {% if socials.twitter %}
+                            <li><a href="{{socials.twitter}}" class="iconBoxed"><svg role="img" aria-label="twitter icon"><use xlink:href="#twitter"></use></svg></a></li>
+                        {% endif %}
+                        {% if socials.twitch %}
+                            <li><a href="{{socials.twitch}}" class="iconBoxed"><svg role="img" aria-label="twitch icon"><use xlink:href="#twitch"></use></svg></a></li>
+                        {% endif %}
+                        {% if socials.tiktok %}
+                            <li><a href="{{socials.tiktok}}" class="iconBoxed"><svg role="img" aria-label="tiktok icon"><use xlink:href="#tiktok"></use></svg></a></li>
+                        {% endif %}
+                    </ul>
+                    
+                    <div>
+                            <button class="header__cart {%if basket.username %}header__cart--primary{%else%}cursorAura--dim{%endif%} cursorAura" {%if basket.username %}onclick="manageMenu('open', 'basket')"{% else %}onclick="window.location.pathname = 'login'"{%endif%}>
+                                {%if basket.username %}
+                                    <div class="cart__info">
+                                        <h2><i class="fas fa-shopping-cart"></i>View Cart</h2>
+                                        <p>{%if basket.packages|length > 0 %}{{ basket.packages|length }} item{%if basket.packages|length > 1 %}s{%endif%} - {{ basket.price|money }} {{basket.currency}}{%else%}No items in cart!{%endif%}</p>
+                                    </div>
+                                <div class="cart__player"><img src="https://mc-heads.net/body/{{basket.uuid}}" class="unselectable"/></div>
+                                {%else%}
+                                    <div class="cart__info">
+                                        <h2><i class="fas fa-shopping-cart"></i>Login</h2>
+                                        <p>Start shopping!</p>
+                                    </div>
+                                {%endif%}
+                            </button>
+                        </div>
+                </div>
             </div>
-            </button>
             
-            {% if basket.username %}
-            <div class="flex-row line-11">
-            <a class="btn btn-logout box-shadow flex-row text-shadow" href="/checkout/logout">Logout <i class="fa-solid fa-right-from-bracket"></i></a>
-            <a class="btn btn-login flex-row box-shadow" href=""> 
-                
-                <div class="text flex-col">
-                <h2 class="text-shadow" style="margin-bottom: 0px; font-size: 16px;">Welcome</h2>
-                <h2 class="text-shadow" style="margin-top: 0px;">{{basket.ign}}</h2>
+            <div class="header__logoWrapper">
+                <div class="container">
+                    <!-- Game Server -->
+                    <button class="header__server header__externalLink" id="serverLink">
+                        <div>
+                            <h2 class="text--title" id="serverText" data-ip="{{server}}">{{server}}</h2>
+                            {% if showPlayerCount and server %}
+                                <p>Join <span id='serverCount'>0</span> other people!</p>
+                            {% else %}
+                                <p>Click here to copy!</p>
+                            {% endif %}
+                        </div>
+                        <div class="iconBoxed">
+                           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24"><defs><clipPath id="b"><rect width="24" height="24"/></clipPath></defs><g id="a" clip-path="url(#b)"><path d="M4,2H20a2,2,0,0,1,2,2V20a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V4A2,2,0,0,1,4,2M6,6v4h4v2H8v6h2V16h4v2h2V12H14V10h4V6H14v4H10V6Z" fill="#fff"/></g></svg>
+                        </div>
+                    </button>
+                    <!-- Logo -->
+                    {% if store.logo %}
+                        <a href="/" class="header__logo"><img class="unselectable" src="{{ store.logo }}"  /></a>
+                    {% else %}
+                        <a href="/"><h1 class="header__logo">{{ store.name }}</h1></a>
+                    {% endif %}
+                    <!-- Discord Server -->
+                    <a href="{{discord}}" class="header__discord header__externalLink" id="discordLink" target="_blank">
+                        <div class="iconBoxed">
+                           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24"><defs><clipPath id="b"><rect width="24" height="24"/></clipPath></defs><g id="a" clip-path="url(#b)"><g transform="translate(0 2.905)"><g transform="translate(0)"><g transform="translate(0)"><path d="M20.33,1.523A19.849,19.849,0,0,0,15.379,0a13.6,13.6,0,0,0-.634,1.289,18.439,18.439,0,0,0-5.5,0A13.661,13.661,0,0,0,8.615,0,19.989,19.989,0,0,0,3.66,1.527,20,20,0,0,0,.1,15.141h0A19.958,19.958,0,0,0,6.175,18.19a14.667,14.667,0,0,0,1.3-2.1,12.915,12.915,0,0,1-2.048-.978c.172-.125.34-.253.5-.378a14.265,14.265,0,0,0,12.142,0c.164.134.332.262.5.378a12.965,12.965,0,0,1-2.052.98,14.534,14.534,0,0,0,1.3,2.1A19.868,19.868,0,0,0,23.9,15.143h0A19.993,19.993,0,0,0,20.33,1.523ZM8.013,12.4A2.3,2.3,0,0,1,5.852,10,2.281,2.281,0,0,1,8.009,7.6,2.272,2.272,0,0,1,10.173,10,2.292,2.292,0,0,1,8.013,12.4Zm7.974,0a2.292,2.292,0,0,1-2.16-2.4,2.281,2.281,0,0,1,2.16-2.4A2.266,2.266,0,0,1,18.144,10,2.291,2.291,0,0,1,15.987,12.4Z" transform="translate(0)" fill="#fff"/></g></g></g></g></svg>
+                        </div>
+                        <div>
+                           <h2 class="text--title">Discord</h2>
+                            {% if showPlayerCount and discordID %}
+                                <p>Join <span id='discordCount'>0</span> other people!</p>
+                            {% else %}
+                                <p>Click here to copy!</p>
+                            {% endif %}
+                        </div>
+                    </a>
+                    <!-- Mobile Menu -->
+                    <button class="header__mobileMenu btn btn--dark" onclick="manageMenu('open', 'nav')">
+                        <span class="text--title">MENU</span><i class="fas fa-bars"></i>
+                    </button>
                 </div>
-                <img class="drop-shadow" src="https://mc-heads.net/body/{{basket.ign}}" alt="">
-                </a>
-                </div>
-                {% else %}
-                <a class="btn btn-login flex-row box-shadow" href="/login">
-                    <div class="text flex-col">
-                <h2 class="text-shadow">Login <i class="fa-solid fa-right-to-bracket" style="height: 16px;"></i></h2>
-                </div>
-                <img class="drop-shadow" src="https://mc-heads.net/body/notch" alt="">
-                
-            </a>
-            
-            {% endif %}
-        </div>
-        
-        <div class="container container-logo flex-row">
-            <img class="drop-shadow" src="{{store.logo}}" alt="logo" id="logo">
-        </div>
-        
-        <div class="container flex-row line-2">
-            <div class="select">
-        <select class="btn box-shadow">
-            <option value="" disabled selected hidden class="text-shadow">{{ basket.currency }} </option>
-            {% for currency in store.currencies %}
-                                    {% if currency.code in [store.currency, "AUD", "BRL", "CAD", "DKK", "EUR", "NOK", "NZD", "GBP", "SEK", "USD", "PLN"] %}
-                                        <option class="text-shadow"><a href="?currency={{ currency.code }}">{{ currency.code }}</a></option>
-                                    {% endif %}
-                                {% endfor %}
-        </select>
-    </div>
-                        
-                        
-                        
-                        
-                        
-                        
-            <a href="/checkout/basket" class="btn btn-basket flex-row box-shadow">
-                {% if basket.packages|length > 0 %}
-    <h4 class="text-shadow"><i class="fa-solid fa-basket-shopping"></i> {{ _p(":count item for :amount :currency", basket.packages|length, {'count' :
-    basket.packages|length, 'amount' : basket.price|money, 'currency' : basket.currency})
-    }}</h4>
-    {% else %}
-    <h4 class="text-shadow"><i class="fa-solid fa-basket-shopping"></i> Empty</h4>
-    {% endif %}
-            </a>
-            
-        </div>   
-        <div class="header-btm"></div>
-    </header>   
-    </div>
+        </header>

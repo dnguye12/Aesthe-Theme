@@ -1,26 +1,20 @@
-<div class="module-payments btn box-shadow">
-    <h4><i class="fa-solid fa-users"></i>{{ module.header }}</h4>
-    <ul class="list-unstyled recent-payments flex-row payment-ul">
-        {% for payment in module.payments %}
-        <li class="payment-items">
-                <img src="https://mc-heads.net/avatar/{{payment.ign}}" width="36">
-                <span class="tooltiptext">{{payment.ign}}</span>
-        </li>
-        <script>
-            for(let stack of document.getElementsByClassName("payment-ul")) {
-                let items = stack.getElementsByTagName("li");
-            for(let i = 5; i < items.length; ++i) {
-                items[i].remove();
-            }
-            }
-        </script>
+<div class="module module--payments">
+    <div class="module__heading">
+        
+        <h2><i class="fas fa-user-friends"></i>{{ module.header }}</h2>
+    </div>
+    <div class="module__body">
+        {% if module.payments %}
+            <ul>
+                {% for payment in module.payments %}
+                    <li>
+                        <img src="https://minotar.net/avatar/{{payment.ign}}/32" width="32" class="unselectable" />
+                        <small>{{payment.ign}}</small>
+                    </li>
+                {% endfor %}
+            </ul>
         {% else %}
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        {% endfor %}
-    </ul>
+            <p>No recent payments to display.</p>
+        {% endif %}
+    </div>
 </div>

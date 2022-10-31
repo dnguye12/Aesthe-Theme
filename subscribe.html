@@ -1,238 +1,286 @@
 {% extends "layout.html" %}
 
 {% block content %}
-
-<main  class="container flex-row checkout">
-    {% include "header_2.html" %}
-    <div class="main-bar col-8 checkout-bar flex-col">
-   <div class="basket box-shadow btn flex-col">
-      <h1><i class="fa-solid fa-basket-shopping"></i>Review Basket</h1>
-      <form method="post" action="/checkout/item/update">
-         {% for package in basket.packages %}
-         <div class="checkout-item sub-item flex-row btn box-shadow">
-            <div class="text flex-col text-shadow">
-               {% if package.ign != "" %}
-               <h2><i class="fas fa-gift"></i></h2>
-               
-               {% else %}
-               <h2>{{ package.name }}</h2>
-               {%endif %}
-               <h4 class="flex-row">{{ basket.price|money }} <small>{{ basket.currency }}</small> <small class="flex-row btn text-shadow box-shadow period">every {{ basket.packages[0].expiryPeriod }}</small></h4>
+	<div class="body body--checkout">
+	    <div>
+			<div class="sidebar">
+			    {% include "header_3.html" %}   
+				{{ modules|raw }}
+			</div>
+		</div>
+	    <!-- LEFT PANEL (BASKET OVERVIEW & COUPONS) -->
+		<div>
+			<div class="panel panel-review">
+			    <!-- BASKET OVERVIEW -->
+				<div class="panel__heading">
+                    <h2>Review your cart</h2>
+                </div>
+				<div class="panel__body">
+				    <!-- REVIEW -->
+					<div class="review">
+                        <div class="package">
+                            <div class="package__info">
+                                <h3>{{ basket.packages[0].name }}</h3>
+                                <div class="package__tags">
+                                    <span class="tag tag--left tag--700">{{ basket.packages[0].price|money }} {{ basket.currency }}</span>
+                                    <span class="tag tag--700"><i class="fas fa-redo-alt"></i>{{ basket.packages[0].expiryPeriod }}</span>
+                                    {% if package.ign != "" %}
+                                        <span class="tag tag--gift tag--700"><i class="fas fa-gift"></i>{{ package.ign }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="package__buttons">
+                                <a href="javascript::void(0);" data-remote="/package/{{ package.id }}" class="iconBoxed iconBoxed--rounded package__infoModal toggle-modal cursorAura cursorAura--dim"><i class="fas fa-info"></i></a>
+                                <a href="/checkout/packages/remove/{{ basket.packages[0].id }}" class="btn btn--danger cursorAura" >Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    <!-- COUPONS -->
+                    <div class="panel__heading panel__heading--coupons">
+                        <h2>Apply Coupons & Gift Cards</h2>
+                    </div>
+                    <div class="panel__body">
+                        <div class="coupons">
+                            <form method="post" action="/checkout/coupons/add">
+                                <input type="text" name="coupon" placeholder="Enter code">
+                                <button class="btn btn--primary cursorAura">Apply</button>
+                            </form>
+                        </div>
+        
+                        {% if basket.coupons|length > 0 %}
+                            <div class="redeemed">
+                                {% for coupon in basket.coupons %}
+                                    <div class="coupon">
+                                        <p class="text--title">{{ coupon.code }}</p>
+                                        <a href="/checkout/coupons/remove/{{ coupon.code }}"><i class="fas fa-times"></i></a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
             
-            {% include "package_options.html" %}
-            <div class="btn-control flex-row">
-            <input class="d-inline form-control btn-quantity btn flex-col box-shadow" type="text" name="quantity[{{ package.item_id }}]" value="{{ package.quantity }}"
-            {% if package.price==0.00 or package.disableQuantity %}disabled="disabled"
-            {% endif %} />
-            <button class="btn btn-secondary mr-2 btn btn-update box-shadow text-shadow"><i class="fa-solid fa-square-pen"></i>Update</button>
-            <a href="/checkout/item/remove/{{ package.item_id }}" class="ml-2 btn btn-rm box-shadow text-shadow flex-col">
-            <i class="fa-solid fa-trash"></i></a>
+            
+            
+            
+        {% if store.useCheckout %}
+            <div>
+                <div class="panel">
+                    <div class="panel__heading">
+                       <h2><i class="fas fa-address-card"></i>Checkout</h2>
+                    </div>
+                    <div class="panel__body">
+                        <div class="hide">{{ privacyForm|raw }}</div>
+                        <p>Upon proceeding, you'll be redirected to Tebex Checkout. Please follow the instructions.</p>
+                    </div>
+                    <div class="panel__footer">
+                        <form method="post" action="{% if basket.price > 0 %}/checkout/pay{% else %}/checkout/free{% endif %}" class="basket__total checkout">
+                            <div>
+                                <h3>Total</h3>
+                                <h2>{{ basket.price|money }} {{basket.currency}}</h2>
+                            </div>
+                            <button type="submit" class="btn btn--primary cursorAura" id="purchase-button" data-loading-text="Redirecting..">Pay Now</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-         </div>
-         {% endfor %}
-      </form>
-   </div>
-   <div class="checkout box-shadow btn flex-col">
-      <h1><i class="fa-solid fa-credit-card"></i>Checkout</h1>
-      <div class="card flex-col btn drop-shadow">
-         <div class="card-header flex-row drop-shadow btn">
-             <div class="flex-row">
-            <img src="https://mc-heads.net/avatar/{{basket.ign}}" width="48" alt="" class="drop-shadow">
-            <div class="text flex-col text-shadow">
-               <h3>PURCHASE BY</h3>
-               <h2>{{basket.ign}}</h2>
-            </div>
-            </div>
-            <h4 class="btn text-shadow">{{ basket.price|money }} <small>{{ basket.currency }}</small></h4>
-         </div>
-         <div class="card-footer flex-col drop-shadow btn">
-            <form method="post" action="/checkout/basketcoupon/add">
-               <div class="input-group mb-3">
-                  <input type="text" name="coupon" placeholder="{{ __("Have a coupon code? Enter it here and click redeem.") }}"
-                  class="form-control btn drop-shadow coupon-input">
-                  <div class="input-group-append">
-                     <button class="btn btn-primary btn-redeem box-shadow flex-row text-shadow"><i class="fa-solid fa-tag"></i>Redeem Coupon</button>
-                  </div>
-               </div>
-            </form>
-            {% if store.useCheckout %}
-            <div class="bg-light border border-1 rounded p-2 p-md-4 4 mt-5">
-               <form method="post" action="{% if basket.price > 0 %}/checkout/pay{% else %}/checkout/free{% endif %}" {% if basket.price >
-                  0 %}class="gateway"{% endif %}>
-                  <div class="row">
-                     <div class="col-12">
-                        <p class="mb-0 text-center mt-2 text-shadow"><small>You will be redirected to our payment gateway to complete your purchase</small></p>
-                        <button type="submit" class="btn btn-success btn-block btn-lg box-shadow flex-row text-shadow btn-purchase" id="purchase-button" data-loading-text="{{ __("Loading, please wait...") }}">
-                        <i class="fa-solid fa-credit-card"></i>Pay Now
-                        </button>
-                     </div>
-                  </div>
-               </form>
-            </div>
-            {% else %}
-            <!-- Virtual Currency -->
-            <div class="row mt-5">
-               <div class="col-12">
-                  {% include "virtualcurrency.html" %}
-               </div>
-            </div>
-            <!-- /Virtual Currency -->
-            <!-- Start Checkout Fields -->
-            <div class="row mt-5">
-               <div class="col-12">
-                  <form method="post" action="{% if basket.price > 0 %}/checkout/pay{% else %}/checkout/free{% endif %}"
-                     {% if basket.price>
-                     0 %}class="gateway"{% endif %}>
-                     <input type="hidden" name="type" value="single" />
-                     {% if (checkout.amazonpay or checkout.gateways|length > 0) and basket.price > 0 %}
-                     <h4 class="mb-3">{{ __("Payment method") }}</h4>
-                     <div class="gateways">
-                        {% for gateway in checkout.gateways %}
-                        <div class="radio float-left text-left text-md-center">
-                           <label>
-                           <input type="radio" name="gateway" id="gateway" value="{{ gateway.id }}" {% if
-                           checkout.gateways|length==1 %} checked="checked" {% endif %} data-id="{{ gateway.gateway }}">
-                           <img class="gateway_img border rounded" src="{{ gateway.image }}" />
-                           {% if gateway.offset != 0 %}<span>({% if gateway.offset > 0 %}+{% endif %}{{ gateway.offset|money }}</span> <small>{{ basket.currency }}</small>){% endif %}
-                           </label>
+        {% else %}
+    </div>
+                            
+        <!-- CURRENTLY NOT SUPPORTED (OLD CHECKOUT PAGE) -->  
+    <div>
+        <form method="post" action="{% if basket.price > 0 %}/checkout/pay{% else %}/checkout/free{% endif %}" {% if basket.price > 0 %}class="gateway"{% endif %}>
+			
+			<input type="hidden" name="type" value="single" />    
+            
+            {% if checkout.gateways|length > 0 and basket.price > 0 %}
+                <div class="page-header">
+                  <h4>{{ __("Payment method") }}</h4>
+                </div>
+                
+                <div class="gateways">
+                    {% for gateway in checkout.gateways %}
+                        <div class="radio">
+                            <label>
+                              <input type="radio" name="gateway" id="gateway" value="{{ gateway.id }}" {% if checkout.gateways|length == 1 %} checked="checked" {% endif %} data-id="{{ gateway.gateway }}">
+                              <img src="/templates/209/img/gateways/{{ gateway.gateway }}.png"/> 
+                              {{ gateway.name }} 
+                              {% if gateway.offset != 0 %}
+								({% if gateway.offset > 0 %}+{% endif %}{{ gateway.offset|money }} <small>{{ basket.currency }}</small>)
+							    {% endif %} 
+                            </label>
                         </div>
-                        {% endfor %}
-                        <div class="clearfix"></div>
-                     </div>
-                     {% if checkout.amazonpay %}
-                     {% include "amazonpaybutton.html" %}
-                     {% endif %}
-                     {% endif %}
-                     {% if checkout.braintree %}
-                     <div class="mt-5 braintree-details hidden">
-                        <div class="bt-drop-in-wrapper">
-                           <div id="bt-dropin"></div>
-                        </div>
-                        <input id="nonce" name="payment_method_nonce" type="hidden" />
-                        <script src="https://js.braintreegateway.com/web/dropin/1.2.0/js/dropin.min.js"></script>
-                        <script>
-                           var form = document.querySelector('.gateway')[0];
-                           var client_token = "{{ checkout.braintree.braintree_client_token }}";
-                           var braintreeinstance;
-                           
-                           braintree.dropin.create({
-                               authorization: client_token,
-                               selector: '#bt-dropin',
-                               paypal: {
-                                   flow: 'vault'
-                               }
-                           }, function (createErr, instance) {
-                               braintreeinstance = instance;
-                           });
-                           
-                        </script>
-                     </div>
-                     {% endif %}
-                     {% include "checkout_fields.html" %}
-                     <div class="card-container row mt-5">
-                        <div class="col-12">
-                           <h4>{{ __("Card details:") }}</h4>
-                           <div class="row">
-                              <div class="number form-group col-12 col-md-4">
-                                 <label>{{ __("Card number:") }}</label>
-                                 <input type="text" class="form-control" placeholder="4242 4242 4242 4242" />
-                              </div>
-                              <div class="cvc form-group col-4">
-                                 <label>{{ __("CVC:") }} <a href="http://www.cvvnumber.com/cvv.html" target="_blank"
-                                    style="font-size:11px">{{ __("What is this?") }}</a></label>
-                                 <input type="text" class="form-control" placeholder="123" />
-                              </div>
-                              <div class="expiration form-group col-md-4">
-                                 <div class="row">
-                                    <div class="month form-group col-6">
-                                       <label>{{ __("Expiry month:") }}</label>
-                                       <select class="form-control">
-                                          <option value='01'>{{ __("01 - January") }}</option>
-                                          <option value='02'>{{ __("02 - February") }}</option>
-                                          <option value='03'>{{ __("03 - March") }}</option>
-                                          <option value='04'>{{ __("04 - April") }}</option>
-                                          <option value='05'>{{ __("05 - May") }}</option>
-                                          <option value='06'>{{ __("06 - June") }}</option>
-                                          <option value='07'>{{ __("07 - July") }}</option>
-                                          <option value='08'>{{ __("08 - August") }}</option>
-                                          <option value='09'>{{ __("09 - September") }}</option>
-                                          <option value='10'>{{ __("10 - October") }}</option>
-                                          <option value='11'>{{ __("11 - November") }}</option>
-                                          <option value='12'>{{ __("12 - December") }}</option>
-                                       </select>
-                                    </div>
-                                    <div class="year form-group col-6">
-                                       <label>{{ __("Expiry year:") }}</label>
-                                       <select class="form-control">
-                                          {% for year in checkout.expiryYears %}
-                                          <option value="{{ year }}">{{ year }}</option>
-                                          {% endfor %}
-                                       </select>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="tax row mt-5">
-                        <div class="col-12 ">
-                        </div>
-                     </div>
-                     <div class="row mt-5">
-                        <div class="col-12">
-                           {{ privacyForm|raw }}
-                        </div>
-                     </div>
-                     <div class="row mt-5">
-                        <div class="col-12">
-                           <div class="bg-light border rounded p-4">
-                              <h4 class="h2 text-center text-sm-left">{{ __("Purchase") }}</h4>
-                              {% if checkout.gateways|length > 0 or basket.price == 0 %}
-                              <div class="row">
-                                 <div class="col-12 col-lg-6">
-                                    <div class="checkbox">
-                                       <label>
-                                       <input type="checkbox" value="true" name="agreement">
-                                       {{ __("I agree to the :link_start Terms & Conditions :link_end of this
-                                       purchase.", {'link_start': '<a href="javascript::void(0);" data-remote="/terms"
-                                          class="toggle-modal">', 'link_end': '</a>'})|raw }}
-                                       </label>
-                                       {% include "checkout/tokenize.html" %}
-                                    </div>
-                                 </div>
-                                 <div class="col-12 col-lg-6 mt-lg-0">
-                                    <div class="col-12 text-center text-lg-right mb-3">
-                                       {% if checkout.playerReferrals %}<a href="javascript::void(0);" class="referral-button toggle-modal btn-link text-primary" data-remote="/checkout/playerReferral">Did someone refer you?</a>{% endif %}
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="row">
-                                 <div class="col-12">
-                                    {% include "checkout/buttons.html" %}
-                                 </div>
-                              </div>
-                              {% else %}
-                              <h5>{{ __("You need to setup a :gateway in your control panel before players can donate.",
-                                 {"gateway": '<a href="http://server.buycraft.net/gateways" target="_blank">payment gateway</a>'})|raw
-                                 }}
-                              </h5>
-                              {% endif %}
-                           </div>
-                        </div>
-                     </div>
-                  </form>
-               </div>
-            </div>
+                    {% endfor %}
+                </div>
+                    
             {% endif %}
-         </div>
-      </div>
-   </div>
-</div>
-    
-</main>
+            
+            <div class="page-header">
+              <h4>{{ __("Billing details") }}</h4>
+            </div>
 
-{% include "content_footer.html" %}
+            <div class="details">
 
+              <div class="row">
+                <div class="name">
+                  <div class="form-group">
+                    <label>{{ __("Full name:") }}</label>
+                    <input type="input" class="form-control" name="address_name" />
+                  </div>
+                </div>
+                <div class="email">
+                  <div class="form-group">
+                    <label>{{ __("Email address:") }}</label>
+                    <input type="input" class="form-control" name="email" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="address1">
+                  <div class="form-group">
+                    <label>{{ __("Address Line 1:") }}</label>
+                    <input type="input" class="form-control" name="address_line_1" />
+                  </div>
+                </div>
+                <div class="address2">
+                  <div class="form-group">
+                    <label>{{ __("Address Line 2:") }}</label>
+                    <input type="input" class="form-control" name="address_line_2" />
+                  </div>
+                </div>
+                <div class="city">
+                  <div class="form-group">
+                    <label>{{ __("City:") }}</label>
+                    <input type="input" class="form-control" name="address_city" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="zip">
+                  <div class="form-group">
+                    <label>{{ __("Zip Code:") }}</label>
+                    <input type="input" class="form-control" name="address_zip" />
+                  </div>
+                </div>
+                <div class="state">
+                  <div class="form-group">
+                    <label>{{ __("State/Region:") }}</label>
+                    <input type="input" class="form-control" name="address_state" />
+                  </div>
+                </div>
+                <div class="country">
+                  <div class="form-group">
+                    <label>{{ __("Country:") }}</label>
+                    <select class="form-control" name="address_country">
+                        <option value="">{{ __("Select a country") }}</option>
+					    {% for country in checkout.countries %}
+						    <option value="{{ country.id }}">{{ country.name }}</option>
+					    {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            
+            <div class="card-container">
+            
+                <div class="page-header">
+                  <h4>{{ __("Card details") }}</h4>
+                </div>
+
+                <div class="card">
+
+                  <div class="row">
+                    <div class="number">
+                      <div class="form-group">
+                          <label>{{ __("Card number:") }}</label>
+                          <input type="text" class="form-control" placeholder="4242 4242 4242 4242" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="cvc">
+                      <div class="form-group">
+                        <label>{{ __("CVC:") }} <a href="http://www.cvvnumber.com/cvv.html" target="_blank" style="font-size:11px">{{ __("What is this?") }}</a></label>
+                        <input type="text" class="form-control" placeholder="123" />
+                      </div>
+                    </div>
+                    <div class="expiration">
+                      <div class="month">
+                        <div class="form-group">
+                          <label>{{ __("Expiry month:") }}</label>
+                          <select class="form-control">
+                            <option value='01'>{{ __("01 - January") }}</option>
+                            <option value='02'>{{ __("02 - February") }}</option>
+                            <option value='03'>{{ __("03 - March") }}</option>
+                            <option value='04'>{{ __("04 - April") }}</option>
+                            <option value='05'>{{ __("05 - May") }}</option>
+                            <option value='06'>{{ __("06 - June") }}</option>
+                            <option value='07'>{{ __("07 - July") }}</option>
+                            <option value='08'>{{ __("08 - August") }}</option>
+                            <option value='09'>{{ __("09 - September") }}</option>
+                            <option value='10'>{{ __("10 - October") }}</option>
+                            <option value='11'>{{ __("11 - November") }}</option>
+                            <option value='12'>{{ __("12 - December") }}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="year">
+                          <label>{{ __("Expiry year:") }}</label>
+                          <select class="form-control">
+                            {% for year in checkout.expiryYears %}
+                                <option value="{{ year }}">{{ year }}</option>
+                            {% endfor %}
+                          </select>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                
+            </div>
+
+            <div class="tax"></div>
+{{ privacyForm|raw }}
+
+            <div class="page-header">
+              <h4>{{ __("Subscribe") }}</h4>
+            </div>
+
+            {% if checkout.gateways|length > 0 %}
+                <div class="row">
+                  <div class="col-sm-8">
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" value="true" name="agreement">
+                        {{ __("I agree to the :link_start terms & conditions :link_end of this purchase.", {'link_start': '<a href="javascript::void(0);" data-remote="/terms" class="toggle-modal">', 'link_end': '</a>'})|raw }}
+                      </label>
+{% include "subscribe/tokenize.html" %}
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    {% include "subscribe/buttons.html" %}
+                  </div>
+                </div>  
+            {% else %}
+			    <h5>{{ __("You need to setup a :gateway in your control panel before players can donate.", {"gateway": '<a href="http://server.buycraft.net/gateways" target="_blank">payment gateway</a>'})|raw }}</h5>
+		    {% endif %}
+                
+                            </form>
+                        {% endif %}                            
+    </div>
+	
+    {% if checkout.kount %}
+        <iframe width="1" height="1" frameborder="0" scrolling="no" src="{{ checkout.kount.url|raw }}">
+            <img width="1" height="1" src="{{ checkout.kount.gif|raw }}">    
+        </iframe>
+    {% endif %}
+        </div>
+        
 {% endblock %}
-

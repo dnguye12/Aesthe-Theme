@@ -1,142 +1,55 @@
-<div class="side-bar col-4 flex-col">
-        <div class="drop-down-menu box-shadow btn" id="drop-down-menu">
-            <h1 class="text-shadow"><i class="fa-solid fa-bars" id="ddmi"></i>Menu</h1>
+<div class="basket menuWrapper" data-toggle="basket">
+            <div class="basket__buttons">
+                <button class="basket__close iconBoxed iconBoxed--rounded btn--dark cursorAura cursorAura--dim" onclick="manageMenu('close', 'basket')">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button type="button" class="btn btn--dark cursorAura--dim dropdown" onclick="toggleDropdown('currency')">
+                    {{ basket.currency }} <i class="fa fa-caret-down"></i>
+                    <ul class="dropdownMenu" data-toggle="currency">
+                        {% for currency in store.currencies %}
+                            {% if currency.code in [store.currency, "AUD", "BRL", "CAD", "DKK", "EUR", "NOK", "NZD", "GBP", "SEK", "USD", "PLN"] %}
+                                <li {% if basket.currency == currency.code %}class="active"{% endif %}>
+                                  <a href="?currency={{ currency.code }}">{{ currency.code }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </button>
+                <a href="/checkout/logout" class="btn btn--dark cursorAura--dim btn--hideMobile">Logout</a>
+                <a href="/checkout/logout" class="btn btn--dark iconBoxed iconBoxed--rounded btn--showMobile"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+            <div class="basket__cart">
+                <div class="cart__info">
+                    <h2>Your Cart</h2>
+                    <p>{%if basket.packages|length > 0 %}{{ basket.packages|length }} item{%if basket.packages|length > 1 %}s{%endif%} for {{ basket.price|money }} {{basket.currency}}{%else%}No items in cart!{%endif%}</p>
+                    <span class="tag tag--left tag--light">{{basket.ign}}</span>
+                </div>
+                <div class="cart__player"><img src="https://mc-heads.net/body/{{basket.uuid}}" class="unselectable"/></div>
+            </div>
+            <div class="basket__items">
+                {% for package in basket.packages %}
+                    <form method="post" action="/checkout/update" id="package--{{package.id}}">
+                        <div class="package">
+                            <div class="package__info">
+                                <h3>{{ package.name[:25] }}</h3>
+                                <span class="tag tag--left tag--700">{{ package.price|money }} {{ basket.currency }}</span>
+                            </div>
+                            <div class="package__buttons">
+                                <span>Quantity:</span>
+                                <a href="javascript::void(0);" data-remote="/package/{{ package.id }}" class="iconBoxed iconBoxed--rounded package__infoModal toggle-modal cursorAura cursorAura--dim"><i class="fas fa-info"></i></a>
+                                <button onclick="subtractPackage({{package.id}})" class="iconBoxed iconBoxed--rounded package__remove cursorAura" ><i class="fas fa-minus"></i></button>
+                                <input type="text" class="package__quantity" name="quantity[{{ package.id }}]" value="{{ package.quantity }}" {% if package.price == 0.00 or package.disableQuantity %}disabled="disabled"{% endif %} maxlength="3"/>
+                                <a href="/checkout/packages/add/{{ package.id }}" class="iconBoxed iconBoxed--rounded package__add cursorAura"><i class="fas fa-plus"></i></a>
+                            </div>
+                        </div>
+                    </form>
+                {% endfor %}
+            </div>
+            <div class="basket__total">
+                <div>
+                    <h3>Total</h3>
+                    <h2>{{ basket.price|money }} {{basket.currency}}</h2>
+                </div>
+                <a href="/checkout/basket" class="btn btn--primary cursorAura">Checkout</a>
+            </div>
         </div>
-        <nav class="navigation box-shadow" id="navigation">
-                <ul class="flex-col">
-                    <a href="/" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-house"></i> Home</li></a>
-                    <a href="/category/ranks" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-crown"></i> Ranks</li></a>
-                    <a href="/category/subscriptions" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-newspaper"></i> Ranks Subscription</li></a>
-                    <a href="/category/cosmetics" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-masks-theater"></i> Cosmetics</li></a>
-                    <a href="/category/keys" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-key"></i> Keys</li></a>
-                    <a href="/category/coins" class="btn btn-menu text-shadow"><li><i class="fa-solid fa-coins"></i> Coins</li></a>
-                </ul>
-				
-				<!--
-				<label for="touch"><span class="dropdown-title text-shadow">Drop down test</span></label>               
-            <input type="checkbox" id="touch"> 
-
-            <ul id="slide">
-            <li><a href="#">Lorem Ipsum</a></li> 
-            <li><a href="#">Lorem Ipsum</a></li>
-            <li><a href="#">Lorem Ipsum</a></li>
-            <li><a href="#">Lorem Ipsum</a></li>
-            </ul>
-			-->
-			
-            </nav>
-		<style>
-    .dropdown-title {
-    width: 100%;
-    font-size: 16px;
-    font-weight: bold;
-    text-decoration: none;
-    height: 56px;
-    line-height: 56px;
-    cursor: pointer;
-    padding-left: 24px;
-    padding-right: 24px;
-    cursor : pointer;
-    display: block;
-}
-.dropdown-title:hover {
-    background-color: var(--orange);
-}
-
-.dropdown-title::after {
-  float: right;
-  right: 10%;
-  content: "+";
-  font-size: 24px;
-  font-weight: 600;
-}
-.dropdown-title i {
-    margin-right: 12px;
-    transition: transform 350ms;
-}
-
-.dropdown-title:hover i {
-    transform: rotate(-30deg);
-}
-    #slide {
-    clear:both;
-    width:100%;
-    height:0px;
-    overflow: hidden;
-    transition: height .4s ease;
-}
-    #slide a {
-        padding: 0px;
-        height: 56px;
-    }
-    #slide li {
-        height: unset;
-    }
-    #slide li i {
-        margin-left: 8px;
-    }
-
-    #touch {position: absolute; opacity: 0; height: 0px;}    
-
-    #touch:checked + #slide {
-        background-color: var(--gray-light);
-    } 
-            
-        </style>
-        
-        <script>
-            let dropDownMenu = document.getElementById("drop-down-menu");
-            let ddmi = document.getElementById("ddmi");
-            let navi = document.getElementById("navigation");
-            let helper = false;
-            
-            let touch = document.getElementById("touch");
-            let slide = document.getElementById("slide");
-            let slideItems = document.querySelectorAll('#slide li');
-            let widthScreen = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-            
-            dropDownMenu.addEventListener("click", function() {
-                if(ddmi.classList.contains("fa-bars")) {
-                    ddmi.classList.remove("fa-bars");
-                    ddmi.classList.add("fa-square-xmark");
-                    navi.style.visibility = "visible";
-                    navi.style.opacity = "1";
-                    dropDownMenu.classList.toggle("drop-down-menu-active");
-                    helper = true;
-                }else {
-                    ddmi.classList.add("fa-bars");
-                    ddmi.classList.remove("fa-square-xmark");
-                    navi.style.visibility = "hidden";
-                    navi.style.opacity = "0";
-                    dropDownMenu.classList.toggle("drop-down-menu-active");
-                    helper = false;
-                    if(touch.checked && widthScreen <= 992) {
-                        dropDownMenu.style.marginBottom = (slideItems.length * -56 - 112).toString() + "px";
-                        slide.style.height = (slideItems.length * 56 ).toString() + "px";
-                        navi.style.top = (slideItems.length * 56 + 112).toString() + "px";
-                    } 
-                }
-                console.log(helper);
-            });
-            
-            navi.addEventListener("click", function() {
-             if(touch.checked) {
-                 if(widthScreen <= 992) {
-                     dropDownMenu.style.marginBottom = (slideItems.length * -56 - 112).toString() + "px";
-                 slide.style.height = (slideItems.length * 56 ).toString() + "px";
-                 navi.style.top = (slideItems.length * 56 + 112).toString() + "px";
-                 }else {
-                     dropDownMenu.style.marginBottom = (slideItems.length * -56).toString() + "px";
-                 slide.style.height = (slideItems.length * 56).toString() + "px";
-                 navi.style.top = (slideItems.length * 56).toString() + "px";
-                 }
-                 
-             }   else {
-                 dropDownMenu.style.marginBottom = "-112px";
-                 slide.style.height = "0px";
-                 navi.style.top = "112px";
-             }
-            });
-        </script>
-            {{ modules|raw }}
-    </div>

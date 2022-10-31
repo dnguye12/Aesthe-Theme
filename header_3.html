@@ -1,0 +1,25 @@
+<div class="header__navWrapper module">
+      <ul class="nav menuWrapper" data-toggle="nav">
+         <button class="header__closeMobileNav iconBoxed iconBoxed--rounded btn--dark cursorAura cursorAura--dim" onclick="manageMenu('close', 'nav')">
+         <i class="fas fa-chevron-right"></i>
+         </button>
+         <li class="{% if page.category == "index" %}active{% endif %}"><a href="/">Home</a></li>
+         {% for category in store.categories %}
+         {% if category.subcategories|length > 0 %}
+         <li class="dropdown" onclick="toggleDropdown('{{category.name}}')">
+            <a href="#">{{ category.name }} <i class="fa fa-caret-down"></i></a>
+            <ul class="dropdownMenu" data-toggle="{{category.name}}">
+               {% for subcategory in category.subcategories %}
+               <li><a href="/category/{{ subcategory.id }}">{{ subcategory.name }}</a></li>
+               {% endfor %}
+            </ul>
+         </li>
+         {% else %}
+         <li class="{% if category.active %}active{% endif %}"><a href="/category/{{ category.id }}">{{ category.name }}</a></li>
+         {% endif %}
+         {% endfor %}
+         {% for page in store.pages %}
+         <li class="{% if page.active %}active{% endif %}"><a href="/{{ page.slug }}">{{ page.title }}</a></li>
+         {% endfor %}
+      </ul>
+</div>

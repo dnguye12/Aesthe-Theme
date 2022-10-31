@@ -1,0 +1,99 @@
+{
+	"author": "tjktak1002",
+	"support_email": "tjktakbuonngu@gmail.com",
+	"config": [{
+			"header": "Main Links",
+			"options": [
+				{
+			        "id": "server-ip",
+					"name": "You server ip address",
+					"default": "mc.hypixel.net",
+					"description": "Change the server address",
+					"type": "textarea"
+			    },
+				{
+			        "id": "server-port",
+					"name": "You server port",
+					"default": "25565",
+					"description": "Change the server port",
+					"type": "textarea"
+			    },
+				{
+			        "id": "discord-invite-link",
+					"name": "Discord Invite Link",
+					"default": "",
+					"description": "Discord server invite link",
+					"type": "textarea"
+			    },
+				{
+			        "id": "discord-id",
+					"name": "Discord Server ID",
+					"default": "",
+					"description": "Change the server address",
+					"type": "textarea"
+			    }
+			]
+	},{
+			"header": "Social Links",
+			"options": [
+				{
+			        "id": "fb-link",
+					"name": "Facebook Link",
+					"default": "",
+					"description": "Change the server address",
+					"type": "textarea"
+			    },
+				{
+			        "id": "gh-link",
+					"name": "Github Link",
+					"default": "",
+					"description": "Change the server port",
+					"type": "textarea"
+			    },
+				{
+			        "id": "link-link",
+					"name": "Linkedin Link",
+					"default": "",
+					"description": "Discord server invite link",
+					"type": "textarea"
+			    },
+				{
+			        "id": "ins-link",
+					"name": "Instagram Link",
+					"default": "",
+					"description": "Change the server address",
+					"type": "textarea"
+			    },
+				{
+			        "id": "yt-link",
+					"name": "Youtube Link",
+					"default": "",
+					"description": "Change the server address",
+					"type": "textarea"
+			    },
+				{
+			        "id": "twt-link",
+					"name": "Twitter Link",
+					"default": "",
+					"description": "Change the server address",
+					"type": "textarea"
+			    },
+				{
+			        "id": "twc-link",
+					"name": "Twitch Link",
+					"default": "",
+					"description": "Change the server address",
+					"type": "textarea"
+			    },
+				{
+			        "id": "tik-link",
+					"name": "Tiktok Link",
+					"default": "",
+					"description": "Change the server address",
+					"type": "textarea"
+			    }
+			]
+	}
+		    ]
+
+}

@@ -1,29 +1,30 @@
 {% extends "layout.html" %}
 
-
 {% block content %}
-<main class="container flex-row">
-    {% include "header_2.html" %}
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="main-bar col-8 flex-col">
-        <div class="main-wc">
-            <h1>Enter your Minecraft username.</h1>
-            
+    <div class="body">
+        <div>
+            <div class="sidebar">
+                {% include "header_3.html" %}   
+                {{ modules|raw }}
+            </div>
         </div>
-        <div class="login-form btn box-shadow">
-            <p>Please enter your Minecraft Username to continue. It is CaSe-SeNsItIvE and cannot contain spaces.</p>
-            <p>Your username is the name you appear as on a Minecraft server. If you don't know what your username is, then please refer to the Minecraft launcher, or the in-game chat when you type. Towards the bottom it will say your Minecraft name.</p>
-            {{ loginform|raw }}
+        
+        <div class="content">
+            <div class="featured">{{ modules|raw }}</div>
+            
+            <div class="panel">
+                <div class="panel__heading">
+                    <h1>Login</h1>
+                </div>
+                <div class="panel__body">
+                    <form method="post">
+                        <div class="username">
+                            <input type="text" name="ign" class="input--900" placeholder="Enter your username">
+                            <button class="btn btn--primary cursorAura" type="submit">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div> 
         </div>
     </div>
-</main>
-
-{% include "content_footer.html" %}
 {% endblock %}

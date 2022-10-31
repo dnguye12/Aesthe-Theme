@@ -390,6 +390,11 @@ img{
  background:var(--col-gray); 
  border:var(--border); 
  color:var(--col-white)}
+ 
+ .tag--600{
+ background:var(--col-gray-dark); ; 
+ border:var(--border); 
+ color:var(--col-orange)}
 
 .tag--700{
  background:var(--col-gray-dark); 

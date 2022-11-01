@@ -247,11 +247,11 @@ input,
 select{
  display:inline-block; 
  font-family:var(--font-family-text); 
- color:var(--col-white); 
+ color:var(--border-radius);
  padding:.75rem 1.5rem; 
  background:var(--col-gray-dark); 
  border:var(--border); 
- border-radius:var(--border-radius); 
+ border-radius: var(--col-white); 
  height:3rem; 
  min-width:calc(3rem+1ch)}
 

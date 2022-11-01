@@ -247,9 +247,9 @@ input,
 select{
  display:inline-block; 
  font-family:var(--font-family-text); 
- color:var(--col-white); 
+ color:var(--col-gray-dark); 
  padding:.75rem 1.5rem; 
- background:var(--col-gray-dark); 
+ background:var(--col-white); 
  border:var(--border); 
  border-radius:var(--border-radius); 
  height:3rem; 
@@ -615,7 +615,7 @@ img{
  border:0}
 
 .header__socialWrapper{
- background:var(--col-gray-dark); 
+ background:var(--col-bg); 
  padding:var(--spacing-xs) 0; 
  box-sizing:border-box; 
  min-height:58px; 

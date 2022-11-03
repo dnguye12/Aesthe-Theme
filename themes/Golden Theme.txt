@@ -1690,9 +1690,10 @@ display:block !important}
  font-size:1rem}
 
  .module--featured img{
- max-width:3.5rem; 
- max-height:3.5rem; 
- margin-right:var(--spacing-s)}
+ max-width:4.5rem; 
+ max-height:4.5rem; 
+ margin-right:var(--spacing-s);
+ filter:drop-shadow(2px 2px 3px rgba(0,0,0,0.3))}}
 
  
  .module--communitygoal p{

@@ -3,7 +3,7 @@
         <div>
             <h2>{{module.package.name[:20]}}</h2>
             <div>
-                <span class="tag tag--900 tag--left">{{module.package.price|money}} {{module.package.currency}}</span>
+                <span class="tag tag--600 tag--left">{{module.package.price|money}} {{module.package.currency}}</span>
                 {% if module.package.discount.applied %}
                     <p class="price--discounted text--title">{{ module.package.discount.original|money }} {{ module.package.currency }}</p>
                 {% endif %}

@@ -1,7 +1,7 @@
 
 :root{
  --col-orange:#00B7FF; 
- --col-gray:#20202A; 
+ --col-gray:#181820; 
  --col-bg:#262634; 
  --col-white:#fff; 
  --col-gray-dark:#262634; 
@@ -700,7 +700,7 @@ img{
  transform:scale(105%); 
  position:absolute; 
  z-index:2; 
- filter:drop-shadow(0 0 25px var(--color-yellow))}
+ filter:drop-shadow(0 0 25px var(--col-orange))}
 
 .header__logoBlurred{
  filter:blur(4px); 
@@ -719,7 +719,7 @@ img{
 .header__cart{
 border-radius:10px; 
  border:var(--border); 
- background:var(--col-gray-light); 
+ background:var(--col-gray); 
  position:relative; 
  display:grid; 
  align-items:center; 

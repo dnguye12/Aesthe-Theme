@@ -700,7 +700,7 @@ img{
  transform:scale(105%); 
  position:absolute; 
  z-index:2; 
- filter:drop-shadow(0 0 25px var(--color-yellow))}
+ filter:drop-shadow(0 0 25px var(--col-orange))}
 
 .header__logoBlurred{
  filter:blur(4px); 

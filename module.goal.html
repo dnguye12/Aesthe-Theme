@@ -1,17 +1,19 @@
-<div class="module">
-    <div class="module__heading">
-        
-        <h2><i class="fas fa-dollar-sign"></i>{{ module.header }}</h2>
+
+<div class="module module-goal p-3">
+    <h4 class="mb-3"><i class="fa-solid fa-users me-1"></i>{{ module.header }}</h4>
+
+    <div class="progress">
+        <div class="progress-bar {% if module.bar.style == "striped" %} progress-bar-striped {% endif %} {% if module.bar.animated %} progress-bar-striped progrss-bar-animated {% endif %}" role="progressbar" style="width:{{ module.percentage }}%;"></div>
     </div>
-    <div class="module__body">
-        <div class="progress">
-            <div class="progress__bar" style="width:{{ module.percentage }}%;"></div>
-                {% if module.displayAmount %}
-                    <h3>{{ module.total }} / {{ module.target }} {{ store.currency }} ({{ module.percentage }}%)</h3>
-    		    {% endif %}
-    		    {% if module.displayAmount == false %}
-    			    <h3>{{ module.percentage }}% Completed</h3>
-    		    {% endif %} 
-        </div>
-    </div>
+
+    <p class="mt-2 text-center mb-0">
+        {% if module.displayAmount %}
+        <strong>{{ module.total }} / {{ module.target }} {{ store.currency }}</strong> ({{ module.percentage }}%)
+        {% endif %}
+
+        {% if module.displayAmount == false %}
+        {{ module.percentage }}% {{ __("completed") }}
+        {% endif %}
+    </p>
+
 </div>

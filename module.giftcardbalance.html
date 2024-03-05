@@ -1,28 +1,24 @@
-<div class="module">
-    <div class="module__heading">
-        
-        <h2><i class="fas fa-wallet"></i>{{ module.header }}</h2>
-    </div>
-    <div class="module__body">
-        <form action='#giftcardbalance' method='post'>
-            <input type="text" name="card_number" placeholder="Enter Code" value="{{search}}" class="input--900" />
-            <div class="form__submit"><button class="btn btn--primary cursorAura">Check Giftcard</button></div>
+
+<div class="module p-3 module-gift" id="giftcardbalance">
+    <h4 class="mb-3"><i class="fa-solid fa-gift me-1"></i>{{ module.header }}</h4>
+    <div class="giftcardbalance">
+        <form action="#giftcardbalance" method='post'>
+            <div class="input-group d-flex justify-content-center align-items-center flex-column">
+                <input type="text" name="card_number" placeholder="Card Number" class="form-control mb-3 w-100" value="{{ search }}">
+                <div class="input-group-append w-100">
+                    <button class="btn w-100 drop-shadow">{{ __("Check") }}</button>
+                </div>
+            </div>
+            {% if search %}
+            {% if giftcard == false or giftcard.card_number == false %}
+            <p class='alert alert-danger'>{{ __("No card found") }}</p>
+            {% elseif giftcard.void == 1 %}
+            <p class='alert alert-warning'>{{ __("This gift card has been marked as void") }}</p>
+            {% else %}
+            <p><strong>{{ __("Card balance:") }} {{ giftcard.remaining_balance }} {{ store.currency }}</strong></p>
+            {% endif %}
+            {% endif %}
+
         </form>
     </div>
 </div>
-
-{% if search %}
-    {% if giftcard == false or giftcard.card_number == false %}
-        <div class="alert alert--danger">
-            <p>No card found!</p>
-        </div>
-    {% elseif giftcard.void == 1 %}
-        <div class="alert alert--danger">
-            <p>This gift card has been marked as void.</p>
-        </div>
-    {% else %}
-        <div class="alert alert--success">
-            <p>Your giftcard balance is <b>{{ giftcard.remaining_balance }} {{ store.currency }}</b>.</p>
-        </div>
-    {% endif %}
-{% endif %}

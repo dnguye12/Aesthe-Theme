@@ -1,9 +1,5 @@
-<div class="module">
-   <div class="module__heading">
-       
-       <h2><i class="fas fa-question"></i>{{ module.header }}</h2>
-   </div>
-   <div class="module__body">
-       <p>{{ module.text|raw }}</p>
-   </div>
+
+<div class="module module-textbox p-3">
+    <h4 class="mb-2"><i class="fa-solid fa-circle-exclamation me-1"></i>{{ module.header }}</h4>
+    <p class="mb-0">{{ module.text|raw }}</p>
 </div>

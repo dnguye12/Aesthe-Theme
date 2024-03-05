@@ -1,28 +1,22 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="body">
-	    <div>
-    	    <div class="sidebar">
-    	    {% include "header_3.html" %}    
-    			{{ modules|raw }}
-    		</div>
-		</div>
-		<div class="content">
-		    <div class="featured">{{ modules|raw }}</div>
-		    
-			<div class="panel">
-				<div class="panel__heading">
-				    <h2>{{ page.title }}</h2>
-            
-			    </div>
-				<div class="panel__body markup__body">
-			  		{{ page.metaData.content|raw }}
-				</div>
-			</div>
-		</div>
-	</div>
-	
+    
+    <div class="container login page mt-lg-0 mt-2">
+   <div class="row">
+      <div class="col-md-3 col-12 sidebar">
+         {% include "header_2.html" %}
+         {{ modules|raw }}
+      </div>
+      <div class="col-md-9 col-12 mainbar">
+               
+         <div class="login-info p-4 mb-2 position-relative">
+             <h4 class="mb-2">{{ page.title }}</h4>
+             {{ page.metaData.content|raw }}
+         </div>
+      </div>
+   </div>
+</div>
 
     {% include "content_footer.html" %}
 

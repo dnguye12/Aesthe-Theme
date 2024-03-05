@@ -1,30 +1,26 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <div class="body">
-        <div>
-            <div class="sidebar">
-                {% include "header_3.html" %}   
-                {{ modules|raw }}
-            </div>
-        </div>
-        
-        <div class="content">
-            <div class="featured">{{ modules|raw }}</div>
-            
-            <div class="panel">
-                <div class="panel__heading">
-                    <h1>Login</h1>
-                </div>
-                <div class="panel__body">
-                    <form method="post">
-                        <div class="username">
-                            <input type="text" name="ign" class="input--900" placeholder="Enter your username">
-                            <button class="btn btn--primary cursorAura" type="submit">Login</button>
-                        </div>
-                    </form>
-                </div>
-            </div> 
-        </div>
-    </div>
+
+    
+    <div class="container login mt-lg-0 mt-2">
+   <div class="row">
+      <div class="col-md-3 col-12 sidebar">
+         {% include "header_2.html" %}
+         {{ modules|raw }}
+      </div>
+      <div class="col-md-9 col-12 mainbar">
+               
+         <div class="login-info p-4 mb-2 position-relative">
+             <h4 class="mb-2">{{ __("Enter username") }}</h4>
+             <p class="mb-2">{{ __("Please enter your username to continue") }}</p>
+                    {{ loginform|raw }}
+         </div>
+      </div>
+   </div>
+</div>
+    
+
+    {% include "content_footer.html" %}
+
 {% endblock %}

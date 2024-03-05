@@ -3,25 +3,24 @@
 	--header-splash-height: {{config("header-splash-height")}};
 	--header-splash-blur: {{config("header-splash-blur")}};
 	
-	--header-splash-overlay-color: rgb(27,27,27);
+	--header-splash-overlay-color: #1F1F1F;
 
 	--logo-width: {{config("logo-width")}};
 	
-	--color-main: #ffa31a;
-	--color-main-hover: #1a1a1a;
+	--color-main: #2dc653;
+    --color-main-hover: #1a1a1a;
     --color-white: #fff;
     --color-blue: #4573da;
     --color-green: #4da564;
     --color-red: #fe3c45;
     --color-gray: #b8b8b8;
-    
-    --color-discord: #7289da;
-    
-    --color-main-bg: #292929;
-    --color-dark-bg: rgb(27,27,27);
-    --color-light-bg: #363636;
-    --color-border: #363636;
 
+    --color-discord: #7289da;
+
+    --color-main-bg: #252525;
+    --color-dark-bg: #1F1F1F;
+    --color-light-bg: #2e2e2e;
+    --color-border: #2e2e2e;
 
 	--dsh-color-main: drop-shadow(0px 0px 2px var(--color-main));
 }

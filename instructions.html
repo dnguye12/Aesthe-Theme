@@ -1,26 +1,26 @@
 {% extends "layout.html" %}
 
 {% block content %}
-	<div class="body">
-	    <div>
-    	    <div class="sidebar">
-    	        {% include "header_3.html" %}   
-    			{{ modules|raw }}
-    		</div>
-		</div>
-		
-		<div class="content">
-			<div class="panel">
-			    <div class="featured">{{ modules|raw }}</div>
-			    
-				<div class="panel__heading">
-				    <h1>Payment instructions</h1>
-			    </div>
-				<div class="panel__body">
-					{{ gateway.note|raw }}
-					{{ gateway.scripts|raw }}
-				</div>
-			</div>
-		</div>
-	</div>
+
+    <div class="jumbotron page-title-inner">
+        <div class="container">
+            <header class="page-title">
+                <h1 class="text-center text-white text-shadow">{{ __("Payment instructions") }}</h1>
+            </header>
+        </div>
+    </div>
+
+    <div id="content-outer" class="container px-0 px-lg-3">
+         <section class="bg-white p-0 row no-gutters border-left border-right">
+            <div class="col-12">
+                <div class="p-xl-5 p-4">
+                    {{ gateway.note|raw }}
+		  {{ gateway.scripts|raw }}
+                </div>
+            </div>
+        </section>
+    </div>
+
+    {% include "content_footer.html" %}
+
 {% endblock %}

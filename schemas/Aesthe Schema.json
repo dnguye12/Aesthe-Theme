@@ -1,99 +1,77 @@
 {
-	"author": "tjktak1002",
-	"support_email": "tjktakbuonngu@gmail.com",
-	"config": [{
-			"header": "Main Links",
-			"options": [
-				{
-			        "id": "server-ip",
-					"name": "You server ip address",
-					"default": "mc.hypixel.net",
-					"description": "Change the server address",
-					"type": "textarea"
-			    },
-				{
-			        "id": "server-port",
-					"name": "You server port",
-					"default": "25565",
-					"description": "Change the server port",
-					"type": "textarea"
-			    },
-				{
-			        "id": "discord-invite-link",
-					"name": "Discord Invite Link",
-					"default": "",
-					"description": "Discord server invite link",
-					"type": "textarea"
-			    },
-				{
-			        "id": "discord-id",
-					"name": "Discord Server ID",
-					"default": "",
-					"description": "Change the server address",
-					"type": "textarea"
-			    }
-			]
-	},{
-			"header": "Social Links",
-			"options": [
-				{
-			        "id": "fb-link",
-					"name": "Facebook Link",
-					"default": "",
-					"description": "Change the server address",
-					"type": "textarea"
-			    },
-				{
-			        "id": "gh-link",
-					"name": "Github Link",
-					"default": "",
-					"description": "Change the server port",
-					"type": "textarea"
-			    },
-				{
-			        "id": "link-link",
-					"name": "Linkedin Link",
-					"default": "",
-					"description": "Discord server invite link",
-					"type": "textarea"
-			    },
-				{
-			        "id": "ins-link",
-					"name": "Instagram Link",
-					"default": "",
-					"description": "Change the server address",
-					"type": "textarea"
-			    },
-				{
-			        "id": "yt-link",
-					"name": "Youtube Link",
-					"default": "",
-					"description": "Change the server address",
-					"type": "textarea"
-			    },
-				{
-			        "id": "twt-link",
-					"name": "Twitter Link",
-					"default": "",
-					"description": "Change the server address",
-					"type": "textarea"
-			    },
-				{
-			        "id": "twc-link",
-					"name": "Twitch Link",
-					"default": "",
-					"description": "Change the server address",
-					"type": "textarea"
-			    },
-				{
-			        "id": "tik-link",
-					"name": "Tiktok Link",
-					"default": "",
-					"description": "Change the server address",
-					"type": "textarea"
-			    }
-			]
-	}
-		    ]
+    "author": "tjktak1002",
+    "support_email": "tjktak4@mail.com",
+    "config": [{
+		"header": "Store Information",
+		"options": [
+			{
+				"id": "server-ip",
+				"name": "You server ip address",
+				"default": "mc.hypixel.net",
+				"description": "Change the server address",
+				"type": "textarea"
+			},
+			{
+				"id": "server-port",
+				"name": "You server port",
+				"default": "25565",
+				"description": "Change the server port",
+				"type": "textarea"
+			},
+			{
+				"id": "discord",
+				"name": "Discord Server Name",
+				"default": "Bedwars",
+				"description": "Change the display name for discord",
+				"type": "textarea"
+			},
+			{
+				"id": "discord-link",
+				"name": "Discord Server Invite Link",
+				"default": "https://discord.com/invite/bedwars",
+				"description": "Change the server discord invite link",
+				"type": "textarea"
+			},
+			{
+				"id": "discord-id",
+				"name": "Discord Server ID",
+				"default": "bedwars",
+				"description": "I dont know how to explain this but if your invite link is https://discord.com/invite/bedwars then but bedwars here",
+				"type": "textarea"
+			}
 
+		]
+	}, {
+		"header": "Header Settings",
+		"options": [
+			{
+				"id": "logo-width",
+				"name": "Main logo width",
+				"default": "450px",
+				"description": "Change how width your main logo is, affecting its size",
+				"type": "textarea"
+			},
+			{
+				"id": "header-splash",
+				"name": "Header background url",
+				"default": "https://i.ibb.co/FmkXR7C/artwork.webp",
+				"description": "Set the background for your header, can be left as empty",
+				"type": "textarea"
+			},
+			{
+				"id": "header-splash-height",
+				"name": "Header background height",
+				"default": "486px",
+				"description": "Set the height for background of your header",
+				"type": "textarea"
+			},
+			{
+				"id": "header-splash-blur",
+				"name": "Header background blur",
+				"default": "3px",
+				"description": "Set the amount of blur for background of your header",
+				"type": "textarea"
+			}
+		]
+	}]
 }

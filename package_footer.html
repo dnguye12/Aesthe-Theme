@@ -1,45 +1,64 @@
-<div class="modal__footer">
-    <!-- PRICE & BUTTONS -->
-    <div class="modal__price">
-        <!-- DISPLAY PRICE -->
-        {% if package.customPrice %}
-            <h3>Name your own price<h3>
-        {% elseif package.price == 0.00 %}
-            <h3>Free</h3>
-        {% else %}
-            <h3>{{ package.price|money }} {{ basket.currency }}</h3>
-        {% endif %}
-        
-        <!-- PURCHASE & GIFT BUTTON -->
-        {% if package.purchasable == false %}
-            <p>Not Purchasable</p>
-        {% else %}
-            <div class="modal__buttons">
-                {% if package.disable_gifting == false and package.storeGiftingEnabled %}
-                    <button class="btn btn--dark btn--gift cursorAura cursorAura--dim collapse" data-collapse="gift">Gift<i class="fas fa-chevron-down"></i></button>
-                {% endif %}
-                {% if package.basket %}
-                    <a href="/checkout/packages/remove/{{ package.id }}" class="btn btn--danger cursorAura btn--hideMobile">Remove</a>
-                    <a href="/checkout/packages/remove/{{ package.id }}" class="btn btn--danger iconBoxed iconBoxed--rounded btn--showMobile"><i class="fas fa-trash"></i></a>
-                {% else %}
-                    {% if package.type != "single" %}
-                        <a href="/checkout/packages/add/{{ package.id }}/subscribe" class="btn btn--primary cursorAura">Subscribe</a>
+
+<div class="modal-footer">
+    <div class="container-fluid px-0">
+        <div class="row align-items-center">
+            <div class="col-12 col-lg-4 text-start mb-3 mb-lg-0 price">
+                <strong class="h4 mb-0">
+                    {% if package.customPrice %}
+                        <b class="h5">{{ __("You decide how much to pay.") }}</b>
+                    {% elseif package.price == 0.00 %}
+                        <span class="h5">{{ __("This item is free.") }}</span>
+                    {% else %}
+                        {% if package.discount.applied %}
+                            <del class="text-danger small font-weight-bold">{{ package.discount.original|money }}</del>
+                        {% endif %}
+                        <b>{{ package.price|money }} <small>{{ basket.currency }}</small></b>
                     {% endif %}
-                    {% if package.type != "subscription" %}
-                        <a href="/checkout/packages/add/{{ package.id }}/single" class="btn btn--primary cursorAura">Purchase</a>
-                    {% endif %}
-                {% endif %}
+                    </strong>
             </div>
+
+            <div class="col-12 col-lg-8 text-center text-lg-right d-flex justify-content-end align-items-center">
+                    {% if package.basket %}
+                        <a href="/checkout/packages/remove/{{ package.id }}" class="btn btn--rm btn-primary d-block d-md-inline-block gift-weight">{{
+                        __("Remove") }}</a>
+                    {% else %}
+                        {% if package.type != "single" %}
+                            <a href="/checkout/packages/add/{{ package.id }}/subscribe" class="btn btn--add btn-success d-block d-md-inline-block gift-weight" {%
+                            if package.purchasable==false %}disabled data-toggle="tooltip" title="{{ package.reason }}"{% endif %}>{{ __("Subscribe") }}</a>
+                        {% endif %}
+
+                        {% if package.type != "subscription" %}
+                            <a href="/checkout/packages/add/{{ package.id }}/single" class="btn btn--add btn-primary d-block d-md-inline-block gift-weight" {% if
+                            package.purchasable==false %}disabled data-toggle="tooltip" title="{{ package.reason }}"{% endif %}>{{ __("Add to basket") }}</a>
+                        {% endif %}
+                    {% endif %}
+                
+
+                {% if package.disable_gifting == false and package.storeGiftingEnabled %}
+                    <a href="#" type="button" data-toggle="collapse" data-target="#giftFields"
+                        aria-expanded="false" aria-controls="giftFields" class="btn btn--gift btn-secondary d-block d-md-inline-block gift-weight btn-gift ms-1">{{ __("Gift this package") }} <i class="fas fa-chevron-down ml-1"></i>
+                    </a>
+                {% endif %}
+
+            </div>
+        </div>
+        {% if package.disable_gifting == false and package.storeGiftingEnabled %}
+        <div class="collapse gift-fields" id="giftFields">
+            <div class="row">
+                <div class="col-12">
+                    <form name="gift-form" method="get" action="/checkout/packages/add/{{ package.id }}/single/gift">
+                        <div class="input-group mt-3">
+                            <input type="text" name="username" placeholder="{{ __("Enter a username to gift this package to") }}"
+                                class="form-control" />
+                            <div class="input-group-append">
+                                <button class="btn btn-primary btn-sm" type="submit"><i class="fa-solid fa-gift me-1"></i>Gift</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         {% endif %}
     </div>
-    
-    <!-- GIFT COLLAPSIBLE -->
-    {% if package.disable_gifting == false and package.storeGiftingEnabled %}
-        <div class="modal__gift collapsible" data-collapsible="gift">
-            <form name="gift-form" method="get" action="/checkout/packages/add/{{ package.id }}/single/gift">
-                <input type="text" name="username" placeholder="Enter a username to gift this package to"/>
-                <button type="submit" class="btn btn--accent cursorAura"><i class="fas fa-gift"></i>Gift</button>
-            </form>
-        </div>
-    {% endif %}
 </div>

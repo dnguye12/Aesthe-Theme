@@ -1,16 +1,17 @@
-<div class="module module--topdonator">
-    <div class="module__avatar">
+
+<div class="p-3 module module-topdonator d-flex">
+    <div class="skin">
         {% if module.ign %}
-            <img src="https://mc-heads.net/body/{{module.ign}}" class="unselectable" id="topDonatorAvatar" data-username="{{module.ign}}"/>
+            <img src="https://mc-heads.net/body/{{module.ign}}" class="unselectable drop-shadow" id="topDonatorAvatar" data-username="{{module.ign}}"/>
         {% else %}
-            <img src="https://mc-heads.net/body/MHF_Steve" class="unselectable" id="topDonatorAvatar"/>
+            <img src="https://mc-heads.net/body/MHF_Steve" class="unselectable drop-shadow" id="topDonatorAvatar"/>
         {% endif %}
     </div>
-    <div class="module__body">
-        <h2><i class="fas fa-star"></i> Top Donator</h2>
+    <div class="desc d-flex flex-column align-items-start justify-content-center">
+        <h4 class="mb-2"><i class="fa-solid fa-crown me-1"></i>Top Donator</h4>
         {% if module.ign %}
-            <p>{{ module.ign }},</p>
-            <p>
+            <p class="mb-0"><b>{{ module.ign }}</b>,
+            <span class="text-shadow">
                 {% if module.displayAmount %}
                     {{ __("donated") }} {{ module.total|money }} <small>{{ store.currency }}</small>
                 {% else %}
@@ -28,9 +29,10 @@
                 {% else %}
                     {{ __("this week.") }}
                 {% endif %}    
+            </span>
             </p>
         {% else %}
-            <p>Your name and skin can be here!</p>
+            <p class="mb-0">Your name and skin can be here!</p>
         {% endif %}
     </div>
 </div>

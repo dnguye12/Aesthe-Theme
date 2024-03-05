@@ -1,20 +1,22 @@
-<div class="module module--payments">
-    <div class="module__heading">
-        
-        <h2><i class="fas fa-user-friends"></i>{{ module.header }}</h2>
-    </div>
-    <div class="module__body">
-        {% if module.payments %}
-            <ul>
-                {% for payment in module.payments %}
-                    <li>
-                        <img src="https://minotar.net/avatar/{{payment.ign}}/32" width="32" class="unselectable" />
-                        <small>{{payment.ign}}</small>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No recent payments to display.</p>
+{% set payment = module.payments | length %}
+{% set limit_payments = 11 - payment %}
+
+<div class="module module-payments p-3">
+    <h4 class="mb-2"><i class="fa-solid fa-coins me-1"></i>{{ module.header }}</h4>
+    {% if payment == 0 %}
+        <p class="mb-1">{{ __("No recent payments to display.") }}</p>
         {% endif %}
-    </div>
+    <ul class="list-unstyled recent-payments mb-0">
+        
+        {% for payment in module.payments %}
+        <li class="toggle-tooltip" title="{{ payment.ign }}">
+            <img src="{{ payment.skin }}" width="32">
+        </li>
+        {% endfor %}
+        {% if limit_payments > 0 %}
+            {% for i in 1..limit_payments %}
+                <div class="holder"></div>
+            {% endfor %}
+        {% endif %}
+    </ul>
 </div>

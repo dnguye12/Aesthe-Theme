@@ -1,27 +1,43 @@
 {% extends "layout.html" %}
-
 {% block content %}
-	<div class="body">
-	    <div>
-    	    <div class="sidebar">
-    	    {% include "header_3.html" %}    
-    			{{ modules|raw }}
-    		</div>
-		</div>
-		<div class="content">
-		    <div class="featured">{{ modules|raw }}</div>
-		    
-			<div class="panel">
-				<div class="panel__heading">
-				    <h2>Welcome to the {{store.name}} store!</h2>
-            
-			    </div>
-				<div class="panel__body markup__body">
-			  		{{ index.description|raw }}
-				</div>
-			</div>
-		</div>
-	</div>
-	<style>
-	</style>
+<div class="container">
+   <div class="row">
+      <div class="col-lg-3 col-12 sidebar">
+         {% include "header_2.html" %}
+         {{ modules|raw }}
+      </div>
+      <div class="col-lg-9 col-12 mainbar index mt-lg-0 mt-2">
+         <div class="desc position-relative p-4 mb-2">
+            <div class="store-name mb-3">
+               <span>Welcome to the official</span>
+               <h1>{{store.name}}</h1>
+            </div>
+            {{ index.description|raw }}
+         </div>
+         <div class="support p-4 mb-2">
+            <h4 class="mb-2"><i class="fa-solid fa-life-ring me-1"></i>Help & Support</h4>
+            <p>We have an active and passionate Staff Team which is always happy to help you or answer your questions!</p>
+            <p>The quickest way to ask questions or seek help with minor issues is to <b>join our Discord Server.</b></p>
+            <a class="btn btn-discord drop-shadow" href="{{discordLink}}" target="_blank"><i class="fa-brands fa-discord me-1"></i>Discord server</a>
+         </div>
+         <div class="policy mx-0">
+            <div class="p-4 refund-policy">
+               <div class="mb-3">
+                  <h4 class="mb-2"><i class="fa-solid fa-triangle-exclamation me-1"></i>Refund Policy</h4>
+                  <p>All payments are <b>final</b> and <b>non-refundable</b>. Attempting a chargeback or opening a PayPal dispute will result in <b>permanent</b> and <b>irreversible banishment</b> from all of our servers, and other stores.</p>
+               </div>
+               <a class="btn toggle-modal w-100 drop-shadow" href="javascript:void(0);" data-remote="/terms"><i class="fa-solid fa-square-arrow-up-right me-1"></i>Terms & Conditions</a>
+            </div>
+            <div class="p-4 privacy-policy">
+               <div class="mb-3">
+                  <h4 class="mb-2"><i class="fa-solid fa-user-shield me-1"></i>Privacy Policy</h4>
+                  <p>All information that is required on this webstore is <b>not shared</b> with any other third parties and is stored <b>securely</b>. All payments are processed via SSL enabled gateways and ensure that your payment details are secure.</p>
+               </div>
+               <a class="btn toggle-modal w-100 drop-shadow" href="javascript:void(0);" data-remote="/tebex-privacy"><i class="fa-solid fa-square-arrow-up-right me-1"></i>Privacy Policy</a>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% include "content_footer.html" %}
 {% endblock %}

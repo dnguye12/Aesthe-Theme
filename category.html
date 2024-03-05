@@ -1,105 +1,101 @@
 {% extends "layout.html" %}
-
 {% block content %}
-	<div class="body">
-	    <!-- SIDEBAR -->
-		 <div>
-			<div class="sidebar">
-			    {% include "header_3.html" %}   
-				{{ modules|raw }}
-			</div>
-		</div>
-		<!-- CONTENT -->
-		<div class="content">
-		    <div class="featured">{{ modules|raw }}</div>
-		    
-			<div class="panel">
-				<div class="panel__heading">
-				    <h1>{{ category.name }}</h1>
-			    </div>
-				<div class="panel__body">
-				    {# if category.decription != "" #}
-				        <div class="panel__description">
-				            {{ category.description|raw }}
-				        </div>
-				    {# endif #}
-				    
-					{% if category.packages|length > 0 %}
-					    <div class="category {% if category.displayType == "list" %}category--list{% else %}category--images{% endif %}">
-					        
-					        <!-- LIST PACKAGES -->
-    						{% if category.displayType == "list" %}
-    						    {% for package in category.packages %}
-    						        <div class="package">
-                                        <div class="package__info">
-                                            <h3>{{ package.name[:25] }}</h3>
-                                            <div class="package__tags">
-                                                <span class="tag tag--left tag--700">{{ package.price|money }} {{ basket.currency }}</span>
-                                                {% if package.countdownEnds %}
-                                                    <span class="tag tag--danger"><i class="fas fa-stopwatch"></i>Ending Soon</span>
-                                                {% endif %}
-                                                {% if package.discount.applied %}
-    					                  		    <p class="price--discounted text--title">{{ package.discount.original|money }} {{ basket.currency }}</p>
-    					                  		{% endif %}
-					                  		</div>
-                                        </div>
-                                        <div class="package__buttons {% if not package.basket %}package__buttons--outBasket{% endif %}">
-                                            <a href="javascript::void(0);" data-remote="/package/{{ package.id }}" class="iconBoxed iconBoxed--rounded package__infoModal toggle-modal cursorAura cursorAura--dim"><i class="fas fa-info"></i></a>
-                                            {% if package.basket %}
-                                                <span>Quantity:</span>
-                                                <a href="#" onclick="subtractPackage({{package.id}})" class="iconBoxed iconBoxed--rounded package__remove cursorAura" ><i class="fas fa-minus"></i></a>
-                                                <input type="text" class="package__quantity" name="quantity[{{ package.id }}]" value="{{ package.quantity }}" {% if package.price == 0.00 or package.disableQuantity %}disabled="disabled"{% endif %} maxlength="3"/>
-                                                <a href="/checkout/packages/add/{{ package.id }}" class="iconBoxed iconBoxed--rounded package__add cursorAura"><i class="fas fa-plus"></i></a>
-                                            {% else %}
-                                                <a href="/checkout/packages/add/{{ package.id }}" class="btn btn--primary cursorAura">Add to Cart</a>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-    						    {% endfor %}
-    					    
-    					    <!-- IMAGE PACKAGES -->
-    						{% else %}
-    							{% for package in category.packages %}
-    							    <div class="package">
-    							        {% if onSaleTag and package.discount.applied %}
-    							            <span class="tag tag--danger tag--right">On Sale</span>
-    							        {% endif %}
-                                        <div class="package__image">
-                                            <a href="javascript:void(0);" data-remote="/package/{{ package.id }}" class="toggle-modal">
-                                                <img src="{{ package.image.url }}" />
-                                            </a>
-                                        </div>
-                                        
-                                        <div class="package__info">
-                                            <h2>{{ package.name[:20] }}</h2>
-                                            {% if package.customPrice == false and package.price > 0.00 %}
-                                                <h3>
-                                                    {% if package.discount.applied %}
-    				                  					<span class="price--discounted text--title">{{ package.discount.original|money }} {{ basket.currency }}</span><br>
-    				                  				{% endif %}
-    												{{ package.price|money }} {{ basket.currency }}
-                                                </h3>
-                                            {% endif %}
-                                        </div>
-                                        
-                                        <div class="package__buttons">
-                                            {% if package.basket %}
-                                                <a href="#" onclick="subtractPackage({{package.id}})" class="iconBoxed iconBoxed--rounded package__remove cursorAura" ><i class="fas fa-minus"></i></a>
-                                                <input type="text" class="package__quantity" name="quantity[{{ package.id }}]" value="{{ package.quantity }}" {% if package.price == 0.00 or package.disableQuantity %}disabled="disabled"{% endif %} maxlength="3"/>
-                                                <a href="/checkout/packages/add/{{ package.id }}" class="iconBoxed iconBoxed--rounded package__add cursorAura"><i class="fas fa-plus"></i></a>
-                                            {% else %}
-                                                <a href="/checkout/packages/add/{{ package.id }}" class="btn btn--primary cursorAura">Add to Cart</a>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-    							{% endfor %}
-    						</div>
-						{% endif %}
-					{% else %}
-						<p>No packages to display in this category.</p>
-					{% endif %}
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="container cats">
+   <div class="row">
+      <div class="col-lg-3 col-12 sidebar">
+         {% include "header_2.html" %}
+         {{ modules|raw }}
+      </div>
+      <div class="col-lg-9 col-12 mainbar mt-lg-0 mt-2">
+         <div class="cat-info p-4 mb-2 position-relative">
+            <h4 class="mb-2">{{ category.name }}</h4>
+            {% if category.description != "" %}
+            {{ category.description|raw }}
+            {% endif %}
+         </div>
+         {% if category.displayType == "list" %}
+         <div class="list-packages p-4 pt-3 position-relative">
+            {% for package in category.packages %}
+            <div class="package d-flex justify-content-between align-items-center p-3 mt-2">
+               <div class="text d-flex flex-column justify-content-center align-items-start">
+                  <span class="big name">{{ package.name }} {% if package.countdownEnds %}<span class="text-danger">&nbsp;&nbsp;<i
+                     class="fa fa-clock-o"></i> <br /><span class="countdown-to badge px-0" data-countdown="{{ package.countdownEnds }}">{{
+                  __("Ending Soon!") }}</span></span>{% endif %}</span>
+                  {% if package.customPrice == false and package.price > 0 %}
+                  <strong class="h4 price">
+                  {% if package.discount.applied %}
+                  <del class="text-danger small font-weight-bold">{{ package.discount.original|money }}</del>
+                  {% endif %}
+                  {{ package.price|money }} <small>{{ basket.currency }}</small>
+                  </strong>
+                  {% endif %}
+               </div>
+               <div class="btn-holder d-flex justify-content-center align-items-center">
+                  <a href="javascript:void(0);" data-remote="/package/{{ package.id }}"
+                     class="btn btn-info toggle-modal me-2 drop-shadow"><i class="fa-solid fa-info"></i></a>
+                  {% if package.basket %}
+                  <a href="/checkout/packages/remove/{{ package.id }}"
+                     class="btn btn--remove cursorAura drop-shadow d-flex justify-content-center align-items-center"><i class="fa-solid fa-trash-can-arrow-up me-1"></i>Remove</a>
+                  {% else %}
+                  <a href="/checkout/packages/add/{{ package.id }}"
+                     class="btn btn--add cursorAura drop-shadow d-flex justify-content-center align-items-center"><i class="fa-solid fa-cart-plus me-1"></i>Add to cart</a>
+                  {% endif %}   
+               </div>
+            </div>
+            {% endfor %}
+         </div>
+         {% else %}
+         <div class="grid-packages p-4 position-relative">
+            {% for package in category.packages %}
+            <div class="package w-100 drop-shadow" id="package--{{ package.id }}">
+               <a class="package-img toggle-modal toggle-tooltip " href="javascript:void(0);" data-remote="/package/{{ package.id }}" title="{{ __("Click for more details") }}">
+               <img src="{{ package.image.url }}" class="drop-shadow" alt="{{package.name}}" >
+               </a>
+               <div class="package-info mt-2">
+                  <span class="package-name">{{package.name[:20] }}</span>
+                  <div class="package-price">
+                     {% if package.discount.applied %}
+                     <del class="text-danger small font-weight-bold discount">
+                     {{ package.discount.original|money }}
+                     </del>
+                     {% endif %}
+                     <span class="price-actual">{{ package.price|money }} <small>{{ basket.currency }}</small></span>
+                  </div>
+                  <div class="package-buttons d-flex justify-content-center align-items-center">
+                     <a href="javascript:void(0);" data-remote="/package/{{ package.id }}"
+                        class="btn btn-info toggle-modal drop-shadow"><i class="fa-solid fa-info"></i></a>
+                     {% if package.basket %}
+                     <a href="/checkout/packages/remove/{{ package.id }}"
+                        class="btn btn--remove cursorAura drop-shadow d-flex justify-content-center align-items-center"><i class="fa-solid fa-trash-can-arrow-up me-1"></i>Remove</a>
+                     {% else %}
+                     <a href="/checkout/packages/add/{{ package.id }}"
+                        class="btn btn--add cursorAura drop-shadow d-flex justify-content-center align-items-center"><i class="fa-solid fa-cart-plus me-1"></i>Add to cart</a>
+                     {% endif %}                     
+                  </div>
+               </div>
+            </div>
+            {% endfor %}
+         </div>
+         {% endif %}
+      </div>
+   </div>
+</div>
+{% include "content_footer.html" %}
 {% endblock %}
+{#
+<div class="container login">
+   <div class="row">
+      <div class="col-md-3 col-12 sidebar">
+         {% include "header_2.html" %}
+         {{ modules|raw }}
+      </div>
+      <div class="col-md-9 col-12 mainbar">
+         <div class="login-info p-4 mb-2 position-relative">
+            <h4 class="mb-2">{{ __("Enter username") }}</h4>
+            <p class="mb-2">{{ __("Please enter your username to continue") }}</p>
+            {{ loginform|raw }}
+         </div>
+      </div>
+   </div>
+</div>
+#}

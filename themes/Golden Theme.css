@@ -3,24 +3,26 @@
 	--header-splash-height: {{config("header-splash-height")}};
 	--header-splash-blur: {{config("header-splash-blur")}};
 	
-	--header-splash-overlay-color: #1F1F1F;
+	--header-splash-overlay-color: rgb(27,27,27);
 
 	--logo-width: {{config("logo-width")}};
+    --logo-width-mb: {{config("logo-width-mb")}};
 	
-	--color-main: #2dc653;
-    --color-main-hover: #1a1a1a;
+	--color-main: #ffa31a;
+	--color-main-hover: #1a1a1a;
     --color-white: #fff;
     --color-blue: #4573da;
     --color-green: #4da564;
     --color-red: #fe3c45;
     --color-gray: #b8b8b8;
-
+    
     --color-discord: #7289da;
+    
+    --color-main-bg: #292929;
+    --color-dark-bg: rgb(27,27,27);
+    --color-light-bg: #363636;
+    --color-border: #363636;
 
-    --color-main-bg: #252525;
-    --color-dark-bg: #1F1F1F;
-    --color-light-bg: #2e2e2e;
-    --color-border: #2e2e2e;
 
 	--dsh-color-main: drop-shadow(0px 0px 2px var(--color-main));
 }
@@ -124,6 +126,17 @@ header .line-2 {
 }
 }
 
+@media only screen and (max-width: 576px) {
+    header .line-2 {
+        grid-template-areas:
+        "logo"
+        "discord"
+        "server";
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+  }
+  }
+
 header .line-2 #ip-copy {
 	        grid-area: server;
     padding: 10px 30px 10px 0px;
@@ -185,6 +198,14 @@ header .line-2 .logo-holder img {
 	max-width: var(--logo-width);
 	transition: 350ms;
 }
+
+@media only screen and (max-width: 992px) {
+    header .line-2 .logo-holder img {
+      max-width: var(--logo-width-mb) !important;
+      transition: 350ms;
+  }
+  }
+  
 
 header .line-2 .logo-holder:hover img {
     transform: scale(1.02);

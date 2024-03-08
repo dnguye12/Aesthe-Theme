@@ -3,27 +3,26 @@
 	--header-splash-height: {{config("header-splash-height")}};
 	--header-splash-blur: {{config("header-splash-blur")}};
 	
-	--header-splash-overlay-color: rgb(27,27,27);
+	--header-splash-overlay-color: #181820;
 
 	--logo-width: {{config("logo-width")}};
-	
-	--color-main: #ffa31a;
-	--color-main-hover: #1a1a1a;
+    --logo-width-mb: {{config("logo-width-mb")}};
+
+    --color-main: #00B7FF;
+    --color-main-hover: #1a1a1a;
     --color-white: #fff;
-    --color-blue: #4573da;
-    --color-green: #4da564;
-    --color-red: #fe3c45;
+    --color-blue: #00B7FF;
+    --color-green: #40E253;
+    --color-red: #FF3434;
     --color-gray: #b8b8b8;
-    
+
     --color-discord: #7289da;
-    
-    --color-main-bg: #292929;
-    --color-dark-bg: rgb(27,27,27);
-    --color-light-bg: #363636;
-    --color-border: #363636;
 
-
-	--dsh-color-main: drop-shadow(0px 0px 2px var(--color-main));
+    --color-main-bg: #242431;
+    --color-dark-bg: #181820;
+    --color-light-bg: #181820;
+    --color-border: #181820;
+    --dsh-color-main: drop-shadow(0px 0px 2px var(--color-main));
 }
 
 body {
@@ -125,8 +124,19 @@ header .line-2 {
 }
 }
 
+@media only screen and (max-width: 576px) {
+    header .line-2 {
+        grid-template-areas:
+        "logo"
+        "discord"
+        "server";
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+  }
+  }
+
 header .line-2 #ip-copy {
-	        grid-area: server;
+	    grid-area: server;
     padding: 10px 30px 10px 0px;
     cursor: pointer;
     transition: 350ms;
@@ -187,6 +197,14 @@ header .line-2 .logo-holder img {
 	transition: 350ms;
 }
 
+@media only screen and (max-width: 992px) {
+    header .line-2 .logo-holder img {
+      max-width: var(--logo-width-mb) !important;
+      transition: 350ms;
+  }
+  }
+  
+
 header .line-2 .logo-holder:hover img {
     transform: scale(1.02);
     filter: var(--dsh-color-main);
@@ -225,7 +243,6 @@ header .line-2 .logo-holder:hover img {
 
 .menu-nav .nav-item a.active {
 	color: var(--color-main);
-
 }
 
 .menu-nav .dropdown-menu {
@@ -1626,7 +1643,6 @@ footer .footer-left small {
     line-height: 12px;
     font-weight: 600;
 }
-
 .swal2-actions button {
     border-radius: 8px !important;
     background: var(--color-main) !important;

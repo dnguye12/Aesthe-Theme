@@ -6,6 +6,7 @@
 	--header-splash-overlay-color: #1d1027;
 
 	--logo-width: {{config("logo-width")}};
+    --logo-width-mb: {{config("logo-width-mb")}};
 
 	--color-main: #ff6bff;
 	--color-main-hover: #3c2b48;
@@ -125,6 +126,17 @@ header .line-2 {
 }
 }
 
+@media only screen and (max-width: 576px) {
+    header .line-2 {
+        grid-template-areas:
+        "logo"
+        "discord"
+        "server";
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+  }
+  }
+
 header .line-2 #ip-copy {
 	    grid-area: server;
     padding: 10px 30px 10px 0px;
@@ -186,6 +198,14 @@ header .line-2 .logo-holder img {
 	max-width: var(--logo-width);
 	transition: 350ms;
 }
+
+@media only screen and (max-width: 992px) {
+    header .line-2 .logo-holder img {
+      max-width: var(--logo-width-mb) !important;
+      transition: 350ms;
+  }
+  }
+  
 
 header .line-2 .logo-holder:hover img {
     transform: scale(1.02);

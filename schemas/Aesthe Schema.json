@@ -52,6 +52,13 @@
 				"type": "textarea"
 			},
 			{
+				"id": "logo-width-mb",
+				"name": "Main logo width for mobile",
+				"default": "450px",
+				"description": "Change how width your main logo is, affecting its size for mobile devices",
+				"type": "textarea"
+			},
+			{
 				"id": "header-splash",
 				"name": "Header background url",
 				"default": "https://i.ibb.co/FmkXR7C/artwork.webp",

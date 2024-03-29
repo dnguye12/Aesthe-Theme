@@ -1,7 +1,7 @@
 
 {% if module.display %}
 
-<a href="javascript:void(0);" data-remote="/package/{{ package.id }}" class="module module-feature p-3 toggle-modal toggle-tooltip d-flex align-items-center justify-content-between" title="{{ __("Click for more details") }}">
+<a href="javascript:void(0);" data-remote="/package/{{ module.package.id }}" class="module module-feature p-3 toggle-modal toggle-tooltip d-flex align-items-center justify-content-between" title="{{ __("Click for more details") }}">
     <div class="img-holder p-2 d-flex justify-content">
         <img src="{{ module.package.image.url }}"/>
     </div>

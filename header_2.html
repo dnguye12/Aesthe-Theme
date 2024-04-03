@@ -14,7 +14,9 @@
             <div class="collapse" id="navCollapse{{ category.id }}">
                <div class="">
                   {% for subcategory in category.subcategories %}
+                  {% if category.id !=  subcategory.id%}
                   <a class="dropdown-item {% if category.active %}active{% endif %}" href="/category/{{ subcategory.id }}">{{ subcategory.name }}</a>
+                  {% endif %}
                   {% endfor %}
                </div>
             </div>
